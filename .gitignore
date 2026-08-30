@@ -1,0 +1,17 @@
+node_modules/
+
+# Build output (attached to releases, not committed)
+main.js
+*.js.map
+
+# Obsidian plugin manifests and styles ARE source files — never ignore
+# manifest.json or styles.css; the plugin will not install without them.
+
+.DS_Store
+
+# Scratch scripts
+gen_locales.py
+scaffold.py
+
+# Local reference data only — not part of the plugin
+data-for-study/

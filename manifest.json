@@ -1,0 +1,10 @@
+{
+    "id": "ai-journey",
+    "name": "AI Journey",
+    "version": "1.0.0",
+    "minAppVersion": "1.5.0",
+    "description": "An AI companion for a daily founder's journal.",
+    "author": "soonzsoonz",
+    "authorUrl": "",
+    "isDesktopOnly": true
+}
