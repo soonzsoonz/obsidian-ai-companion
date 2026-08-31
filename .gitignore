@@ -17,3 +17,7 @@ scaffold.py
 data-for-study/
 fix_syntax.py
 update_translations.py
+
+# Python bytecode from scratch scripts
+__pycache__/
+*.pyc
