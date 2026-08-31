@@ -68,5 +68,7 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Voeg de nieuwssamenvatting toe aan geplande uitvoeringen.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Gepland: dagboekfeedback',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Voeg dagboekfeedback toe aan geplande uitvoeringen. Standaard uitgeschakeld — het herschrijft advies gedurende de dag.',
+  COMMAND_OPEN_FACTS: 'Feitentabel openen',
+  FACTS_EMPTY_HEADING: 'Wat de AI over je weet',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

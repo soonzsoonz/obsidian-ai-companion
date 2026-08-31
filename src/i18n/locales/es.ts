@@ -68,5 +68,7 @@ export const STRINGS_ES: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Incluir el resumen de noticias en las ejecuciones programadas.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Programado: comentarios del diario',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Incluir comentarios del diario en las ejecuciones programadas. Desactivado por defecto — reescribe los consejos a medida que avanza el día.',
+  COMMAND_OPEN_FACTS: 'Abrir tabla de hechos',
+  FACTS_EMPTY_HEADING: 'Lo que la IA sabe de ti',
   NOTICE_FACTS_ACCUMULATED: 'Hechos acumulados con éxito.',
 };

@@ -68,5 +68,7 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'تضمين ملخص الأخبار في عمليات التشغيل المجدولة.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'مجدول: ملاحظات اليوميات',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'تضمين ملاحظات اليوميات في عمليات التشغيل المجدولة. متوقف افتراضيًا — حيث يقوم بإعادة كتابة النصائح مع مرور اليوم.',
+  COMMAND_OPEN_FACTS: 'فتح جدول الحقائق',
+  FACTS_EMPTY_HEADING: 'ما يعرفه الذكاء الاصطناعي عنك',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

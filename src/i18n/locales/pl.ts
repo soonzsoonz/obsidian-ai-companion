@@ -68,5 +68,7 @@ export const STRINGS_PL: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Uwzględnij podsumowanie wiadomości w zaplanowanych uruchomieniach.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Zaplanowane: opinie do dziennika',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Uwzględnij opinie do dziennika w zaplanowanych uruchomieniach. Domyślnie wyłączone — z upływem dnia porady są przepisywane.',
+  COMMAND_OPEN_FACTS: 'Otwórz tabelę faktów',
+  FACTS_EMPTY_HEADING: 'Co SI o Tobie wie',
   NOTICE_FACTS_ACCUMULATED: 'Fakty zgromadzone pomyślnie.',
 };

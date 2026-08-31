@@ -68,5 +68,7 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'خلاصه اخبار را در اجراهای برنامه‌ریزی شده بگنجانید.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'برنامه‌ریزی شده: بازخورد روزنامه',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'بازخورد روزنامه را در اجراهای برنامه‌ریزی شده بگنجانید. به طور پیش‌فرض خاموش است — زیرا با گذشت روز توصیه‌ها را بازنویسی می‌کند.',
+  COMMAND_OPEN_FACTS: 'باز کردن جدول واقعیت‌ها',
+  FACTS_EMPTY_HEADING: 'آنچه هوش مصنوعی درباره شما می‌داند',
   NOTICE_FACTS_ACCUMULATED: 'حقایق با موفقیت جمع\u200cآوری شدند.',
 };

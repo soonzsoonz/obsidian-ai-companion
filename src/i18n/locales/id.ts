@@ -68,5 +68,7 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Sertakan ringkasan berita dalam eksekusi yang dijadwalkan.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Dijadwalkan: umpan balik jurnal',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Sertakan umpan balik jurnal dalam eksekusi yang dijadwalkan. Dinonaktifkan secara default — ini akan menulis ulang saran seiring berjalannya hari.',
+  COMMAND_OPEN_FACTS: 'Buka tabel fakta',
+  FACTS_EMPTY_HEADING: 'Apa yang AI ketahui tentang Anda',
   NOTICE_FACTS_ACCUMULATED: 'Fakta berhasil dikumpulkan.',
 };

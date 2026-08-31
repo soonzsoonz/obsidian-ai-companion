@@ -66,5 +66,7 @@ export const STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Include the news digest in scheduled runs.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Scheduled: journal feedback',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Include journal feedback in scheduled runs. Off by default — it rewrites advice as the day goes on.',
+  COMMAND_OPEN_FACTS: 'Open Fact Table',
+  FACTS_EMPTY_HEADING: 'What the AI knows about you',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

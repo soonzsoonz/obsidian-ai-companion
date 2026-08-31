@@ -68,5 +68,7 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Haber özetini planlanan çalıştırmalara dahil et.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Planlanmış: günlük geri bildirimi',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Günlük geri bildirimini planlanan çalıştırmalara dahil et. Varsayılan olarak kapalıdır — gün ilerledikçe tavsiyeleri yeniden yazar.',
+  COMMAND_OPEN_FACTS: 'Gerçekler tablosunu aç',
+  FACTS_EMPTY_HEADING: 'Yapay zekânın sizin hakkınızda bildikleri',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

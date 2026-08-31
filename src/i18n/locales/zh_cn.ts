@@ -68,5 +68,7 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: '排程执行时包含新知汇整。',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: '排程：日志反馈',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: '排程执行时包含日志反馈。默认关闭——它会随着一天的进展重写建议。',
+  COMMAND_OPEN_FACTS: '打开事实表',
+  FACTS_EMPTY_HEADING: 'AI 对你的了解',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };

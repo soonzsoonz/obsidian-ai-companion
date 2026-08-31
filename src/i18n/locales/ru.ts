@@ -68,5 +68,7 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Включить дайджест новостей в запланированные запуски.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'По расписанию: отзывы на дневник',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Включить отзывы на дневник в запланированные запуски. По умолчанию отключено — советы перезаписываются в течение дня.',
+  COMMAND_OPEN_FACTS: 'Открыть таблицу фактов',
+  FACTS_EMPTY_HEADING: 'Что ИИ знает о вас',
   NOTICE_FACTS_ACCUMULATED: 'Факты успешно накоплены.',
 };

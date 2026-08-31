@@ -68,5 +68,7 @@ export const STRINGS_PT_BR: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Incluir o resumo de notícias nas execuções programadas.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Programado: feedback do diário',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Incluir o feedback do diário nas execuções programadas. Desativado por padrão — reescreve os conselhos ao longo do dia.',
+  COMMAND_OPEN_FACTS: 'Abrir tabela de fatos',
+  FACTS_EMPTY_HEADING: 'O que a IA sabe sobre você',
   NOTICE_FACTS_ACCUMULATED: 'Fatos acumulados com sucesso.',
 };

@@ -54,6 +54,12 @@ export default class AIJourneyPlugin extends Plugin {
         });
 
         this.addCommand({
+            id: 'open-fact-table',
+            name: t('COMMAND_OPEN_FACTS'),
+            callback: () => { void this.factsFeature?.open(); }
+        });
+
+        this.addCommand({
             id: 'archive-processed-shares',
             name: t('COMMAND_ARCHIVE_SHARES'),
             callback: () => { void this.archiveShares(); }
@@ -100,6 +106,8 @@ export default class AIJourneyPlugin extends Plugin {
             () => void this.digestFeature?.generate());
         item(t('COMMAND_ACCUMULATE_FACTS'), 'brain',
             () => void this.factsFeature?.accumulate());
+        item(t('COMMAND_OPEN_FACTS'), 'book-open',
+            () => void this.factsFeature?.open(), false);
         menu.addSeparator();
         item(t('COMMAND_ARCHIVE_SHARES'), 'archive', () => void this.archiveShares(), false);
 
@@ -185,8 +193,13 @@ export default class AIJourneyPlugin extends Plugin {
         // never receive the defaults.
         const j = this.settings.journal;
         if (!j.folder.trim()) j.folder = DEFAULT_SETTINGS.journal.folder;
+        // A dot-folder is invisible to Obsidian's whole API surface, not just
+        // the file explorer: it is never indexed, so the fact table could be
+        // neither read back nor opened by hand. Move anyone off it.
         const f = this.settings.facts;
-        if (!f.folder.trim() || f.folder === 'facts') f.folder = DEFAULT_SETTINGS.facts.folder;
+        if (!f.folder.trim() || f.folder === 'facts' || f.folder.includes('/.')) {
+            f.folder = DEFAULT_SETTINGS.facts.folder;
+        }
     }
 
     /**

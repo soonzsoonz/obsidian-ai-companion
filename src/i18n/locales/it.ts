@@ -68,5 +68,7 @@ export const STRINGS_IT: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Includi il riepilogo delle notizie nelle esecuzioni programmate.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Programmato: feedback del diario',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Includi il feedback del diario nelle esecuzioni programmate. Disattivato per impostazione predefinita — riscrive i consigli nel corso della giornata.',
+  COMMAND_OPEN_FACTS: 'Apri la tabella dei fatti',
+  FACTS_EMPTY_HEADING: "Ciò che l'IA sa di te",
   NOTICE_FACTS_ACCUMULATED: 'Fatti accumulati con successo.',
 };

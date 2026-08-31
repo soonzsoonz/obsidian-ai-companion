@@ -68,5 +68,7 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: '예약된 실행에 뉴스 요약을 포함합니다.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: '예약: 일지 피드백',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: '예약된 실행에 일지 피드백을 포함합니다. 기본값은 꺼져 있습니다 — 하루가 지남에 따라 조언이 덮어쓰여집니다.',
+  COMMAND_OPEN_FACTS: '사실 표 열기',
+  FACTS_EMPTY_HEADING: 'AI가 당신에 대해 아는 것',
   NOTICE_FACTS_ACCUMULATED: '사실이 성공적으로 축적되었습니다.',
 };

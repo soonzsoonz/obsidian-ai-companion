@@ -32,6 +32,20 @@ export class FactsFeature {
         return normalizePath(`${folder}/${file}`);
     }
 
+    /**
+     * Opens the fact table for reading and hand-editing.
+     *
+     * It is an ordinary note on purpose: when the AI records something wrong,
+     * correcting it should be as easy as editing any other note, and the next
+     * run reads the corrected version back.
+     */
+    async open(): Promise<void> {
+        const path = this.path(TABLE_FILE);
+        const file = this.app.vault.getFileByPath(path)
+            ?? await ensureNote(this.app, path, '# ' + t('FACTS_EMPTY_HEADING') + '\n');
+        await this.app.workspace.getLeaf(false).openFile(file);
+    }
+
     /** Current fact table, for injecting into other features' prompts. */
     async read(): Promise<string> {
         if (!this.settings().facts.enable) return '';

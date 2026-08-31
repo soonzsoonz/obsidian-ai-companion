@@ -68,5 +68,7 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Bao gồm phần tóm tắt tin tức trong các lần chạy theo lịch.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Đã lên lịch: phản hồi nhật ký',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Bao gồm phản hồi nhật ký trong các lần chạy theo lịch. Mặc định là tắt — vì nó sẽ ghi đè lời khuyên theo thời gian trong ngày.',
+  COMMAND_OPEN_FACTS: 'Mở bảng dữ kiện',
+  FACTS_EMPTY_HEADING: 'Những gì AI biết về bạn',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

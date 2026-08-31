@@ -68,5 +68,7 @@ export const STRINGS_DE: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Nachrichten-Zusammenfassung in geplante Ausführungen einschließen.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'Geplant: Journal-Feedback',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Journal-Feedback in geplante Ausführungen einschließen. Standardmäßig aus — der Ratschlag wird im Laufe des Tages überschrieben.',
+  COMMAND_OPEN_FACTS: 'Faktentabelle öffnen',
+  FACTS_EMPTY_HEADING: 'Was die KI über Sie weiß',
   NOTICE_FACTS_ACCUMULATED: 'Fakten erfolgreich gesammelt.',
 };

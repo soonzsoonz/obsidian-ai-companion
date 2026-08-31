@@ -68,5 +68,7 @@ export const STRINGS_UK: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'Включати дайджест новин у заплановані запуски.',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'За розкладом: відгуки на щоденник',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'Включати відгуки на щоденник у заплановані запуски. Вимкнено за замовчуванням — поради перезаписуються протягом дня.',
+  COMMAND_OPEN_FACTS: 'Відкрити таблицю фактів',
+  FACTS_EMPTY_HEADING: 'Що ШІ знає про вас',
   NOTICE_FACTS_ACCUMULATED: 'Факти успішно накопичено.',
 };

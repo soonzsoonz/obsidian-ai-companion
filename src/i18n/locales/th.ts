@@ -68,5 +68,7 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'รวมการสรุปข่าวในการรันตามกำหนดเวลา',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'ตามกำหนดเวลา: คำติชมวารสาร',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'รวมคำติชมวารสารในการรันตามกำหนดเวลา ปิดโดยค่าเริ่มต้น — มันจะเขียนคำแนะนำใหม่ตลอดทั้งวัน',
+  COMMAND_OPEN_FACTS: 'เปิดตารางข้อเท็จจริง',
+  FACTS_EMPTY_HEADING: 'สิ่งที่ AI รู้เกี่ยวกับคุณ',
   NOTICE_FACTS_ACCUMULATED: 'รวบรวมข้อเท็จจริงสำเร็จ',
 };

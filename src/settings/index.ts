@@ -80,7 +80,7 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
         runOnStart: false
     },
     facts: {
-        folder: 'ai-journey/.ai-journey',
+        folder: 'ai-journey/memory',
         enable: false
     }
 };

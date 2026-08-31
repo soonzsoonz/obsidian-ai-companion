@@ -68,5 +68,7 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   SETTINGS_DIGEST_RUN_DIGEST_DESC: 'スケジュール実行にニュースダイジェストを含めます。',
   SETTINGS_DIGEST_RUN_FEEDBACK_NAME: 'スケジュール: ジャーナルフィードバック',
   SETTINGS_DIGEST_RUN_FEEDBACK_DESC: 'スケジュール実行にジャーナルフィードバックを含めます。デフォルトではオフです。1日の中でアドバイスが上書きされていくためです。',
+  COMMAND_OPEN_FACTS: 'ファクトテーブルを開く',
+  FACTS_EMPTY_HEADING: 'AIがあなたについて知っていること',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };
