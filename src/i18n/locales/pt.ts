@@ -46,5 +46,9 @@ export const STRINGS_PT: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Ative primeiro a tabela de factos nas definições.',
   COMMAND_ARCHIVE_SHARES: 'Arquivar partilhas processadas',
   NOTICE_ARCHIVED: 'Arquivados / removidos',
+  COMMAND_CREATE_JOURNAL: 'Nova nota de diário',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Abra uma nota de diário para usar estas ações',
+  NOTICE_TEMPLATE_MISSING: 'Modelo não encontrado',
   NOTICE_FACTS_ACCUMULATED: 'Fatos acumulados com sucesso.',
 };

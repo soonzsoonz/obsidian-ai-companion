@@ -46,5 +46,9 @@ export const STRINGS_FR: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: "Activez d'abord la table de faits dans les paramètres.",
   COMMAND_ARCHIVE_SHARES: 'Archiver les partages traités',
   NOTICE_ARCHIVED: 'Archivés / supprimés',
+  COMMAND_CREATE_JOURNAL: 'Nouvelle note de journal',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Ouvrez une note de journal pour utiliser ces actions',
+  NOTICE_TEMPLATE_MISSING: 'Modèle introuvable',
   NOTICE_FACTS_ACCUMULATED: 'Faits accumulés avec succès.',
 };

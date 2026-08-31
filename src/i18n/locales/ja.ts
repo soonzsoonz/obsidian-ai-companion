@@ -46,5 +46,9 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: '先に設定でファクトテーブルを有効にしてください。',
   COMMAND_ARCHIVE_SHARES: '処理済みの共有をアーカイブ',
   NOTICE_ARCHIVED: 'アーカイブ済み / 削除済み',
+  COMMAND_CREATE_JOURNAL: '今日のジャーナルを作成',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'これらを使うにはジャーナルノートを開いてください',
+  NOTICE_TEMPLATE_MISSING: 'テンプレートが見つかりません',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };

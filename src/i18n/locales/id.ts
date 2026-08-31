@@ -46,5 +46,9 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Aktifkan tabel fakta di pengaturan terlebih dahulu.',
   COMMAND_ARCHIVE_SHARES: 'Arsipkan bagikan yang telah diproses',
   NOTICE_ARCHIVED: 'Diarsipkan / dihapus',
+  COMMAND_CREATE_JOURNAL: 'Catatan jurnal baru',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Buka catatan jurnal untuk menggunakan ini',
+  NOTICE_TEMPLATE_MISSING: 'Templat tidak ditemukan',
   NOTICE_FACTS_ACCUMULATED: 'Fakta berhasil dikumpulkan.',
 };

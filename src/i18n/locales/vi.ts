@@ -46,5 +46,9 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Hãy bật bảng dữ kiện trong cài đặt trước.',
   COMMAND_ARCHIVE_SHARES: 'Lưu trữ các bài chia sẻ đã xử lý',
   NOTICE_ARCHIVED: 'Đã lưu trữ / đã xóa',
+  COMMAND_CREATE_JOURNAL: 'Tạo nhật ký hôm nay',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Hãy mở một ghi chú nhật ký để dùng các mục này',
+  NOTICE_TEMPLATE_MISSING: 'Không tìm thấy mẫu',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

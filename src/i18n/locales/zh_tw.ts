@@ -46,5 +46,9 @@ export const STRINGS_ZH_TW: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: '請先在設定中啟用事實表。',
   COMMAND_ARCHIVE_SHARES: '歸檔已處理的轉貼',
   NOTICE_ARCHIVED: '已歸檔 / 已清除',
+  COMMAND_CREATE_JOURNAL: '建立今日日誌',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: '請開啟日誌筆記才能使用這些功能',
+  NOTICE_TEMPLATE_MISSING: '找不到範本',
   NOTICE_FACTS_ACCUMULATED: '事實累積成功。',
 };

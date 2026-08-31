@@ -46,5 +46,9 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Сначала включите таблицу фактов в настройках.',
   COMMAND_ARCHIVE_SHARES: 'Архивировать обработанные публикации',
   NOTICE_ARCHIVED: 'Архивировано / удалено',
+  COMMAND_CREATE_JOURNAL: 'Новая запись дневника',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Откройте запись дневника, чтобы использовать это',
+  NOTICE_TEMPLATE_MISSING: 'Шаблон не найден',
   NOTICE_FACTS_ACCUMULATED: 'Факты успешно накоплены.',
 };

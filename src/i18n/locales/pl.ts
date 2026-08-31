@@ -46,5 +46,9 @@ export const STRINGS_PL: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Najpierw włącz tabelę faktów w ustawieniach.',
   COMMAND_ARCHIVE_SHARES: 'Zarchiwizuj przetworzone udostępnienia',
   NOTICE_ARCHIVED: 'Zarchiwizowano / usunięto',
+  COMMAND_CREATE_JOURNAL: 'Nowa notatka dziennika',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Otwórz notatkę dziennika, aby z tego skorzystać',
+  NOTICE_TEMPLATE_MISSING: 'Nie znaleziono szablonu',
   NOTICE_FACTS_ACCUMULATED: 'Fakty zgromadzone pomyślnie.',
 };

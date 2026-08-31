@@ -46,5 +46,9 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'فعّل جدول الحقائق في الإعدادات أولاً.',
   COMMAND_ARCHIVE_SHARES: 'أرشفة المشاركات المعالجة',
   NOTICE_ARCHIVED: 'تمت الأرشفة / تم الحذف',
+  COMMAND_CREATE_JOURNAL: 'ملاحظة يومية جديدة',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'افتح ملاحظة يومية لاستخدام هذه الإجراءات',
+  NOTICE_TEMPLATE_MISSING: 'لم يتم العثور على القالب',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

@@ -46,5 +46,9 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Schakel eerst de feitentabel in bij de instellingen.',
   COMMAND_ARCHIVE_SHARES: 'Verwerkte deelberichten archiveren',
   NOTICE_ARCHIVED: 'Gearchiveerd / opgeschoond',
+  COMMAND_CREATE_JOURNAL: 'Nieuwe dagboeknotitie',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Open een dagboeknotitie om dit te gebruiken',
+  NOTICE_TEMPLATE_MISSING: 'Sjabloon niet gevonden',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

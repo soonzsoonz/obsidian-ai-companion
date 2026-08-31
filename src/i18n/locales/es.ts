@@ -46,5 +46,9 @@ export const STRINGS_ES: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Activa primero la tabla de hechos en los ajustes.',
   COMMAND_ARCHIVE_SHARES: 'Archivar publicaciones procesadas',
   NOTICE_ARCHIVED: 'Archivados / eliminados',
+  COMMAND_CREATE_JOURNAL: 'Nueva nota de diario',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Abre una nota de diario para usar estas acciones',
+  NOTICE_TEMPLATE_MISSING: 'Plantilla no encontrada',
   NOTICE_FACTS_ACCUMULATED: 'Hechos acumulados con éxito.',
 };

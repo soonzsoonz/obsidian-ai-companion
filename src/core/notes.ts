@@ -46,6 +46,20 @@ export function journalChildFolder(folder: string, date: Date, format: string): 
     return normalizePath(folder ? `${folder}/${name}` : name);
 }
 
+/**
+ * Whether a path lies inside the journal folder.
+ *
+ * The AI commands only ever act on journal notes. A note outside that folder
+ * is someone else's — a meeting note, a project page — and running a command
+ * while it is open must neither rewrite it nor silently retarget today's
+ * journal behind the reader's back.
+ */
+export function isJournalNote(path: string, journalFolder: string): boolean {
+    const folder = normalizePath(journalFolder).replace(/\/+$/, '');
+    if (!folder) return true; // journal is the vault root: everything qualifies
+    return normalizePath(path).startsWith(folder + '/');
+}
+
 /** Reads the body of one section, excluding the heading itself. */
 export function readSection(content: string, key: SectionKey): string {
     const heading = SECTIONS[key];

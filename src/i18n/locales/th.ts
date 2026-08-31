@@ -46,5 +46,9 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'กรุณาเปิดใช้งานตารางข้อเท็จจริงในการตั้งค่าก่อน',
   COMMAND_ARCHIVE_SHARES: 'เก็บถาวรรายการที่ประมวลผลแล้ว',
   NOTICE_ARCHIVED: 'เก็บถาวรแล้ว / ลบแล้ว',
+  COMMAND_CREATE_JOURNAL: 'สร้างบันทึกวันนี้',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'เปิดบันทึกประจำวันเพื่อใช้คำสั่งเหล่านี้',
+  NOTICE_TEMPLATE_MISSING: 'ไม่พบเทมเพลต',
   NOTICE_FACTS_ACCUMULATED: 'รวบรวมข้อเท็จจริงสำเร็จ',
 };

@@ -1,10 +1,11 @@
-import { Notice, Plugin } from 'obsidian';
+import { Menu, Notice, Plugin } from 'obsidian';
 import { AIJourneySettingsTab, DEFAULT_SETTINGS } from './settings';
 import type { AIJourneySettings } from './settings';
 import { JournalFeature } from './features/journal';
 import { DigestFeature } from './features/digest';
 import { FactsFeature } from './features/facts';
 import { NewsInbox } from './features/news';
+import { isJournalNote } from './core/notes';
 import { ProviderCore } from './core';
 import { CliProvider } from './providers/cli';
 import { t } from './i18n';
@@ -64,7 +65,55 @@ export default class AIJourneyPlugin extends Plugin {
             callback: () => { void this.archiveShares(); }
         });
 
+        this.addCommand({
+            id: 'create-journal-note',
+            name: t('COMMAND_CREATE_JOURNAL'),
+            callback: () => { void this.journalFeature?.openToday(); }
+        });
+
+        this.addRibbonIcon('bot-message-square', t('RIBBON_TOOLTIP'), evt => {
+            this.showActionMenu(evt);
+        });
+
         this.app.workspace.onLayoutReady(() => this.applySchedule());
+    }
+
+    /**
+     * The ribbon menu — the same actions as the command palette, reachable
+     * without knowing their names. Actions that would act on a journal note
+     * are disabled while a non-journal note is open, rather than silently
+     * retargeting today's journal.
+     */
+    private showActionMenu(evt: MouseEvent): void {
+        const active = this.app.workspace.getActiveFile();
+        const onJournal = !active || isJournalNote(active.path, this.settings.journal.folder);
+        const menu = new Menu();
+
+        const item = (label: string, icon: string, run: () => void, needsJournal = true) => {
+            menu.addItem(mi => {
+                mi.setTitle(label).setIcon(icon).onClick(run);
+                if (needsJournal && !onJournal) mi.setDisabled(true);
+            });
+        };
+
+        item(t('COMMAND_CREATE_JOURNAL'), 'file-plus', () => void this.journalFeature?.openToday(), false);
+        menu.addSeparator();
+        item(t('COMMAND_GENERATE_JOURNAL_FEEDBACK'), 'message-circle',
+            () => void this.journalFeature?.generateFeedback());
+        item(t('COMMAND_GENERATE_DIGEST'), 'newspaper',
+            () => void this.digestFeature?.generate());
+        item(t('COMMAND_SYNTHESIZE_THEME'), 'layers',
+            () => void this.digestFeature?.synthesizeTheme());
+        item(t('COMMAND_ACCUMULATE_FACTS'), 'brain',
+            () => void this.factsFeature?.accumulate());
+        menu.addSeparator();
+        item(t('COMMAND_ARCHIVE_SHARES'), 'archive', () => void this.archiveShares(), false);
+
+        if (!onJournal) {
+            menu.addSeparator();
+            menu.addItem(mi => mi.setTitle(t('MENU_NOT_JOURNAL')).setDisabled(true));
+        }
+        menu.showAtMouseEvent(evt);
     }
 
     /** Moves digested shares out of the landing folder and prunes old ones. */

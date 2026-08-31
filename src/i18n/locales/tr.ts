@@ -46,5 +46,9 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Önce ayarlardan gerçekler tablosunu etkinleştirin.',
   COMMAND_ARCHIVE_SHARES: 'İşlenmiş paylaşımları arşivle',
   NOTICE_ARCHIVED: 'Arşivlendi / temizlendi',
+  COMMAND_CREATE_JOURNAL: 'Yeni günlük notu',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Bunları kullanmak için bir günlük notu açın',
+  NOTICE_TEMPLATE_MISSING: 'Şablon bulunamadı',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

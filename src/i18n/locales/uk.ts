@@ -46,5 +46,9 @@ export const STRINGS_UK: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Спершу увімкніть таблицю фактів у налаштуваннях.',
   COMMAND_ARCHIVE_SHARES: 'Архівувати оброблені публікації',
   NOTICE_ARCHIVED: 'Заархівовано / видалено',
+  COMMAND_CREATE_JOURNAL: 'Новий запис щоденника',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Відкрийте запис щоденника, щоб скористатися цим',
+  NOTICE_TEMPLATE_MISSING: 'Шаблон не знайдено',
   NOTICE_FACTS_ACCUMULATED: 'Факти успішно накопичено.',
 };

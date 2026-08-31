@@ -1,12 +1,34 @@
-import { Notice, type App, type Plugin } from 'obsidian';
+import { Notice, normalizePath, type App, type Plugin } from 'obsidian';
 import type { ProviderCore } from '../../core';
-import { ensureNote, journalPath, readSection, writeSection, SECTIONS } from '../../core/notes';
+import {
+    clockTime, ensureNote, formatDate, isJournalNote, journalPath, readSection, writeSection, SECTIONS
+} from '../../core/notes';
 import type { AIJourneySettings } from '../../settings';
 import { t } from '../../i18n';
 
-/** Skeleton written into a freshly created daily note. */
-export function dailyTemplate(): string {
-    return [SECTIONS.journal, '', '- ', '', SECTIONS.shares, '', '- ', ''].join('\n');
+/**
+ * Skeleton written into a freshly created daily note.
+ *
+ * Only the two sections the writer fills in themselves are laid out; AI回饋
+ * and AI整理社群新知 are created by the commands that populate them, so an
+ * untouched note is not full of empty AI headings.
+ */
+export function dailyTemplate(date: Date, format: string): string {
+    return [
+        '---',
+        'title:',
+        'date: ' + formatDate(date, format),
+        '---',
+        '',
+        SECTIONS.journal,
+        '',
+        '- ',
+        '',
+        SECTIONS.shares,
+        '',
+        '- ',
+        ''
+    ].join('\n');
 }
 
 /**
@@ -25,10 +47,48 @@ export class JournalFeature {
         return this.plugin.app;
     }
 
-    async generateFeedback(date = new Date()): Promise<void> {
+    /**
+     * Opens the day's journal note, creating it from the template first.
+     *
+     * A template path in settings wins over the built-in skeleton, so the
+     * layout can be customised without touching the plugin — but the four
+     * canonical headings are what the AI commands look for, so a custom
+     * template that drops them will leave those commands with nowhere to write.
+     */
+    async openToday(date = new Date()): Promise<void> {
         const cfg = this.settings();
         const path = journalPath(cfg.journal.folder, date, cfg.journal.dateFormat);
-        const file = await ensureNote(this.app, path, dailyTemplate());
+
+        let initial = dailyTemplate(date, cfg.journal.dateFormat);
+        const templatePath = cfg.journal.templatePath.trim();
+        if (templatePath) {
+            const tpl = this.app.vault.getFileByPath(normalizePath(templatePath));
+            if (tpl) {
+                initial = (await this.app.vault.read(tpl))
+                    .replace(/\{\{date\}\}/g, formatDate(date, cfg.journal.dateFormat))
+                    .replace(/\{\{time\}\}/g, clockTime(date));
+            } else {
+                new Notice(t('NOTICE_TEMPLATE_MISSING') + ': ' + templatePath);
+            }
+        }
+
+        const file = await ensureNote(this.app, path, initial);
+        await this.app.workspace.getLeaf(false).openFile(file);
+    }
+
+    async generateFeedback(date = new Date()): Promise<void> {
+        const cfg = this.settings();
+
+        // Prefer the note the reader is looking at, so feedback lands on the
+        // day they are actually editing rather than always on today.
+        const active = this.app.workspace.getActiveFile();
+        const file = active && isJournalNote(active.path, cfg.journal.folder)
+            ? active
+            : await ensureNote(
+                this.app,
+                journalPath(cfg.journal.folder, date, cfg.journal.dateFormat),
+                dailyTemplate(date, cfg.journal.dateFormat)
+            );
         const content = await this.app.vault.read(file);
         const entry = readSection(content, 'journal');
 
@@ -46,8 +106,17 @@ export class JournalFeature {
             return;
         }
 
-        const updated = writeSection(await this.app.vault.read(file), 'feedback', res.data);
-        await this.app.vault.modify(file, updated);
+        // Stamped and appended: several runs a day accumulate, so the reader
+        // can see how the advice changed as the day's entry grew.
+        const stamp = '*' + formatDate(date, 'YYYY-MM-DD') + ' ' + clockTime(date) + '*';
+        const prior = readSection(await this.app.vault.read(file), 'feedback');
+        const block = stamp + '\n\n' + res.data.trim();
+        const merged = prior ? prior + '\n\n---\n\n' + block : block;
+
+        await this.app.vault.modify(
+            file,
+            writeSection(await this.app.vault.read(file), 'feedback', merged)
+        );
         new Notice(t('NOTICE_DONE'));
     }
 

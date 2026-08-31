@@ -44,5 +44,9 @@ export const STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'Enable the fact table in settings first.',
   COMMAND_ARCHIVE_SHARES: 'Archive Processed Shares',
   NOTICE_ARCHIVED: 'Archived / pruned',
+  COMMAND_CREATE_JOURNAL: 'New Journal Note',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'Open a journal note to use these',
+  NOTICE_TEMPLATE_MISSING: 'Template not found',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

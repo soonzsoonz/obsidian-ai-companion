@@ -46,5 +46,9 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   NOTICE_FACTS_DISABLED: 'ابتدا جدول واقعیت‌ها را در تنظیمات فعال کنید.',
   COMMAND_ARCHIVE_SHARES: 'بایگانی اشتراک‌های پردازش‌شده',
   NOTICE_ARCHIVED: 'بایگانی‌شده / حذف‌شده',
+  COMMAND_CREATE_JOURNAL: 'یادداشت روزانه جدید',
+  RIBBON_TOOLTIP: 'AI Journey',
+  MENU_NOT_JOURNAL: 'برای استفاده از این موارد یک یادداشت روزانه باز کنید',
+  NOTICE_TEMPLATE_MISSING: 'قالب پیدا نشد',
   NOTICE_FACTS_ACCUMULATED: 'حقایق با موفقیت جمع\u200cآوری شدند.',
 };
