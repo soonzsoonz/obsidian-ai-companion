@@ -44,5 +44,7 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Buat panduan tema dari bagikan terbaru',
   NOTICE_DONE: 'Selesai.',
   NOTICE_FACTS_DISABLED: 'Aktifkan tabel fakta di pengaturan terlebih dahulu.',
+  COMMAND_ARCHIVE_SHARES: 'Arsipkan bagikan yang telah diproses',
+  NOTICE_ARCHIVED: 'Diarsipkan / dihapus',
   NOTICE_FACTS_ACCUMULATED: 'Fakta berhasil dikumpulkan.',
 };

@@ -44,5 +44,7 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'ایجاد راهنمای موضوعی از اشتراک‌های اخیر',
   NOTICE_DONE: 'انجام شد.',
   NOTICE_FACTS_DISABLED: 'ابتدا جدول واقعیت‌ها را در تنظیمات فعال کنید.',
+  COMMAND_ARCHIVE_SHARES: 'بایگانی اشتراک‌های پردازش‌شده',
+  NOTICE_ARCHIVED: 'بایگانی‌شده / حذف‌شده',
   NOTICE_FACTS_ACCUMULATED: 'حقایق با موفقیت جمع\u200cآوری شدند.',
 };

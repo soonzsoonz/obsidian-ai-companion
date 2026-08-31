@@ -44,5 +44,7 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'สร้างคู่มือตามหัวข้อจากรายการที่แชร์ล่าสุด',
   NOTICE_DONE: 'เสร็จสิ้น',
   NOTICE_FACTS_DISABLED: 'กรุณาเปิดใช้งานตารางข้อเท็จจริงในการตั้งค่าก่อน',
+  COMMAND_ARCHIVE_SHARES: 'เก็บถาวรรายการที่ประมวลผลแล้ว',
+  NOTICE_ARCHIVED: 'เก็บถาวรแล้ว / ลบแล้ว',
   NOTICE_FACTS_ACCUMULATED: 'รวบรวมข้อเท็จจริงสำเร็จ',
 };

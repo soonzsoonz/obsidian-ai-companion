@@ -44,5 +44,7 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: '从近期分享汇整主题指南',
   NOTICE_DONE: '完成。',
   NOTICE_FACTS_DISABLED: '请先在设置中启用事实表。',
+  COMMAND_ARCHIVE_SHARES: '归档已处理的分享',
+  NOTICE_ARCHIVED: '已归档 / 已清除',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };

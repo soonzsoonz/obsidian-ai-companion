@@ -44,5 +44,7 @@ export const STRINGS_PT: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Criar guia temático a partir das partilhas recentes',
   NOTICE_DONE: 'Concluído.',
   NOTICE_FACTS_DISABLED: 'Ative primeiro a tabela de factos nas definições.',
+  COMMAND_ARCHIVE_SHARES: 'Arquivar partilhas processadas',
+  NOTICE_ARCHIVED: 'Arquivados / removidos',
   NOTICE_FACTS_ACCUMULATED: 'Fatos acumulados com sucesso.',
 };

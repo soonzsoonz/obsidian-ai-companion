@@ -44,5 +44,7 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Создать тематическое руководство из недавних публикаций',
   NOTICE_DONE: 'Готово.',
   NOTICE_FACTS_DISABLED: 'Сначала включите таблицу фактов в настройках.',
+  COMMAND_ARCHIVE_SHARES: 'Архивировать обработанные публикации',
+  NOTICE_ARCHIVED: 'Архивировано / удалено',
   NOTICE_FACTS_ACCUMULATED: 'Факты успешно накоплены.',
 };

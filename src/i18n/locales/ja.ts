@@ -44,5 +44,7 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: '最近の共有からテーマガイドを作成',
   NOTICE_DONE: '完了しました。',
   NOTICE_FACTS_DISABLED: '先に設定でファクトテーブルを有効にしてください。',
+  COMMAND_ARCHIVE_SHARES: '処理済みの共有をアーカイブ',
+  NOTICE_ARCHIVED: 'アーカイブ済み / 削除済み',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };

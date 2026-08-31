@@ -44,5 +44,7 @@ export const STRINGS_IT: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Crea una guida tematica dalle condivisioni recenti',
   NOTICE_DONE: 'Fatto.',
   NOTICE_FACTS_DISABLED: 'Attiva prima la tabella dei fatti nelle impostazioni.',
+  COMMAND_ARCHIVE_SHARES: 'Archivia le condivisioni elaborate',
+  NOTICE_ARCHIVED: 'Archiviati / rimossi',
   NOTICE_FACTS_ACCUMULATED: 'Fatti accumulati con successo.',
 };

@@ -44,5 +44,7 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Themagids maken op basis van recente deelberichten',
   NOTICE_DONE: 'Klaar.',
   NOTICE_FACTS_DISABLED: 'Schakel eerst de feitentabel in bij de instellingen.',
+  COMMAND_ARCHIVE_SHARES: 'Verwerkte deelberichten archiveren',
+  NOTICE_ARCHIVED: 'Gearchiveerd / opgeschoond',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

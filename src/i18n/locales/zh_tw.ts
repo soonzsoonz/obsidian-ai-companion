@@ -44,5 +44,7 @@ export const STRINGS_ZH_TW: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: '從近期轉貼彙整主題指南',
   NOTICE_DONE: '完成。',
   NOTICE_FACTS_DISABLED: '請先在設定中啟用事實表。',
+  COMMAND_ARCHIVE_SHARES: '歸檔已處理的轉貼',
+  NOTICE_ARCHIVED: '已歸檔 / 已清除',
   NOTICE_FACTS_ACCUMULATED: '事實累積成功。',
 };

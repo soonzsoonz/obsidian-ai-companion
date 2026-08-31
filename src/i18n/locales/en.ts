@@ -42,5 +42,7 @@ export const STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Synthesize Theme Guide from Recent Shares',
   NOTICE_DONE: 'Done.',
   NOTICE_FACTS_DISABLED: 'Enable the fact table in settings first.',
+  COMMAND_ARCHIVE_SHARES: 'Archive Processed Shares',
+  NOTICE_ARCHIVED: 'Archived / pruned',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

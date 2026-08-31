@@ -16,6 +16,19 @@ export interface JournalSettings {
     templatePath: string;
 }
 
+export interface NewsSettings {
+    /** Where mobile shares land. Read, then moved to archiveFolder. */
+    landingFolder: string;
+    /** Processed shares are moved here, one day after being digested. */
+    archiveFolder: string;
+    /** Cross-day theme guides and long-form reports. */
+    summaryFolder: string;
+    /** Let the AI actually fetch and research the shared links. */
+    research: boolean;
+    /** Delete archived shares older than this. 0 disables deletion. */
+    archiveRetentionDays: number;
+}
+
 export interface DigestSettings {
     scheduleMode: 'manual' | 'on-open' | 'hourly';
 }
@@ -28,6 +41,7 @@ export interface FactsSettings {
 export interface AIJourneySettings {
     ai: AISettings;
     journal: JournalSettings;
+    news: NewsSettings;
     digest: DigestSettings;
     facts: FactsSettings;
 }
@@ -41,15 +55,23 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
         timeout: 30000
     },
     journal: {
-        folder: '',
+        folder: 'ai-journey/journal',
         dateFormat: 'YYYY-MM-DD',
         templatePath: ''
+    },
+    news: {
+        landingFolder: 'ai-journey/news/landing',
+        archiveFolder: 'ai-journey/news/archived',
+        summaryFolder: 'ai-journey/news/summary',
+        research: true,
+        // Deletion of archived shares is opt-in: 0 means keep forever.
+        archiveRetentionDays: 0
     },
     digest: {
         scheduleMode: 'manual'
     },
     facts: {
-        folder: 'facts',
+        folder: 'ai-journey/.ai-journey',
         enable: false
     }
 };

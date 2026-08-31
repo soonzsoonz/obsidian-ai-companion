@@ -44,5 +44,7 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Tạo hướng dẫn chủ đề từ các bài chia sẻ gần đây',
   NOTICE_DONE: 'Hoàn tất.',
   NOTICE_FACTS_DISABLED: 'Hãy bật bảng dữ kiện trong cài đặt trước.',
+  COMMAND_ARCHIVE_SHARES: 'Lưu trữ các bài chia sẻ đã xử lý',
+  NOTICE_ARCHIVED: 'Đã lưu trữ / đã xóa',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

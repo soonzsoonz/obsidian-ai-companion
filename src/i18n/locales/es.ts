@@ -44,5 +44,7 @@ export const STRINGS_ES: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Crear guía temática a partir de las publicaciones recientes',
   NOTICE_DONE: 'Hecho.',
   NOTICE_FACTS_DISABLED: 'Activa primero la tabla de hechos en los ajustes.',
+  COMMAND_ARCHIVE_SHARES: 'Archivar publicaciones procesadas',
+  NOTICE_ARCHIVED: 'Archivados / eliminados',
   NOTICE_FACTS_ACCUMULATED: 'Hechos acumulados con éxito.',
 };

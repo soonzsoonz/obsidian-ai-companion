@@ -44,5 +44,7 @@ export const STRINGS_FR: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Créer un guide thématique à partir des partages récents',
   NOTICE_DONE: 'Terminé.',
   NOTICE_FACTS_DISABLED: "Activez d'abord la table de faits dans les paramètres.",
+  COMMAND_ARCHIVE_SHARES: 'Archiver les partages traités',
+  NOTICE_ARCHIVED: 'Archivés / supprimés',
   NOTICE_FACTS_ACCUMULATED: 'Faits accumulés avec succès.',
 };

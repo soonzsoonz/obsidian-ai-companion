@@ -44,5 +44,7 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'إنشاء دليل موضوعي من المشاركات الأخيرة',
   NOTICE_DONE: 'تم.',
   NOTICE_FACTS_DISABLED: 'فعّل جدول الحقائق في الإعدادات أولاً.',
+  COMMAND_ARCHIVE_SHARES: 'أرشفة المشاركات المعالجة',
+  NOTICE_ARCHIVED: 'تمت الأرشفة / تم الحذف',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

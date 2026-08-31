@@ -44,5 +44,7 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: '최근 공유에서 테마 가이드 생성',
   NOTICE_DONE: '완료되었습니다.',
   NOTICE_FACTS_DISABLED: '먼저 설정에서 사실 표를 활성화하세요.',
+  COMMAND_ARCHIVE_SHARES: '처리된 공유 보관',
+  NOTICE_ARCHIVED: '보관됨 / 정리됨',
   NOTICE_FACTS_ACCUMULATED: '사실이 성공적으로 축적되었습니다.',
 };

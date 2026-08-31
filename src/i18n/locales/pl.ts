@@ -44,5 +44,7 @@ export const STRINGS_PL: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Utwórz przewodnik tematyczny z ostatnich udostępnień',
   NOTICE_DONE: 'Gotowe.',
   NOTICE_FACTS_DISABLED: 'Najpierw włącz tabelę faktów w ustawieniach.',
+  COMMAND_ARCHIVE_SHARES: 'Zarchiwizuj przetworzone udostępnienia',
+  NOTICE_ARCHIVED: 'Zarchiwizowano / usunięto',
   NOTICE_FACTS_ACCUMULATED: 'Fakty zgromadzone pomyślnie.',
 };

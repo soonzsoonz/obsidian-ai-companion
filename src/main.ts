@@ -1,9 +1,10 @@
-import { Plugin } from 'obsidian';
+import { Notice, Plugin } from 'obsidian';
 import { AIJourneySettingsTab, DEFAULT_SETTINGS } from './settings';
 import type { AIJourneySettings } from './settings';
 import { JournalFeature } from './features/journal';
 import { DigestFeature } from './features/digest';
 import { FactsFeature } from './features/facts';
+import { NewsInbox } from './features/news';
 import { ProviderCore } from './core';
 import { CliProvider } from './providers/cli';
 import { t } from './i18n';
@@ -16,6 +17,7 @@ export default class AIJourneyPlugin extends Plugin {
     journalFeature: JournalFeature | null = null;
     digestFeature: DigestFeature | null = null;
     factsFeature: FactsFeature | null = null;
+    newsInbox: NewsInbox | null = null;
 
     private hourlyTimer: number | null = null;
 
@@ -25,9 +27,10 @@ export default class AIJourneyPlugin extends Plugin {
         const getSettings = () => this.settings;
         this.providerCore = new ProviderCore(new CliProvider(this.settings.ai));
 
+        this.newsInbox = new NewsInbox(this.app, () => this.settings.news);
         this.factsFeature = new FactsFeature(this, this.providerCore, getSettings);
         this.journalFeature = new JournalFeature(this, this.providerCore, getSettings, this.factsFeature);
-        this.digestFeature = new DigestFeature(this, this.providerCore, getSettings, this.factsFeature);
+        this.digestFeature = new DigestFeature(this, this.providerCore, getSettings, this.factsFeature, this.newsInbox);
 
         this.addSettingTab(new AIJourneySettingsTab(this.app, this));
 
@@ -55,7 +58,22 @@ export default class AIJourneyPlugin extends Plugin {
             callback: () => { void this.digestFeature?.synthesizeTheme(); }
         });
 
+        this.addCommand({
+            id: 'archive-processed-shares',
+            name: t('COMMAND_ARCHIVE_SHARES'),
+            callback: () => { void this.archiveShares(); }
+        });
+
         this.app.workspace.onLayoutReady(() => this.applySchedule());
+    }
+
+    /** Moves digested shares out of the landing folder and prunes old ones. */
+    async archiveShares(): Promise<void> {
+        if (!this.newsInbox) return;
+        const today = new Date().toISOString().slice(0, 10);
+        const moved = await this.newsInbox.archiveProcessed(today);
+        const pruned = await this.newsInbox.pruneArchive();
+        new Notice(t('NOTICE_ARCHIVED') + ': ' + moved + ' / ' + pruned);
     }
 
     /**
@@ -94,6 +112,7 @@ export default class AIJourneyPlugin extends Plugin {
         this.settings = {
             ai: { ...DEFAULT_SETTINGS.ai, ...saved?.ai },
             journal: { ...DEFAULT_SETTINGS.journal, ...saved?.journal },
+            news: { ...DEFAULT_SETTINGS.news, ...saved?.news },
             digest: { ...DEFAULT_SETTINGS.digest, ...saved?.digest },
             facts: { ...DEFAULT_SETTINGS.facts, ...saved?.facts }
         };

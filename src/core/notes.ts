@@ -23,6 +23,12 @@ export function formatDate(date: Date, format: string): string {
         .replace(/DD/g, pad(date.getDate()));
 }
 
+/** HH:mm, for stamping when a piece of AI output was produced. */
+export function clockTime(date: Date): string {
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
 export function journalPath(folder: string, date: Date, format: string): string {
     const name = `${formatDate(date, format)}.md`;
     return normalizePath(folder ? `${folder}/${name}` : name);

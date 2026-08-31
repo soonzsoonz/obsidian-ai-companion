@@ -44,5 +44,7 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   COMMAND_SYNTHESIZE_THEME: 'Son paylaşımlardan tema kılavuzu oluştur',
   NOTICE_DONE: 'Tamamlandı.',
   NOTICE_FACTS_DISABLED: 'Önce ayarlardan gerçekler tablosunu etkinleştirin.',
+  COMMAND_ARCHIVE_SHARES: 'İşlenmiş paylaşımları arşivle',
+  NOTICE_ARCHIVED: 'Arşivlendi / temizlendi',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };
