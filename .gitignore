@@ -16,3 +16,4 @@ scaffold.py
 # Local reference data only — not part of the plugin
 data-for-study/
 fix_syntax.py
+update_translations.py
