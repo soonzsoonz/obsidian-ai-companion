@@ -34,6 +34,18 @@ export function journalPath(folder: string, date: Date, format: string): string 
     return normalizePath(folder ? `${folder}/${name}` : name);
 }
 
+/**
+ * The folder that holds notes belonging to one journal day.
+ *
+ * Obsidian files cannot have children, but a folder sharing the note's name
+ * is displayed alongside it and reads as its subtree — so every report the
+ * AI generates on a given day lands here, next to that day's journal.
+ */
+export function journalChildFolder(folder: string, date: Date, format: string): string {
+    const name = formatDate(date, format);
+    return normalizePath(folder ? `${folder}/${name}` : name);
+}
+
 /** Reads the body of one section, excluding the heading itself. */
 export function readSection(content: string, key: SectionKey): string {
     const heading = SECTIONS[key];

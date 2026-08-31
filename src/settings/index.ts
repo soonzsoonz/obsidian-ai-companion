@@ -21,8 +21,6 @@ export interface NewsSettings {
     landingFolder: string;
     /** Processed shares are moved here, one day after being digested. */
     archiveFolder: string;
-    /** Cross-day theme guides and long-form reports. */
-    summaryFolder: string;
     /** Let the AI actually fetch and research the shared links. */
     research: boolean;
     /** Delete archived shares older than this. 0 disables deletion. */
@@ -62,7 +60,6 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
     news: {
         landingFolder: 'ai-journey/news/landing',
         archiveFolder: 'ai-journey/news/archived',
-        summaryFolder: 'ai-journey/news/summary',
         research: true,
         // Deletion of archived shares is opt-in: 0 means keep forever.
         archiveRetentionDays: 0

@@ -1,7 +1,8 @@
 import { Notice, normalizePath, type App, type Plugin } from 'obsidian';
 import type { ProviderCore } from '../../core';
 import {
-    clockTime, ensureNote, extractLinks, formatDate, journalPath, readSection, writeSection
+    clockTime, ensureNote, extractLinks, formatDate, journalChildFolder, journalPath,
+    readSection, writeSection
 } from '../../core/notes';
 import type { AIJourneySettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
@@ -118,14 +119,18 @@ export class DigestFeature {
             return;
         }
 
-        // Cross-day guides belong to no single journal day, so they live under
-        // the news summary folder, filed by year and month.
-        const stamp = formatDate(date, 'YYYY-MM-DD');
-        const folder = normalizePath(
-            cfg.news.summaryFolder + '/' + formatDate(date, 'YYYY') + '/' + formatDate(date, 'MM')
-        );
-        const out = await ensureNote(this.app, normalizePath(folder + '/' + stamp + ' 主題彙整.md'), '');
-        await this.app.vault.modify(out, res.data.trim() + '\n');
+        // Everything the AI generates on a given day lands in that day's
+        // folder, whatever range of sources it drew on — one predictable
+        // place, rather than a rule the reader has to keep in their head.
+        const folder = journalChildFolder(cfg.journal.folder, date, cfg.journal.dateFormat);
+        const out = await ensureNote(this.app, normalizePath(folder + '/主題彙整.md'), '');
+
+        // Append like the digest does: running twice in one day adds a second
+        // guide rather than silently discarding the first.
+        const prior = (await this.app.vault.read(out)).trim();
+        const guide = '*' + formatDate(date, 'YYYY-MM-DD') + ' ' + clockTime(date) + '*\n\n'
+            + res.data.trim();
+        await this.app.vault.modify(out, (prior ? prior + '\n\n---\n\n' + guide : guide) + '\n');
 
         new Notice(t('NOTICE_SYNTHESIS_DONE'));
         const leaf = this.app.workspace.getLeaf(true);
