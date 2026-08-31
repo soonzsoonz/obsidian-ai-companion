@@ -28,7 +28,15 @@ export interface NewsSettings {
 }
 
 export interface DigestSettings {
-    scheduleMode: 'manual' | 'on-open' | 'hourly';
+    scheduleMode: 'manual' | 'on-open' | 'interval';
+    /** Hours between scheduled runs when scheduleMode is 'interval'. */
+    intervalHours: number;
+    /** Whether a scheduled pass generates the news digest. */
+    scheduleDigest: boolean;
+    /** Whether a scheduled pass generates journal feedback. */
+    scheduleFeedback: boolean;
+    /** Run once when Obsidian starts, as well as on the interval. */
+    runOnStart: boolean;
 }
 
 export interface FactsSettings {
@@ -65,7 +73,11 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
         archiveRetentionDays: 0
     },
     digest: {
-        scheduleMode: 'manual'
+        scheduleMode: 'manual',
+        intervalHours: 4,
+        scheduleDigest: true,
+        scheduleFeedback: false,
+        runOnStart: false
     },
     facts: {
         folder: 'ai-journey/.ai-journey',
@@ -173,6 +185,51 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                 }));
 
+        // News Settings
+        new Setting(containerEl).setHeading().setName(t('SETTINGS_NEWS_HEADING'));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_NEWS_LANDING_NAME'))
+            .setDesc(t('SETTINGS_NEWS_LANDING_DESC'))
+            .addText(text => text
+                .setValue(this.plugin.settings.news.landingFolder)
+                .onChange(async (value) => {
+                    this.plugin.settings.news.landingFolder = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_NEWS_ARCHIVE_NAME'))
+            .setDesc(t('SETTINGS_NEWS_ARCHIVE_DESC'))
+            .addText(text => text
+                .setValue(this.plugin.settings.news.archiveFolder)
+                .onChange(async (value) => {
+                    this.plugin.settings.news.archiveFolder = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_NEWS_RESEARCH_NAME'))
+            .setDesc(t('SETTINGS_NEWS_RESEARCH_DESC'))
+            .addToggle(toggle => toggle
+                .setValue(this.plugin.settings.news.research)
+                .onChange(async (value) => {
+                    this.plugin.settings.news.research = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_NEWS_RETENTION_NAME'))
+            .setDesc(t('SETTINGS_NEWS_RETENTION_DESC'))
+            .addText(text => text
+                .setValue(String(this.plugin.settings.news.archiveRetentionDays))
+                .onChange(async (value) => {
+                    const days = Number(value);
+                    this.plugin.settings.news.archiveRetentionDays =
+                        Number.isFinite(days) && days > 0 ? Math.floor(days) : 0;
+                    await this.plugin.saveSettings();
+                }));
+
         // Digest Settings
         new Setting(containerEl).setHeading().setName(t('SETTINGS_DIGEST_HEADING'));
 
@@ -182,12 +239,61 @@ export class AIJourneySettingsTab extends PluginSettingTab {
             .addDropdown(dropdown => dropdown
                 .addOption('manual', t('SETTINGS_DIGEST_SCHEDULE_MANUAL'))
                 .addOption('on-open', t('SETTINGS_DIGEST_SCHEDULE_ON_OPEN'))
-                .addOption('hourly', t('SETTINGS_DIGEST_SCHEDULE_HOURLY'))
+                .addOption('interval', t('SETTINGS_DIGEST_SCHEDULE_INTERVAL'))
                 .setValue(this.plugin.settings.digest.scheduleMode)
                 .onChange(async (value) => {
-                    this.plugin.settings.digest.scheduleMode = value as 'manual' | 'on-open' | 'hourly';
+                    this.plugin.settings.digest.scheduleMode =
+                        value as 'manual' | 'on-open' | 'interval';
                     await this.plugin.saveSettings();
+                    // Redraw so the interval-only options appear or vanish.
+                    this.display();
                 }));
+
+        if (this.plugin.settings.digest.scheduleMode !== 'manual') {
+            if (this.plugin.settings.digest.scheduleMode === 'interval') {
+                new Setting(containerEl)
+                    .setName(t('SETTINGS_DIGEST_INTERVAL_NAME'))
+                    .setDesc(t('SETTINGS_DIGEST_INTERVAL_DESC'))
+                    .addSlider(slider => slider
+                        .setLimits(1, 12, 1)
+                        .setDynamicTooltip()
+                        .setValue(this.plugin.settings.digest.intervalHours)
+                        .onChange(async (value) => {
+                            this.plugin.settings.digest.intervalHours = value;
+                            await this.plugin.saveSettings();
+                        }));
+
+                new Setting(containerEl)
+                    .setName(t('SETTINGS_DIGEST_RUN_ON_START_NAME'))
+                    .setDesc(t('SETTINGS_DIGEST_RUN_ON_START_DESC'))
+                    .addToggle(toggle => toggle
+                        .setValue(this.plugin.settings.digest.runOnStart)
+                        .onChange(async (value) => {
+                            this.plugin.settings.digest.runOnStart = value;
+                            await this.plugin.saveSettings();
+                        }));
+            }
+
+            new Setting(containerEl)
+                .setName(t('SETTINGS_DIGEST_RUN_DIGEST_NAME'))
+                .setDesc(t('SETTINGS_DIGEST_RUN_DIGEST_DESC'))
+                .addToggle(toggle => toggle
+                    .setValue(this.plugin.settings.digest.scheduleDigest)
+                    .onChange(async (value) => {
+                        this.plugin.settings.digest.scheduleDigest = value;
+                        await this.plugin.saveSettings();
+                    }));
+
+            new Setting(containerEl)
+                .setName(t('SETTINGS_DIGEST_RUN_FEEDBACK_NAME'))
+                .setDesc(t('SETTINGS_DIGEST_RUN_FEEDBACK_DESC'))
+                .addToggle(toggle => toggle
+                    .setValue(this.plugin.settings.digest.scheduleFeedback)
+                    .onChange(async (value) => {
+                        this.plugin.settings.digest.scheduleFeedback = value;
+                        await this.plugin.saveSettings();
+                    }));
+        }
 
         // Facts Settings
         new Setting(containerEl).setHeading().setName(t('SETTINGS_FACTS_HEADING'));

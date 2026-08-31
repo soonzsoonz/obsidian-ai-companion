@@ -1,8 +1,7 @@
-import { Notice, normalizePath, type App, type Plugin } from 'obsidian';
+import { Notice, type App, type Plugin } from 'obsidian';
 import type { ProviderCore } from '../../core';
 import {
-    clockTime, ensureNote, extractLinks, formatDate, journalChildFolder, journalPath,
-    readSection, writeSection
+    clockTime, ensureNote, extractLinks, formatDate, journalPath, readSection, writeSection
 } from '../../core/notes';
 import type { AIJourneySettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
@@ -67,6 +66,30 @@ export class DigestFeature {
         }
 
         const stamp = formatDate(date, 'YYYY-MM-DD') + ' ' + clockTime(date);
+
+        // 今日社群轉貼 is filled in by the plugin, not by hand: copying links
+        // out of a phone into a note is exactly the chore this is meant to
+        // remove. Only shares that arrived via the landing folder are added —
+        // links the writer typed inline are already there.
+        if (shares.length > 0) {
+            const listed = extractLinks(readSection(await this.app.vault.read(file), 'shares'))
+                .map(l => l.url);
+            const fresh = shares
+                .filter(s => s.url && !listed.includes(s.url))
+                .map(s => '- [' + s.title + '](' + s.url + ')');
+
+            if (fresh.length > 0) {
+                const priorShares = readSection(await this.app.vault.read(file), 'shares')
+                    .replace(/^-\s*$/gm, '')   // drop the empty bullet the template leaves
+                    .trim();
+                await this.app.vault.modify(file, writeSection(
+                    await this.app.vault.read(file),
+                    'shares',
+                    priorShares ? priorShares + '\n' + fresh.join('\n') : fresh.join('\n')
+                ));
+            }
+        }
+
         const existing = readSection(await this.app.vault.read(file), 'digest');
         const block = '*' + stamp + '*\n\n' + res.data.trim();
         const merged = existing ? existing + '\n\n---\n\n' + block : block;
@@ -76,65 +99,13 @@ export class DigestFeature {
             writeSection(await this.app.vault.read(file), 'digest', merged)
         );
 
-        // Stamp shares as done; they move to the archive on a later day.
+        // Both sections are written, so these shares have served their purpose
+        // and can be archived immediately.
         if (shares.length > 0) {
             await this.inbox.markDone(shares, formatDate(date, 'YYYY-MM-DD'));
+            await this.inbox.archiveNow(shares);
         }
         new Notice(t('NOTICE_DIGEST_GENERATED'));
-    }
-
-    /**
-     * The cross-post synthesis: gathers links shared over the last `days` and,
-     * instead of summarising each, groups them by theme and writes one how-to
-     * guide per theme. This is what turns ten scattered posts about prompting
-     * into a single usable reference.
-     */
-    async synthesizeTheme(days = 7, date = new Date()): Promise<void> {
-        const cfg = this.settings();
-        const collected: { title: string; url: string }[] = [];
-
-        for (let i = 0; i < days; i++) {
-            const day = new Date(date);
-            day.setDate(day.getDate() - i);
-            const file = this.app.vault.getFileByPath(
-                journalPath(cfg.journal.folder, day, cfg.journal.dateFormat)
-            );
-            if (!file) continue;
-            collected.push(...extractLinks(readSection(await this.app.vault.read(file), 'shares')));
-        }
-
-        if (collected.length === 0) {
-            new Notice(t('NOTICE_NO_SHARES'));
-            return;
-        }
-
-        new Notice(t('NOTICE_GENERATING'));
-        const known = await this.facts.read();
-        const res = await this.providerCore.generate(
-            this.buildSynthesisPrompt(collected, known, days, cfg.news.research)
-        );
-
-        if (!res.success || !res.data) {
-            new Notice(t('NOTICE_AI_FAILED') + (res.error ? ': ' + res.error : ''));
-            return;
-        }
-
-        // Everything the AI generates on a given day lands in that day's
-        // folder, whatever range of sources it drew on — one predictable
-        // place, rather than a rule the reader has to keep in their head.
-        const folder = journalChildFolder(cfg.journal.folder, date, cfg.journal.dateFormat);
-        const out = await ensureNote(this.app, normalizePath(folder + '/主題彙整.md'), '');
-
-        // Append like the digest does: running twice in one day adds a second
-        // guide rather than silently discarding the first.
-        const prior = (await this.app.vault.read(out)).trim();
-        const guide = '*' + formatDate(date, 'YYYY-MM-DD') + ' ' + clockTime(date) + '*\n\n'
-            + res.data.trim();
-        await this.app.vault.modify(out, (prior ? prior + '\n\n---\n\n' + guide : guide) + '\n');
-
-        new Notice(t('NOTICE_SYNTHESIS_DONE'));
-        const leaf = this.app.workspace.getLeaf(true);
-        await leaf.openFile(out);
     }
 
     private buildDigestPrompt(
@@ -181,45 +152,6 @@ export class DigestFeature {
             '',
             'Links:',
             ...items.map((l, i) => (i + 1) + '. ' + l.title + ' — ' + l.url)
-        ].filter(Boolean).join('\n');
-    }
-
-    private buildSynthesisPrompt(
-        links: { title: string; url: string }[],
-        known: string,
-        days: number,
-        research: boolean
-    ): string {
-        return [
-            'You are given every link a founder shared over the last ' + days + ' days.',
-            research ? 'Fetch them so the guide reflects what the sources actually say.' : '',
-            'Do NOT summarise them one by one. Instead:',
-            '',
-            '1. Group them into themes. A theme needs at least 2 related links;',
-            '   drop anything that does not cluster.',
-            '2. For each theme, write ONE practical guide that synthesises across',
-            '   its sources — comparing approaches, noting where they differ, and',
-            '   ending with concrete steps the reader can actually follow.',
-            '3. Prefer depth over coverage. Two strong themes beat six thin ones.',
-            '',
-            'Structure per theme:',
-            '## <theme name>',
-            '<what this cluster is collectively about, 1-2 sentences>',
-            '### 做法',
-            '<the synthesised how-to, in steps>',
-            '### 不同風格 / 取捨',
-            '<how the sources differ and when to pick which>',
-            '### 來源',
-            '<markdown links to the sources used>',
-            '',
-            'Rules:',
-            '- Reply in Traditional Chinese unless the sources are clearly another language.',
-            '- Base claims on the linked material. Where you are inferring, say so.',
-            '- Output only the themed sections.',
-            known ? '\nAbout this reader:\n' + known : '',
-            '',
-            'Shared links:',
-            ...links.map((l, i) => (i + 1) + '. ' + l.title + ' — ' + l.url)
         ].filter(Boolean).join('\n');
     }
 }

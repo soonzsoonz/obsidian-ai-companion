@@ -82,11 +82,36 @@ export class NewsInbox {
     }
 
     /**
-     * Moves shares stamped on an earlier day into the archive.
+     * Moves specific shares to the archive right away.
      *
-     * Deliberately not same-day: if a digest run fails halfway, the shares it
-     * did not reach are still sitting in the landing folder where they can be
-     * seen, rather than already filed away.
+     * Called once a digest run has written both 今日社群轉貼 and
+     * AI整理社群新知 — at that point the share note has done its job, and
+     * leaving it in the landing folder would only make it look unprocessed.
+     * Shares from a run that failed are never passed here, so they stay put.
+     */
+    async archiveNow(shares: Share[]): Promise<number> {
+        const archive = normalizePath(this.settings().archiveFolder);
+        let moved = 0;
+
+        for (const s of shares) {
+            if (!this.app.vault.getFolderByPath(archive)) {
+                await this.app.vault.createFolder(archive).catch(() => { /* exists */ });
+            }
+            let target = normalizePath(archive + '/' + s.file.name);
+            if (this.app.vault.getFileByPath(target)) {
+                target = normalizePath(archive + '/' + s.file.basename + ' ' + Date.now() + '.md');
+            }
+            await this.app.fileManager.renameFile(s.file, target);
+            moved++;
+        }
+        return moved;
+    }
+
+    /**
+     * Sweeps up any processed share still sitting in the landing folder.
+     *
+     * Digest runs archive their own shares, so this only catches leftovers
+     * from an interrupted run or an older version of the plugin.
      */
     async archiveProcessed(today: string): Promise<number> {
         const cfg = this.settings();
@@ -97,7 +122,7 @@ export class NewsInbox {
         for (const file of this.app.vault.getMarkdownFiles()) {
             if (!file.path.startsWith(landing + '/')) continue;
             const stamp = processedOn(await this.app.vault.read(file));
-            if (!stamp || stamp >= today) continue;
+            if (!stamp) continue;
 
             if (!this.app.vault.getFolderByPath(archive)) {
                 await this.app.vault.createFolder(archive).catch(() => { /* exists */ });

@@ -1,4 +1,4 @@
-import { Menu, Notice, Plugin } from 'obsidian';
+import { Menu, Notice, Plugin, normalizePath } from 'obsidian';
 import { AIJourneySettingsTab, DEFAULT_SETTINGS } from './settings';
 import type { AIJourneySettings } from './settings';
 import { JournalFeature } from './features/journal';
@@ -54,12 +54,6 @@ export default class AIJourneyPlugin extends Plugin {
         });
 
         this.addCommand({
-            id: 'synthesize-theme',
-            name: t('COMMAND_SYNTHESIZE_THEME'),
-            callback: () => { void this.digestFeature?.synthesizeTheme(); }
-        });
-
-        this.addCommand({
             id: 'archive-processed-shares',
             name: t('COMMAND_ARCHIVE_SHARES'),
             callback: () => { void this.archiveShares(); }
@@ -75,7 +69,9 @@ export default class AIJourneyPlugin extends Plugin {
             this.showActionMenu(evt);
         });
 
-        this.app.workspace.onLayoutReady(() => this.applySchedule());
+        this.app.workspace.onLayoutReady(() => {
+            void this.ensureFolders().then(() => this.applySchedule());
+        });
     }
 
     /**
@@ -102,8 +98,6 @@ export default class AIJourneyPlugin extends Plugin {
             () => void this.journalFeature?.generateFeedback());
         item(t('COMMAND_GENERATE_DIGEST'), 'newspaper',
             () => void this.digestFeature?.generate());
-        item(t('COMMAND_SYNTHESIZE_THEME'), 'layers',
-            () => void this.digestFeature?.synthesizeTheme());
         item(t('COMMAND_ACCUMULATE_FACTS'), 'brain',
             () => void this.factsFeature?.accumulate());
         menu.addSeparator();
@@ -126,9 +120,13 @@ export default class AIJourneyPlugin extends Plugin {
     }
 
     /**
-     * Digest scheduling. Defaults to manual: unattended AI runs that write
-     * straight into the vault are opt-in, not something a fresh install starts
-     * doing on its own.
+     * Scheduling. Defaults to manual: unattended AI runs that write straight
+     * into the vault are opt-in, not something a fresh install starts doing
+     * on its own.
+     *
+     * The timer only runs while Obsidian is open — a CLI-backed plugin has no
+     * background process, so a missed window is simply picked up at the next
+     * tick rather than being caught up retroactively.
      */
     applySchedule() {
         if (this.hourlyTimer !== null) {
@@ -136,15 +134,29 @@ export default class AIJourneyPlugin extends Plugin {
             this.hourlyTimer = null;
         }
 
-        const mode = this.settings.digest.scheduleMode;
-        if (mode === 'on-open') {
-            void this.digestFeature?.generate();
-        } else if (mode === 'hourly') {
-            this.hourlyTimer = window.setInterval(() => {
-                void this.digestFeature?.generate();
-            }, HOUR_MS);
-            this.registerInterval(this.hourlyTimer);
+        const cfg = this.settings.digest;
+        if (cfg.scheduleMode === 'manual') return;
+
+        if (cfg.scheduleMode === 'on-open') {
+            void this.runScheduled();
+            return;
         }
+
+        // 'interval'
+        const hours = Math.max(1, cfg.intervalHours);
+        this.hourlyTimer = window.setInterval(() => {
+            void this.runScheduled();
+        }, hours * HOUR_MS);
+        this.registerInterval(this.hourlyTimer);
+
+        if (cfg.runOnStart) void this.runScheduled();
+    }
+
+    /** One scheduled pass: whichever of the two the reader enabled. */
+    private async runScheduled(): Promise<void> {
+        const cfg = this.settings.digest;
+        if (cfg.scheduleDigest) await this.digestFeature?.generate();
+        if (cfg.scheduleFeedback) await this.journalFeature?.generateFeedback();
     }
 
     onunload() {
@@ -165,6 +177,38 @@ export default class AIJourneyPlugin extends Plugin {
             digest: { ...DEFAULT_SETTINGS.digest, ...saved?.digest },
             facts: { ...DEFAULT_SETTINGS.facts, ...saved?.facts }
         };
+
+        // A folder saved as "" predates the default layout — it is what an
+        // unset field looked like in an earlier version, not a deliberate
+        // choice of the vault root. Without this, anyone who opened settings
+        // before the layout existed would keep writing to the vault root and
+        // never receive the defaults.
+        const j = this.settings.journal;
+        if (!j.folder.trim()) j.folder = DEFAULT_SETTINGS.journal.folder;
+        const f = this.settings.facts;
+        if (!f.folder.trim() || f.folder === 'facts') f.folder = DEFAULT_SETTINGS.facts.folder;
+    }
+
+    /**
+     * Creates the folders the plugin writes into.
+     *
+     * Done at startup rather than on first write so the news landing folder
+     * exists before the reader goes looking for it in a mobile share sheet —
+     * a folder that only appears after the first digest run is a folder they
+     * cannot share into yet.
+     */
+    private async ensureFolders(): Promise<void> {
+        const s = this.settings;
+        for (const path of [
+            s.journal.folder,
+            s.news.landingFolder,
+            s.news.archiveFolder,
+            s.facts.folder
+        ]) {
+            const clean = normalizePath(path.trim());
+            if (!clean || clean === '/' || this.app.vault.getFolderByPath(clean)) continue;
+            await this.app.vault.createFolder(clean).catch(() => { /* raced or exists */ });
+        }
     }
 
     async saveSettings() {
