@@ -40,8 +40,6 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'فشل طلب الذكاء الاصطناعي',
   NOTICE_JOURNAL_EMPTY: 'اكتب شيئًا في قسم 日誌 أولاً.',
   NOTICE_NO_SHARES: 'لم يتم العثور على روابط في قسم 今日社群轉貼.',
-  NOTICE_SYNTHESIS_DONE: 'تم إنشاء دليل الموضوع.',
-  COMMAND_SYNTHESIZE_THEME: 'إنشاء دليل موضوعي من المشاركات الأخيرة',
   NOTICE_DONE: 'تم.',
   NOTICE_FACTS_DISABLED: 'فعّل جدول الحقائق في الإعدادات أولاً.',
   COMMAND_ARCHIVE_SHARES: 'أرشفة المشاركات المعالجة',

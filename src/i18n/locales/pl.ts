@@ -40,8 +40,6 @@ export const STRINGS_PL: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'Żądanie do SI nie powiodło się',
   NOTICE_JOURNAL_EMPTY: 'Najpierw napisz coś w sekcji 日誌.',
   NOTICE_NO_SHARES: 'Nie znaleziono odnośników w sekcji 今日社群轉貼.',
-  NOTICE_SYNTHESIS_DONE: 'Utworzono przewodnik tematyczny.',
-  COMMAND_SYNTHESIZE_THEME: 'Utwórz przewodnik tematyczny z ostatnich udostępnień',
   NOTICE_DONE: 'Gotowe.',
   NOTICE_FACTS_DISABLED: 'Najpierw włącz tabelę faktów w ustawieniach.',
   COMMAND_ARCHIVE_SHARES: 'Zarchiwizuj przetworzone udostępnienia',

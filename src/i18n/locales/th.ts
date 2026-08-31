@@ -40,8 +40,6 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'คำขอ AI ล้มเหลว',
   NOTICE_JOURNAL_EMPTY: 'กรุณาเขียนบางอย่างในส่วน 日誌 ก่อน',
   NOTICE_NO_SHARES: 'ไม่พบลิงก์ในส่วน 今日社群轉貼',
-  NOTICE_SYNTHESIS_DONE: 'สร้างคู่มือตามหัวข้อแล้ว',
-  COMMAND_SYNTHESIZE_THEME: 'สร้างคู่มือตามหัวข้อจากรายการที่แชร์ล่าสุด',
   NOTICE_DONE: 'เสร็จสิ้น',
   NOTICE_FACTS_DISABLED: 'กรุณาเปิดใช้งานตารางข้อเท็จจริงในการตั้งค่าก่อน',
   COMMAND_ARCHIVE_SHARES: 'เก็บถาวรรายการที่ประมวลผลแล้ว',

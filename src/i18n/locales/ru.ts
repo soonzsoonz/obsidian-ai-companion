@@ -40,8 +40,6 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'Ошибка запроса к ИИ',
   NOTICE_JOURNAL_EMPTY: 'Сначала напишите что-нибудь в разделе 日誌.',
   NOTICE_NO_SHARES: 'В разделе 今日社群轉貼 не найдено ссылок.',
-  NOTICE_SYNTHESIS_DONE: 'Тематическое руководство создано.',
-  COMMAND_SYNTHESIZE_THEME: 'Создать тематическое руководство из недавних публикаций',
   NOTICE_DONE: 'Готово.',
   NOTICE_FACTS_DISABLED: 'Сначала включите таблицу фактов в настройках.',
   COMMAND_ARCHIVE_SHARES: 'Архивировать обработанные публикации',

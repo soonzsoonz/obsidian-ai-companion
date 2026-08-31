@@ -40,8 +40,6 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'Yapay zekâ isteği başarısız oldu',
   NOTICE_JOURNAL_EMPTY: 'Önce 日誌 bölümüne bir şeyler yazın.',
   NOTICE_NO_SHARES: '今日社群轉貼 bölümünde bağlantı bulunamadı.',
-  NOTICE_SYNTHESIS_DONE: 'Tema kılavuzu oluşturuldu.',
-  COMMAND_SYNTHESIZE_THEME: 'Son paylaşımlardan tema kılavuzu oluştur',
   NOTICE_DONE: 'Tamamlandı.',
   NOTICE_FACTS_DISABLED: 'Önce ayarlardan gerçekler tablosunu etkinleştirin.',
   COMMAND_ARCHIVE_SHARES: 'İşlenmiş paylaşımları arşivle',

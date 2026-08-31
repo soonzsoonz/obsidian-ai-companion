@@ -40,8 +40,6 @@ export const STRINGS_DE: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'KI-Anfrage fehlgeschlagen',
   NOTICE_JOURNAL_EMPTY: 'Schreiben Sie zuerst etwas in den Abschnitt 日誌.',
   NOTICE_NO_SHARES: 'Keine Links im Abschnitt 今日社群轉貼 gefunden.',
-  NOTICE_SYNTHESIS_DONE: 'Themenleitfaden erstellt.',
-  COMMAND_SYNTHESIZE_THEME: 'Themenleitfaden aus letzten Beiträgen erstellen',
   NOTICE_DONE: 'Fertig.',
   NOTICE_FACTS_DISABLED: 'Aktivieren Sie zuerst die Faktentabelle in den Einstellungen.',
   COMMAND_ARCHIVE_SHARES: 'Verarbeitete Beiträge archivieren',

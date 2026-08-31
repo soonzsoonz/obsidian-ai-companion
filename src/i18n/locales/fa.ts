@@ -40,8 +40,6 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'درخواست هوش مصنوعی ناموفق بود',
   NOTICE_JOURNAL_EMPTY: 'ابتدا چیزی در بخش 日誌 بنویسید.',
   NOTICE_NO_SHARES: 'هیچ پیوندی در بخش 今日社群轉貼 یافت نشد.',
-  NOTICE_SYNTHESIS_DONE: 'راهنمای موضوعی ایجاد شد.',
-  COMMAND_SYNTHESIZE_THEME: 'ایجاد راهنمای موضوعی از اشتراک‌های اخیر',
   NOTICE_DONE: 'انجام شد.',
   NOTICE_FACTS_DISABLED: 'ابتدا جدول واقعیت‌ها را در تنظیمات فعال کنید.',
   COMMAND_ARCHIVE_SHARES: 'بایگانی اشتراک‌های پردازش‌شده',

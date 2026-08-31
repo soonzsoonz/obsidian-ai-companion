@@ -40,8 +40,6 @@ export const STRINGS_UK: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'Помилка запиту до ШІ',
   NOTICE_JOURNAL_EMPTY: 'Спершу напишіть щось у розділі 日誌.',
   NOTICE_NO_SHARES: 'У розділі 今日社群轉貼 не знайдено посилань.',
-  NOTICE_SYNTHESIS_DONE: 'Тематичний посібник створено.',
-  COMMAND_SYNTHESIZE_THEME: 'Створити тематичний посібник із нещодавніх публікацій',
   NOTICE_DONE: 'Готово.',
   NOTICE_FACTS_DISABLED: 'Спершу увімкніть таблицю фактів у налаштуваннях.',
   COMMAND_ARCHIVE_SHARES: 'Архівувати оброблені публікації',

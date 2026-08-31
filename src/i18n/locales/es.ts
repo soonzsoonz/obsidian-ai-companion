@@ -40,8 +40,6 @@ export const STRINGS_ES: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'La solicitud de IA ha fallado',
   NOTICE_JOURNAL_EMPTY: 'Escribe algo en la sección 日誌 primero.',
   NOTICE_NO_SHARES: 'No se han encontrado enlaces en la sección 今日社群轉貼.',
-  NOTICE_SYNTHESIS_DONE: 'Guía temática creada.',
-  COMMAND_SYNTHESIZE_THEME: 'Crear guía temática a partir de las publicaciones recientes',
   NOTICE_DONE: 'Hecho.',
   NOTICE_FACTS_DISABLED: 'Activa primero la tabla de hechos en los ajustes.',
   COMMAND_ARCHIVE_SHARES: 'Archivar publicaciones procesadas',

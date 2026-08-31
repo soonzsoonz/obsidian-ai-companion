@@ -8,9 +8,9 @@ Repo: git@github.com:soonzsoonz/obsidian-ai-journey.git
 
 1. **Health advisor** — from journal mentions, give practical advice.
 2. **Life companion** — comfort/suggestions on work, family, daily life.
-3. **Idea catalyst** (the differentiator) — ingest shared links collected in the
-   vault, produce a daily digest, and synthesize ACROSS many posts on one theme
-   into a single how-to guide.
+3. **Idea catalyst** (the differentiator) — shares arrive from a phone into a
+   landing folder; the plugin lists them in the journal and digests each one,
+   fetching the page so the summary reflects what it actually says.
 
 ## Canonical daily note layout (must match this)
 

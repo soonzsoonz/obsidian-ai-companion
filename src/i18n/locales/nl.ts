@@ -40,8 +40,6 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'AI-verzoek mislukt',
   NOTICE_JOURNAL_EMPTY: 'Schrijf eerst iets in de sectie 日誌.',
   NOTICE_NO_SHARES: 'Geen links gevonden in de sectie 今日社群轉貼.',
-  NOTICE_SYNTHESIS_DONE: 'Themagids aangemaakt.',
-  COMMAND_SYNTHESIZE_THEME: 'Themagids maken op basis van recente deelberichten',
   NOTICE_DONE: 'Klaar.',
   NOTICE_FACTS_DISABLED: 'Schakel eerst de feitentabel in bij de instellingen.',
   COMMAND_ARCHIVE_SHARES: 'Verwerkte deelberichten archiveren',

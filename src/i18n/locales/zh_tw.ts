@@ -40,8 +40,6 @@ export const STRINGS_ZH_TW: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'AI 請求失敗',
   NOTICE_JOURNAL_EMPTY: '請先在 日誌 區塊寫些內容。',
   NOTICE_NO_SHARES: '在 今日社群轉貼 區塊找不到連結。',
-  NOTICE_SYNTHESIS_DONE: '主題指南已建立。',
-  COMMAND_SYNTHESIZE_THEME: '從近期轉貼彙整主題指南',
   NOTICE_DONE: '完成。',
   NOTICE_FACTS_DISABLED: '請先在設定中啟用事實表。',
   COMMAND_ARCHIVE_SHARES: '歸檔已處理的轉貼',

@@ -40,8 +40,6 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'AI リクエストが失敗しました',
   NOTICE_JOURNAL_EMPTY: 'まず 日誌 セクションに何か書いてください。',
   NOTICE_NO_SHARES: '今日社群轉貼 セクションにリンクが見つかりません。',
-  NOTICE_SYNTHESIS_DONE: 'テーマガイドを作成しました。',
-  COMMAND_SYNTHESIZE_THEME: '最近の共有からテーマガイドを作成',
   NOTICE_DONE: '完了しました。',
   NOTICE_FACTS_DISABLED: '先に設定でファクトテーブルを有効にしてください。',
   COMMAND_ARCHIVE_SHARES: '処理済みの共有をアーカイブ',

@@ -40,8 +40,6 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'Yêu cầu AI thất bại',
   NOTICE_JOURNAL_EMPTY: 'Hãy viết gì đó trong mục 日誌 trước.',
   NOTICE_NO_SHARES: 'Không tìm thấy liên kết nào trong mục 今日社群轉貼.',
-  NOTICE_SYNTHESIS_DONE: 'Đã tạo hướng dẫn theo chủ đề.',
-  COMMAND_SYNTHESIZE_THEME: 'Tạo hướng dẫn chủ đề từ các bài chia sẻ gần đây',
   NOTICE_DONE: 'Hoàn tất.',
   NOTICE_FACTS_DISABLED: 'Hãy bật bảng dữ kiện trong cài đặt trước.',
   COMMAND_ARCHIVE_SHARES: 'Lưu trữ các bài chia sẻ đã xử lý',

@@ -40,8 +40,6 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'AI 요청 실패',
   NOTICE_JOURNAL_EMPTY: '먼저 日誌 섹션에 내용을 작성하세요.',
   NOTICE_NO_SHARES: '今日社群轉貼 섹션에서 링크를 찾을 수 없습니다.',
-  NOTICE_SYNTHESIS_DONE: '테마 가이드가 생성되었습니다.',
-  COMMAND_SYNTHESIZE_THEME: '최근 공유에서 테마 가이드 생성',
   NOTICE_DONE: '완료되었습니다.',
   NOTICE_FACTS_DISABLED: '먼저 설정에서 사실 표를 활성화하세요.',
   COMMAND_ARCHIVE_SHARES: '처리된 공유 보관',

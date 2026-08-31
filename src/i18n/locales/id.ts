@@ -40,8 +40,6 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   NOTICE_AI_FAILED: 'Permintaan AI gagal',
   NOTICE_JOURNAL_EMPTY: 'Tulis sesuatu di bagian 日誌 terlebih dahulu.',
   NOTICE_NO_SHARES: 'Tidak ada tautan ditemukan di bagian 今日社群轉貼.',
-  NOTICE_SYNTHESIS_DONE: 'Panduan tema dibuat.',
-  COMMAND_SYNTHESIZE_THEME: 'Buat panduan tema dari bagikan terbaru',
   NOTICE_DONE: 'Selesai.',
   NOTICE_FACTS_DISABLED: 'Aktifkan tabel fakta di pengaturan terlebih dahulu.',
   COMMAND_ARCHIVE_SHARES: 'Arsipkan bagikan yang telah diproses',

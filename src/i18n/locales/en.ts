@@ -38,8 +38,6 @@ export const STRINGS_EN = {
   NOTICE_AI_FAILED: 'AI request failed',
   NOTICE_JOURNAL_EMPTY: 'Write something in the 日誌 section first.',
   NOTICE_NO_SHARES: 'No links found in the 今日社群轉貼 section.',
-  NOTICE_SYNTHESIS_DONE: 'Theme guide created.',
-  COMMAND_SYNTHESIZE_THEME: 'Synthesize Theme Guide from Recent Shares',
   NOTICE_DONE: 'Done.',
   NOTICE_FACTS_DISABLED: 'Enable the fact table in settings first.',
   COMMAND_ARCHIVE_SHARES: 'Archive Processed Shares',
