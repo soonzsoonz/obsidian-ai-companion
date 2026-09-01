@@ -1,6 +1,6 @@
 # AI Companion
 
-【[English](../README.md) | 繁體中文 | [简体中文](README.zh-CN.md)】
+【[English](../README.md) | 繁體中文 | [简体中文](README.zh-CN.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Italiano](README.it.md) | [Português (BR)](README.pt-BR.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [हिन्दी](README.hi.md) | [Indonesia](README.id.md)】
 
 一個 Obsidian 外掛，讓 AI 真正參與你的日誌 —— 務實、貼近生活，不是心靈導師。
 

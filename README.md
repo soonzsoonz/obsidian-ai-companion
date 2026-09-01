@@ -1,6 +1,6 @@
 # AI Companion
 
-【English | [繁體中文](docs/README.zh-TW.md) | [简体中文](docs/README.zh-CN.md)】
+【English | [繁體中文](docs/README.zh-TW.md) | [简体中文](docs/README.zh-CN.md) | [Français](docs/README.fr.md) | [Deutsch](docs/README.de.md) | [Español](docs/README.es.md) | [Italiano](docs/README.it.md) | [Português (BR)](docs/README.pt-BR.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [हिन्दी](docs/README.hi.md) | [Indonesia](docs/README.id.md)】
 
 An Obsidian plugin that turns a daily journal into a working relationship with an AI —
 practical and life-sized, not a wellness coach.
