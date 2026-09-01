@@ -8,7 +8,8 @@ import type { AICompanionSettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
 import { renderRoleGuidance } from '../../core/roles';
 import {
-    buildReportPrompt, findExpandable, linkReport, safeFileName, stripPreamble
+    buildReportPrompt, findExpandable, linkReport, safeFileName, stripPreamble,
+    stripReportPreamble
 } from './reports';
 import { t } from '../../i18n';
 

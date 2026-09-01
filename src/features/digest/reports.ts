@@ -116,7 +116,12 @@ export function buildReportPrompt(
         '- Concrete over general. If you cannot say anything specific under a',
         '  heading, leave that heading out rather than padding it.',
         '- Do not restate the digest entry; this note exists to go deeper.',
-        '- No preamble and no title line — start at the first heading.',
+        '- Start at the first ## heading. No title line: the note already has',
+        '  one, and a second is a duplicate the reader has to delete.',
+        '- Do not narrate your own process. No "I now have the details", no',
+        '  "note that the numbers differ" — fetching is your work, not part of',
+        '  the note. If a figure came from a source that has since moved on,',
+        '  simply write it with its date.',
         known ? '\nAbout this reader (context, not a filter):\n' + known : '',
         '',
         'The digest entry:',
@@ -143,4 +148,19 @@ export function stripPreamble(output: string, sourceLabel: string): string {
     // Only trim when the first item is found and something precedes it.
     if (!match || match.index === 0) return output.trim();
     return output.slice(match.index).trim();
+}
+
+/**
+ * Trims a report to start at its first `##` heading.
+ *
+ * The note is written with its own H1 and source link, so a title the model
+ * adds is a duplicate; and with research enabled models tend to preface the
+ * answer with notes about the fetching they just did. Both are removed here
+ * rather than trusted to the prompt, which asks for neither and still gets
+ * them often enough to matter.
+ */
+export function stripReportPreamble(output: string): string {
+    const idx = output.search(/^##\s+\S/m);
+    if (idx === -1) return output.trim();
+    return output.slice(idx).trim();
 }
