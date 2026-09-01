@@ -5,6 +5,7 @@ import {
 } from '../../core/notes';
 import type { AIJourneySettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
+import { renderRoleGuidance } from '../../core/roles';
 import { t } from '../../i18n';
 
 /** The per-item shape carried over from the author's existing Notion digests,
@@ -57,7 +58,10 @@ export class DigestFeature {
         new Notice(t('NOTICE_GENERATING'));
         const known = await this.facts.read();
         const res = await this.providerCore.generate(
-            this.buildDigestPrompt(items, known, shares, cfg.news.research)
+            this.buildDigestPrompt(
+                items, known, shares, cfg.news.research,
+                renderRoleGuidance(cfg.roles.rules, cfg.roles.roles)
+            )
         );
 
         if (!res.success || !res.data) {
@@ -112,7 +116,8 @@ export class DigestFeature {
         items: { title: string; url: string }[],
         known: string,
         shares: Share[],
-        research: boolean
+        research: boolean,
+        roleGuidance: string
     ): string {
         const captured = shares
             .filter(s => s.body)
@@ -126,9 +131,16 @@ export class DigestFeature {
               + 'inferring rather than certain, say so.';
 
         return [
-            'You summarise links a founder shared into a daily knowledge digest.',
+            'You write the daily briefing for someone who saves links they find',
+            'worth keeping.',
             '',
             sourcing,
+            '',
+            'Start by asking why THIS person kept THIS link. People save things to',
+            'use at work, to try in their own making, for someone in the family, or',
+            'simply because it was good. Answer in the voice that reason calls for.',
+            '',
+            roleGuidance,
             '',
             'For EACH link, output exactly this three-line block:',
             ITEM_FORMAT,
@@ -136,18 +148,29 @@ export class DigestFeature {
             'Separate blocks with a line containing only: ---',
             '',
             'Rules:',
-            '- 核心結論 is the concrete takeaway, not a description of the article.',
-            '- 為什麼重要 must connect to this reader specifically. Be honest when',
-            '  something is only marginally relevant — say so rather than inflating it.',
+            '- 核心結論 is the concrete takeaway — the actual technique, number, or',
+            '  finding. If it is a prompt or a recipe, quote the usable part.',
+            '- 為什麼重要 says what they can DO with it, or what makes it good. It is',
+            '  not a rating. Never write that something is 重要性偏低, 幫助不大, or',
+            '  只供休閒 — they already decided it was worth keeping, and saying',
+            '  otherwise tells them nothing they can use. A book someone loved, a',
+            '  drawing style, a thing their kid might like: these are worth keeping',
+            '  for their own sake, so write about them on their own terms.',
             '- Reply in Traditional Chinese unless the shared items are clearly another language.',
             '- Output only the blocks. No preamble, no heading.',
+            '',
+            'When a page cannot be fetched, work from the text captured with the',
+            'share and write the summary anyway, ending 核心結論 with',
+            '（來源未能開啟，以上為分享內容摘要）. Do not suggest they check the link',
+            'or ask the sharer — they are the sharer.',
             '',
             'If any single item is substantial enough to deserve a full write-up',
             '(a how-to, a comparison, a feasibility assessment) rather than three',
             'lines, add a fourth line to that block:',
             '- **值得展開**: <one-line reason a full report would help>',
             'Use this sparingly — most items do not warrant it.',
-            known ? '\nAbout this reader:\n' + known : '',
+            known ? '\nAbout this reader (context, not a filter — most of what they\n'
+                + 'save has nothing to do with these):\n' + known : '',
             captured.length ? '\nText captured with the shares:\n' + captured.join('\n\n') : '',
             '',
             'Links:',

@@ -26,7 +26,7 @@ export default class AIJourneyPlugin extends Plugin {
         await this.loadSettings();
 
         const getSettings = () => this.settings;
-        this.providerCore = new ProviderCore(new CliProvider(this.settings.ai));
+        this.providerCore = new ProviderCore(new CliProvider(this.settings.ai, this.settings.news.research));
 
         this.newsInbox = new NewsInbox(this.app, () => this.settings.news);
         this.factsFeature = new FactsFeature(this, this.providerCore, getSettings);
@@ -183,7 +183,8 @@ export default class AIJourneyPlugin extends Plugin {
             journal: { ...DEFAULT_SETTINGS.journal, ...saved?.journal },
             news: { ...DEFAULT_SETTINGS.news, ...saved?.news },
             digest: { ...DEFAULT_SETTINGS.digest, ...saved?.digest },
-            facts: { ...DEFAULT_SETTINGS.facts, ...saved?.facts }
+            facts: { ...DEFAULT_SETTINGS.facts, ...saved?.facts },
+            roles: { ...DEFAULT_SETTINGS.roles, ...saved?.roles }
         };
 
         // A folder saved as "" predates the default layout — it is what an
@@ -227,7 +228,7 @@ export default class AIJourneyPlugin extends Plugin {
     async saveSettings() {
         await this.saveData(this.settings);
         // Swap in place: the features hold this same ProviderCore instance.
-        this.providerCore?.setProvider(new CliProvider(this.settings.ai));
+        this.providerCore?.setProvider(new CliProvider(this.settings.ai, this.settings.news.research));
         this.applySchedule();
     }
 }

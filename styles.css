@@ -1,1 +1,37 @@
-/* Plugin styles */
+/* Settings tab bar. Uses Obsidian's own variables so it follows the active
+   theme rather than imposing a look of its own. */
+.ai-journey-tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--background-modifier-border);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.ai-journey-tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: var(--font-ui-small);
+}
+
+.ai-journey-tab:hover {
+    background: var(--background-modifier-hover);
+    color: var(--text-normal);
+}
+
+.ai-journey-tab.is-active {
+    color: var(--text-accent);
+    border-bottom-color: var(--text-accent);
+}
+
+.ai-journey-role-prompt {
+    width: 100%;
+    min-width: 20rem;
+    resize: vertical;
+}

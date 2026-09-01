@@ -1,5 +1,7 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
 import type AIJourneyPlugin from '../main';
+import { CLI_PRESETS } from '../providers/presets';
+import { DEFAULT_ROLES, DEFAULT_RULES, type RoleDefinition, type RoleRule } from '../core/roles';
 import { t } from '../i18n';
 
 export interface AISettings {
@@ -44,17 +46,23 @@ export interface FactsSettings {
     enable: boolean;
 }
 
+export interface RolesSettings {
+    rules: RoleRule[];
+    roles: RoleDefinition[];
+}
+
 export interface AIJourneySettings {
     ai: AISettings;
     journal: JournalSettings;
     news: NewsSettings;
     digest: DigestSettings;
     facts: FactsSettings;
+    roles: RolesSettings;
 }
 
 export const DEFAULT_SETTINGS: AIJourneySettings = {
     ai: {
-        provider: 'cli',
+        provider: 'claude',
         cliPath: '',
         extraArgs: '',
         model: '',
@@ -82,8 +90,16 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
     facts: {
         folder: 'ai-journey/memory',
         enable: false
+    },
+    roles: {
+        rules: DEFAULT_RULES,
+        roles: DEFAULT_ROLES
     }
 };
+
+function presetPlaceholder(id: string): string {
+    return CLI_PRESETS.find(p => p.id === id)?.command || 'claude';
+}
 
 export class AIJourneySettingsTab extends PluginSettingTab {
     plugin: AIJourneyPlugin;
@@ -93,65 +109,34 @@ export class AIJourneySettingsTab extends PluginSettingTab {
         this.plugin = plugin;
     }
 
+    /** Which tab is showing. Kept on the instance so a redraw stays put. */
+    private tab = 'general';
+
     display(): void {
-        const {containerEl} = this;
+        const { containerEl } = this;
         containerEl.empty();
 
-        // AI Settings
-        new Setting(containerEl).setHeading().setName(t('SETTINGS_AI_HEADING'));
-        
-        new Setting(containerEl)
-            .setName(t('SETTINGS_AI_PROVIDER_NAME'))
-            .setDesc(t('SETTINGS_AI_PROVIDER_DESC'))
-            .addDropdown(dropdown => dropdown
-                .addOption('cli', 'CLI')
-                .setValue(this.plugin.settings.ai.provider)
-                .onChange(async (value) => {
-                    this.plugin.settings.ai.provider = value;
-                    await this.plugin.saveSettings();
-                }));
+        const tabs: { id: string; label: string }[] = [
+            { id: 'general', label: t('TAB_GENERAL') },
+            { id: 'ai', label: t('TAB_AI') },
+            { id: 'roles', label: t('TAB_ROLES') }
+        ];
 
-        new Setting(containerEl)
-            .setName(t('SETTINGS_AI_CLI_PATH_NAME'))
-            .setDesc(t('SETTINGS_AI_CLI_PATH_DESC'))
-            .addText(text => text
-                .setPlaceholder('claude / gemini')
-                .setValue(this.plugin.settings.ai.cliPath)
-                .onChange(async (value) => {
-                    this.plugin.settings.ai.cliPath = value;
-                    await this.plugin.saveSettings();
-                }));
+        const bar = containerEl.createDiv({ cls: 'ai-journey-tabs' });
+        for (const tab of tabs) {
+            const btn = bar.createEl('button', { text: tab.label });
+            btn.addClass('ai-journey-tab');
+            if (this.tab === tab.id) btn.addClass('is-active');
+            btn.onclick = () => { this.tab = tab.id; this.display(); };
+        }
 
-        new Setting(containerEl)
-            .setName(t('SETTINGS_AI_EXTRA_ARGS_NAME'))
-            .setDesc(t('SETTINGS_AI_EXTRA_ARGS_DESC'))
-            .addText(text => text
-                .setValue(this.plugin.settings.ai.extraArgs)
-                .onChange(async (value) => {
-                    this.plugin.settings.ai.extraArgs = value;
-                    await this.plugin.saveSettings();
-                }));
+        const body = containerEl.createDiv();
+        if (this.tab === 'general') this.renderGeneral(body);
+        else if (this.tab === 'ai') this.renderAI(body);
+        else this.renderRoles(body);
+    }
 
-        new Setting(containerEl)
-            .setName(t('SETTINGS_AI_MODEL_NAME'))
-            .setDesc(t('SETTINGS_AI_MODEL_DESC'))
-            .addText(text => text
-                .setValue(this.plugin.settings.ai.model)
-                .onChange(async (value) => {
-                    this.plugin.settings.ai.model = value;
-                    await this.plugin.saveSettings();
-                }));
-
-        new Setting(containerEl)
-            .setName(t('SETTINGS_AI_TIMEOUT_NAME'))
-            .setDesc(t('SETTINGS_AI_TIMEOUT_DESC'))
-            .addText(text => text
-                .setValue(String(this.plugin.settings.ai.timeout))
-                .onChange(async (value) => {
-                    this.plugin.settings.ai.timeout = parseInt(value, 10) || 30000;
-                    await this.plugin.saveSettings();
-                }));
-
+    private renderGeneral(containerEl: HTMLElement): void {
         // Journal Settings
         new Setting(containerEl).setHeading().setName(t('SETTINGS_JOURNAL_HEADING'));
 
@@ -317,5 +302,194 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                     this.plugin.settings.facts.folder = value;
                     await this.plugin.saveSettings();
                 }));
+    }
+
+    private renderAI(containerEl: HTMLElement): void {
+        // AI Settings
+        new Setting(containerEl).setHeading().setName(t('SETTINGS_AI_HEADING'));
+        
+        new Setting(containerEl)
+            .setName(t('SETTINGS_AI_PROVIDER_NAME'))
+            .setDesc(t('SETTINGS_AI_PROVIDER_DESC'))
+            .addDropdown(dropdown => {
+                for (const preset of CLI_PRESETS) {
+                    dropdown.addOption(preset.id, preset.label
+                        + (preset.verified ? '' : ' — ' + t('SETTINGS_AI_UNVERIFIED')));
+                }
+                dropdown.setValue(this.plugin.settings.ai.provider)
+                    .onChange(async (value) => {
+                        this.plugin.settings.ai.provider = value;
+                        await this.plugin.saveSettings();
+                        this.display();
+                    });
+            });
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_AI_CLI_PATH_NAME'))
+            .setDesc(t('SETTINGS_AI_CLI_PATH_DESC'))
+            .addText(text => text
+                .setPlaceholder(presetPlaceholder(this.plugin.settings.ai.provider))
+                .setValue(this.plugin.settings.ai.cliPath)
+                .onChange(async (value) => {
+                    this.plugin.settings.ai.cliPath = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_AI_EXTRA_ARGS_NAME'))
+            .setDesc(t('SETTINGS_AI_EXTRA_ARGS_DESC'))
+            .addText(text => text
+                .setValue(this.plugin.settings.ai.extraArgs)
+                .onChange(async (value) => {
+                    this.plugin.settings.ai.extraArgs = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_AI_MODEL_NAME'))
+            .setDesc(t('SETTINGS_AI_MODEL_DESC'))
+            .addText(text => text
+                .setValue(this.plugin.settings.ai.model)
+                .onChange(async (value) => {
+                    this.plugin.settings.ai.model = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_AI_TIMEOUT_NAME'))
+            .setDesc(t('SETTINGS_AI_TIMEOUT_DESC'))
+            .addText(text => text
+                .setValue(String(this.plugin.settings.ai.timeout))
+                .onChange(async (value) => {
+                    this.plugin.settings.ai.timeout = parseInt(value, 10) || 30000;
+                    await this.plugin.saveSettings();
+                }));
+
+    }
+
+    /**
+     * The roles tab: which voice the AI uses for what.
+     *
+     * Editable because the right voice is a personal call — the built-in rules
+     * are a starting point, not an opinion about how anyone should be spoken to.
+     */
+    private renderRoles(containerEl: HTMLElement): void {
+        const cfg = this.plugin.settings.roles;
+
+        containerEl.createEl('p', {
+            text: t('SETTINGS_ROLES_INTRO'),
+            cls: 'setting-item-description'
+        });
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_ROLES_RULES_HEADING'))
+            .setHeading()
+            .addExtraButton(b => b
+                .setIcon('rotate-ccw')
+                .setTooltip(t('SETTINGS_RESET'))
+                .onClick(async () => {
+                    cfg.rules = DEFAULT_RULES.map(r => ({ ...r, roles: [...r.roles] }));
+                    await this.plugin.saveSettings();
+                    this.display();
+                }));
+
+        for (const rule of cfg.rules) {
+            const setting = new Setting(containerEl)
+                .addText(text => text
+                    .setPlaceholder(t('SETTINGS_ROLES_SITUATION'))
+                    .setValue(rule.situation)
+                    .onChange(async (value) => {
+                        rule.situation = value;
+                        await this.plugin.saveSettings();
+                    }))
+                .addText(text => text
+                    // Comma-separated role names: a plain text field edits far
+                    // more comfortably than a stack of dropdowns per rule.
+                    .setPlaceholder(t('SETTINGS_ROLES_VOICES'))
+                    .setValue(rule.roles
+                        .map(id => cfg.roles.find(r => r.id === id)?.name ?? id)
+                        .join(', '))
+                    .onChange(async (value) => {
+                        rule.roles = value.split(/[,、]/)
+                            .map(n => n.trim())
+                            .filter(Boolean)
+                            .map(n => cfg.roles.find(r => r.name === n || r.id === n)?.id ?? n);
+                        await this.plugin.saveSettings();
+                    }))
+                .addExtraButton(b => b
+                    .setIcon('trash-2')
+                    .setTooltip(t('SETTINGS_REMOVE'))
+                    .onClick(async () => {
+                        cfg.rules = cfg.rules.filter(r => r.id !== rule.id);
+                        await this.plugin.saveSettings();
+                        this.display();
+                    }));
+            setting.infoEl.remove();
+        }
+
+        new Setting(containerEl).addButton(b => b
+            .setButtonText(t('SETTINGS_ROLES_ADD_RULE'))
+            .onClick(async () => {
+                cfg.rules.push({ id: 'r-' + Date.now(), situation: '', roles: [] });
+                await this.plugin.saveSettings();
+                this.display();
+            }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_ROLES_VOICES_HEADING'))
+            .setHeading()
+            .addExtraButton(b => b
+                .setIcon('rotate-ccw')
+                .setTooltip(t('SETTINGS_RESET'))
+                .onClick(async () => {
+                    cfg.roles = DEFAULT_ROLES.map(r => ({ ...r }));
+                    await this.plugin.saveSettings();
+                    this.display();
+                }));
+
+        for (const role of cfg.roles) {
+            const stock = DEFAULT_ROLES.find(d => d.id === role.id);
+            const setting = new Setting(containerEl)
+                .setName(role.name)
+                .addTextArea(area => {
+                    area.setValue(role.prompt)
+                        .onChange(async (value) => {
+                            role.prompt = value;
+                            await this.plugin.saveSettings();
+                        });
+                    area.inputEl.rows = 3;
+                    area.inputEl.addClass('ai-journey-role-prompt');
+                });
+
+            if (stock) {
+                setting.addExtraButton(b => b
+                    .setIcon('rotate-ccw')
+                    .setTooltip(t('SETTINGS_RESET'))
+                    .onClick(async () => {
+                        role.name = stock.name;
+                        role.prompt = stock.prompt;
+                        await this.plugin.saveSettings();
+                        this.display();
+                    }));
+            } else {
+                setting.addExtraButton(b => b
+                    .setIcon('trash-2')
+                    .setTooltip(t('SETTINGS_REMOVE'))
+                    .onClick(async () => {
+                        cfg.roles = cfg.roles.filter(r => r.id !== role.id);
+                        await this.plugin.saveSettings();
+                        this.display();
+                    }));
+            }
+        }
+
+        new Setting(containerEl).addButton(b => b
+            .setButtonText(t('SETTINGS_ROLES_ADD_VOICE'))
+            .onClick(async () => {
+                const id = 'role-' + Date.now();
+                cfg.roles.push({ id, name: t('SETTINGS_ROLES_NEW_VOICE'), prompt: '' });
+                await this.plugin.saveSettings();
+                this.display();
+            }));
     }
 }

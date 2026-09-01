@@ -1,6 +1,7 @@
 import { spawn } from 'child_process';
 import type { AIProvider, ProviderConfig, AIResponse } from '../core/types';
 import type { AISettings } from '../settings';
+import { presetById } from './presets';
 
 /**
  * Splits a user-supplied argument string into argv, honouring quoted segments.
@@ -17,18 +18,25 @@ function parseArgs(raw: string): string[] {
 }
 
 export class CliProvider implements AIProvider {
-    constructor(private settings: AISettings) {}
+    constructor(private settings: AISettings, private research = false) {}
 
     async generate(prompt: string, config?: ProviderConfig): Promise<AIResponse> {
-        const command = this.settings.cliPath.trim();
+        const preset = presetById(this.settings.provider);
+        const command = (this.settings.cliPath.trim() || preset.command).trim();
         if (!command) {
             return { success: false, error: 'No AI CLI path configured.' };
         }
 
         const timeout = config?.timeout ?? this.settings.timeout ?? 30000;
         const model = config?.model ?? this.settings.model;
-        const args = parseArgs(config?.extraArgs ?? this.settings.extraArgs);
-        if (model) args.push('--model', model);
+
+        // Preset flags first, then research flags, then whatever the reader
+        // added by hand — so a hand-written flag can override a preset one.
+        const args = [...preset.baseArgs];
+        if (this.research) args.push(...preset.researchArgs);
+        if (model) args.push(preset.modelFlag, model);
+        args.push(...parseArgs(config?.extraArgs ?? this.settings.extraArgs));
+        if (preset.delivery === 'argument') args.push(prompt);
 
         return new Promise<AIResponse>(resolve => {
             // shell: false — the command and args are user-configured paths, not
@@ -59,16 +67,28 @@ export class CliProvider implements AIProvider {
             });
 
             child.on('close', code => {
-                if (code === 0) {
+                if (code === 0 && stdout.trim()) {
                     finish({ success: true, data: stdout.trim() });
+                } else if (code === 0) {
+                    // Exit 0 with no output usually means the CLI wanted an
+                    // interactive session — the single most common setup error.
+                    finish({
+                        success: false,
+                        error: stderr.trim()
+                            || 'The CLI produced no output. Check its non-interactive flags.'
+                    });
                 } else {
                     finish({ success: false, error: stderr.trim() || `AI CLI exited with code ${code}.` });
                 }
             });
 
-            child.stdin.on('error', () => { /* ignore EPIPE if the CLI exits early */ });
-            child.stdin.write(prompt);
-            child.stdin.end();
+            if (preset.delivery === 'stdin') {
+                child.stdin.on('error', () => { /* ignore EPIPE if the CLI exits early */ });
+                child.stdin.write(prompt);
+                child.stdin.end();
+            } else {
+                child.stdin.end();
+            }
         });
     }
 }
