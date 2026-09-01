@@ -4,7 +4,7 @@ import {
     clockTime, ensureNote, extractLinks, formatDate, journalChildFolder, journalPath,
     readSection, writeSection
 } from '../../core/notes';
-import type { AIJourneySettings } from '../../settings';
+import type { AICompanionSettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
 import { renderRoleGuidance } from '../../core/roles';
 import {
@@ -46,7 +46,7 @@ export class DigestFeature {
     constructor(
         private plugin: Plugin,
         private providerCore: ProviderCore,
-        private settings: () => AIJourneySettings,
+        private settings: () => AICompanionSettings,
         private facts: { read(): Promise<string> },
         private inbox: NewsInbox
     ) {}

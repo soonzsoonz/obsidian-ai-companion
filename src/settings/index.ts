@@ -1,5 +1,5 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import type AIJourneyPlugin from '../main';
+import type AICompanionPlugin from '../main';
 import { CLI_PRESETS } from '../providers/presets';
 import { STYLE_THEMES } from '../core/themes';
 import { DEFAULT_ROLES, DEFAULT_RULES, type RoleDefinition, type RoleRule } from '../core/roles';
@@ -63,7 +63,7 @@ export interface RolesSettings {
     roles: RoleDefinition[];
 }
 
-export interface AIJourneySettings {
+export interface AICompanionSettings {
     ai: AISettings;
     journal: JournalSettings;
     news: NewsSettings;
@@ -73,13 +73,13 @@ export interface AIJourneySettings {
     appearance: AppearanceSettings;
 }
 
-export const DEFAULT_SETTINGS: AIJourneySettings = {
+export const DEFAULT_SETTINGS: AICompanionSettings = {
     ai: {
         provider: 'claude',
         cliPath: '',
         extraArgs: '',
         model: '',
-        timeout: 30000
+        timeout: 500000
     },
     journal: {
         folder: 'ai-companion/journal',
@@ -122,10 +122,10 @@ function presetPlaceholder(id: string): string {
     return CLI_PRESETS.find(p => p.id === id)?.command || 'claude';
 }
 
-export class AIJourneySettingsTab extends PluginSettingTab {
-    plugin: AIJourneyPlugin;
+export class AICompanionSettingsTab extends PluginSettingTab {
+    plugin: AICompanionPlugin;
 
-    constructor(app: App, plugin: AIJourneyPlugin) {
+    constructor(app: App, plugin: AICompanionPlugin) {
         super(app, plugin);
         this.plugin = plugin;
     }
@@ -409,7 +409,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
             .addText(text => text
                 .setValue(String(this.plugin.settings.ai.timeout))
                 .onChange(async (value) => {
-                    this.plugin.settings.ai.timeout = parseInt(value, 10) || 30000;
+                    this.plugin.settings.ai.timeout = parseInt(value, 10) || 500000;
                     await this.plugin.saveSettings();
                 }));
 

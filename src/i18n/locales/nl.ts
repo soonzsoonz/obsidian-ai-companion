@@ -45,7 +45,7 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Verwerkte deelberichten archiveren',
   NOTICE_ARCHIVED: 'Gearchiveerd / opgeschoond',
   COMMAND_CREATE_JOURNAL: 'Nieuwe dagboeknotitie',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Open een dagboeknotitie om dit te gebruiken',
   NOTICE_TEMPLATE_MISSING: 'Sjabloon niet gevonden',
   SETTINGS_NEWS_HEADING: 'Nieuws',

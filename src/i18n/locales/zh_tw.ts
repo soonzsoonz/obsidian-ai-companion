@@ -45,7 +45,7 @@ export const STRINGS_ZH_TW: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: '歸檔已處理的轉貼',
   NOTICE_ARCHIVED: '已歸檔 / 已清除',
   COMMAND_CREATE_JOURNAL: '建立今日日誌',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: '請開啟日誌筆記才能使用這些功能',
   NOTICE_TEMPLATE_MISSING: '找不到範本',
   SETTINGS_NEWS_HEADING: '新知',

@@ -3,7 +3,7 @@ import type { ProviderCore } from '../../core';
 import {
     clockTime, ensureNote, formatDate, isJournalNote, journalPath, readSection, writeSection, SECTIONS
 } from '../../core/notes';
-import type { AIJourneySettings } from '../../settings';
+import type { AICompanionSettings } from '../../settings';
 import { renderRoleGuidance } from '../../core/roles';
 import { t } from '../../i18n';
 
@@ -40,7 +40,7 @@ export class JournalFeature {
     constructor(
         private plugin: Plugin,
         private providerCore: ProviderCore,
-        private settings: () => AIJourneySettings,
+        private settings: () => AICompanionSettings,
         private facts: { read(): Promise<string> }
     ) {}
 

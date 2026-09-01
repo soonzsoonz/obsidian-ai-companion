@@ -45,7 +45,7 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Arsipkan bagikan yang telah diproses',
   NOTICE_ARCHIVED: 'Diarsipkan / dihapus',
   COMMAND_CREATE_JOURNAL: 'Catatan jurnal baru',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Buka catatan jurnal untuk menggunakan ini',
   NOTICE_TEMPLATE_MISSING: 'Templat tidak ditemukan',
   SETTINGS_NEWS_HEADING: 'Berita',

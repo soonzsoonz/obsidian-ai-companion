@@ -45,7 +45,7 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Архивировать обработанные публикации',
   NOTICE_ARCHIVED: 'Архивировано / удалено',
   COMMAND_CREATE_JOURNAL: 'Новая запись дневника',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Откройте запись дневника, чтобы использовать это',
   NOTICE_TEMPLATE_MISSING: 'Шаблон не найден',
   SETTINGS_NEWS_HEADING: 'Новости',

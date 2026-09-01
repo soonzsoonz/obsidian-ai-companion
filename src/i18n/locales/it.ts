@@ -45,7 +45,7 @@ export const STRINGS_IT: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Archivia le condivisioni elaborate',
   NOTICE_ARCHIVED: 'Archiviati / rimossi',
   COMMAND_CREATE_JOURNAL: 'Nuova nota di diario',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Apri una nota di diario per usare queste azioni',
   NOTICE_TEMPLATE_MISSING: 'Modello non trovato',
   SETTINGS_NEWS_HEADING: 'Notizie',

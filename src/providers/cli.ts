@@ -27,7 +27,7 @@ export class CliProvider implements AIProvider {
             return { success: false, error: 'No AI CLI path configured.' };
         }
 
-        const timeout = config?.timeout ?? this.settings.timeout ?? 30000;
+        const timeout = config?.timeout ?? this.settings.timeout ?? 500000;
         const model = config?.model ?? this.settings.model;
 
         // Preset flags first, then research flags, then whatever the reader

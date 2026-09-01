@@ -45,7 +45,7 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'بایگانی اشتراک‌های پردازش‌شده',
   NOTICE_ARCHIVED: 'بایگانی‌شده / حذف‌شده',
   COMMAND_CREATE_JOURNAL: 'یادداشت روزانه جدید',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'برای استفاده از این موارد یک یادداشت روزانه باز کنید',
   NOTICE_TEMPLATE_MISSING: 'قالب پیدا نشد',
   SETTINGS_NEWS_HEADING: 'اخبار',

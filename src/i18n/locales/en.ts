@@ -43,7 +43,7 @@ export const STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Archive Processed Shares',
   NOTICE_ARCHIVED: 'Archived / pruned',
   COMMAND_CREATE_JOURNAL: 'New Journal Note',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Open a journal note to use these',
   NOTICE_TEMPLATE_MISSING: 'Template not found',
   SETTINGS_NEWS_HEADING: 'News',

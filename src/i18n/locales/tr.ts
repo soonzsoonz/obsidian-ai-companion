@@ -45,7 +45,7 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'İşlenmiş paylaşımları arşivle',
   NOTICE_ARCHIVED: 'Arşivlendi / temizlendi',
   COMMAND_CREATE_JOURNAL: 'Yeni günlük notu',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Bunları kullanmak için bir günlük notu açın',
   NOTICE_TEMPLATE_MISSING: 'Şablon bulunamadı',
   SETTINGS_NEWS_HEADING: 'Haberler',

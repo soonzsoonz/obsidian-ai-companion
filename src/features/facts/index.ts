@@ -1,7 +1,7 @@
 import { Notice, normalizePath, type App, type Plugin } from 'obsidian';
 import type { ProviderCore } from '../../core';
 import { ensureNote, formatDate, journalPath, readSection } from '../../core/notes';
-import type { AIJourneySettings } from '../../settings';
+import type { AICompanionSettings } from '../../settings';
 import { t } from '../../i18n';
 
 const TABLE_FILE = 'facts.md';
@@ -20,7 +20,7 @@ export class FactsFeature {
     constructor(
         private plugin: Plugin,
         private providerCore: ProviderCore,
-        private settings: () => AIJourneySettings
+        private settings: () => AICompanionSettings
     ) {}
 
     private get app(): App {

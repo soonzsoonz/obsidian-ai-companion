@@ -45,7 +45,7 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'เก็บถาวรรายการที่ประมวลผลแล้ว',
   NOTICE_ARCHIVED: 'เก็บถาวรแล้ว / ลบแล้ว',
   COMMAND_CREATE_JOURNAL: 'สร้างบันทึกวันนี้',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'เปิดบันทึกประจำวันเพื่อใช้คำสั่งเหล่านี้',
   NOTICE_TEMPLATE_MISSING: 'ไม่พบเทมเพลต',
   SETTINGS_NEWS_HEADING: 'ข่าวสาร',

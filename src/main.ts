@@ -1,6 +1,6 @@
 import { Menu, Notice, Plugin, normalizePath } from 'obsidian';
-import { AIJourneySettingsTab, DEFAULT_SETTINGS } from './settings';
-import type { AIJourneySettings } from './settings';
+import { AICompanionSettingsTab, DEFAULT_SETTINGS } from './settings';
+import type { AICompanionSettings } from './settings';
 import { JournalFeature } from './features/journal';
 import { DigestFeature } from './features/digest';
 import { FactsFeature } from './features/facts';
@@ -14,8 +14,8 @@ import { t } from './i18n';
 
 const HOUR_MS = 60 * 60 * 1000;
 
-export default class AIJourneyPlugin extends Plugin {
-    settings: AIJourneySettings = DEFAULT_SETTINGS;
+export default class AICompanionPlugin extends Plugin {
+    settings: AICompanionSettings = DEFAULT_SETTINGS;
     providerCore: ProviderCore | null = null;
     journalFeature: JournalFeature | null = null;
     digestFeature: DigestFeature | null = null;
@@ -35,7 +35,7 @@ export default class AIJourneyPlugin extends Plugin {
         this.journalFeature = new JournalFeature(this, this.providerCore, getSettings, this.factsFeature);
         this.digestFeature = new DigestFeature(this, this.providerCore, getSettings, this.factsFeature, this.newsInbox);
 
-        this.addSettingTab(new AIJourneySettingsTab(this.app, this));
+        this.addSettingTab(new AICompanionSettingsTab(this.app, this));
 
         this.addCommand({
             id: 'generate-digest',
@@ -188,7 +188,7 @@ export default class AIJourneyPlugin extends Plugin {
     }
 
     async loadSettings() {
-        const saved = (await this.loadData()) as Partial<AIJourneySettings> | null;
+        const saved = (await this.loadData()) as Partial<AICompanionSettings> | null;
         // Merge per-section: a shallow assign would drop nested defaults when an
         // older config predates a newly added field.
         this.settings = {

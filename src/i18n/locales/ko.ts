@@ -45,7 +45,7 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: '처리된 공유 보관',
   NOTICE_ARCHIVED: '보관됨 / 정리됨',
   COMMAND_CREATE_JOURNAL: '오늘의 저널 만들기',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: '이 기능을 쓰려면 저널 노트를 여세요',
   NOTICE_TEMPLATE_MISSING: '템플릿을 찾을 수 없습니다',
   SETTINGS_NEWS_HEADING: '뉴스',

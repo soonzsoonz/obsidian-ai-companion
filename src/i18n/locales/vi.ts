@@ -45,7 +45,7 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Lưu trữ các bài chia sẻ đã xử lý',
   NOTICE_ARCHIVED: 'Đã lưu trữ / đã xóa',
   COMMAND_CREATE_JOURNAL: 'Tạo nhật ký hôm nay',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Hãy mở một ghi chú nhật ký để dùng các mục này',
   NOTICE_TEMPLATE_MISSING: 'Không tìm thấy mẫu',
   SETTINGS_NEWS_HEADING: 'Tin tức',

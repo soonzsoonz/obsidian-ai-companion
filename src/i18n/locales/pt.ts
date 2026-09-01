@@ -45,7 +45,7 @@ export const STRINGS_PT: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Arquivar partilhas processadas',
   NOTICE_ARCHIVED: 'Arquivados / removidos',
   COMMAND_CREATE_JOURNAL: 'Nova nota de diário',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Abra uma nota de diário para usar estas ações',
   NOTICE_TEMPLATE_MISSING: 'Modelo não encontrado',
   SETTINGS_NEWS_HEADING: 'Notícias',

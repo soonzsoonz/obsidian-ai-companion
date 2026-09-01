@@ -45,7 +45,7 @@ export const STRINGS_DE: typeof STRINGS_EN = {
   COMMAND_ARCHIVE_SHARES: 'Verarbeitete Beiträge archivieren',
   NOTICE_ARCHIVED: 'Archiviert / bereinigt',
   COMMAND_CREATE_JOURNAL: 'Neue Journalnotiz',
-  RIBBON_TOOLTIP: 'AI Journey',
+  RIBBON_TOOLTIP: 'AI Companion',
   MENU_NOT_JOURNAL: 'Öffnen Sie eine Journalnotiz, um dies zu nutzen',
   NOTICE_TEMPLATE_MISSING: 'Vorlage nicht gefunden',
   SETTINGS_NEWS_HEADING: 'Nachrichten',
