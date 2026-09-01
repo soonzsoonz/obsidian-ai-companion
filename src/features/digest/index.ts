@@ -7,7 +7,9 @@ import {
 import type { AIJourneySettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
 import { renderRoleGuidance } from '../../core/roles';
-import { buildReportPrompt, findExpandable, linkReport, safeFileName } from './reports';
+import {
+    buildReportPrompt, findExpandable, linkReport, safeFileName, stripPreamble
+} from './reports';
 import { t } from '../../i18n';
 
 /**
@@ -93,6 +95,7 @@ export class DigestFeature {
             return;
         }
 
+        const digestText = stripPreamble(res.data.trim(), t('DIGEST_SOURCE'));
         const stamp = formatDate(date, 'YYYY-MM-DD') + ' ' + clockTime(date);
 
         // 今日社群轉貼 is filled in by the plugin, not by hand: copying links
@@ -136,7 +139,7 @@ export class DigestFeature {
         new Notice(t('NOTICE_DIGEST_GENERATED'));
 
         if (cfg.news.expandReports) {
-            await this.writeReports(file, res.data.trim(), date, known);
+            await this.writeReports(file, digestText, date, known);
         }
     }
 
@@ -230,7 +233,11 @@ export class DigestFeature {
             '  right; padding it to fill a template is not.',
             '- Never write the wording of these instructions into the output.',
             '- Reply in ' + t('LANGUAGE_NAME') + ' unless the shared items are clearly another language.',
-            '- Output only the blocks. No preamble, no heading.',
+            '- Output ONLY the items. Your first character must be the first',
+            '  bullet of the first item. Do not narrate your own process: no',
+            '  "I fetched", no "these two could not be opened", no "now I have',
+            '  enough to write". Fetching is your work, not part of the briefing;',
+            '  where a page could not be read, note it inside that item alone.',
             '',
             'When a page cannot be fetched, work from the text captured with the',
             'share and write it up anyway, ending with',

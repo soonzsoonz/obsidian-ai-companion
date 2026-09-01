@@ -124,3 +124,23 @@ export function buildReportPrompt(
         item.url ? '\nSource: ' + item.url : ''
     ].filter(Boolean).join('\n');
 }
+
+/**
+ * Removes any preamble the model wrote before its first real item.
+ *
+ * With research enabled the CLI genuinely does tool work, and models tend to
+ * report on that work ("Both redirect to X photo pages, so I'll summarise from
+ * the captured text") before answering. That narration is about the AI's
+ * process, not the reader's day, so it does not belong in their note. The
+ * prompt asks for none; this is the belt to that pair of braces.
+ */
+export function stripPreamble(output: string, sourceLabel: string): string {
+    const marker = new RegExp(
+        '^\\s*[-*]?\\s*\\*\\*' + escapeRegExp(sourceLabel) + '\\*\\*',
+        'm'
+    );
+    const match = marker.exec(output);
+    // Only trim when the first item is found and something precedes it.
+    if (!match || match.index === 0) return output.trim();
+    return output.slice(match.index).trim();
+}
