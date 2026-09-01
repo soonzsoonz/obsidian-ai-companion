@@ -8,13 +8,20 @@ import { NewsInbox, type Share } from '../news';
 import { renderRoleGuidance } from '../../core/roles';
 import { t } from '../../i18n';
 
-/** The per-item shape carried over from the author's existing Notion digests,
- *  kept verbatim so old and new archives stay comparable. */
-const ITEM_FORMAT = [
-    '- **來源標題**: <title> ([原始連結](<url>))',
-    '- **核心結論**: <the concrete takeaway>',
-    '- **為什麼重要**: <why it matters to this reader>'
-].join('\n');
+/**
+ * The per-item shape, in the reader's language.
+ *
+ * The three fields keep the structure of the author's existing Notion digests
+ * (source / takeaway / why it matters) so old and new archives stay
+ * comparable, but the labels themselves follow the interface language.
+ */
+function itemFormat(): string {
+    return [
+        '- **' + t('DIGEST_SOURCE') + '**: <title> ([link](<url>))',
+        '- **' + t('DIGEST_TAKEAWAY') + '**: <the concrete takeaway>',
+        '- **' + t('DIGEST_WHY') + '**: <what they can do with it>'
+    ].join('\n');
+}
 
 export class DigestFeature {
     constructor(
@@ -125,8 +132,7 @@ export class DigestFeature {
 
         const sourcing = research
             ? 'Fetch each link and base your summary on what the page ACTUALLY says. '
-              + 'If a page cannot be fetched, say so in 核心結論 rather than guessing '
-              + 'from the title.'
+              + 'If a page cannot be fetched, say so rather than guessing from the title.'
             : 'Work from the titles and any captured text below. Where you are '
               + 'inferring rather than certain, say so.';
 
@@ -143,31 +149,31 @@ export class DigestFeature {
             roleGuidance,
             '',
             'For EACH link, output exactly this three-line block:',
-            ITEM_FORMAT,
+            itemFormat(),
             '',
             'Separate blocks with a line containing only: ---',
             '',
             'Rules:',
-            '- 核心結論 is the concrete takeaway — the actual technique, number, or',
-            '  finding. If it is a prompt or a recipe, quote the usable part.',
-            '- 為什麼重要 says what they can DO with it, or what makes it good. It is',
-            '  not a rating. Never write that something is 重要性偏低, 幫助不大, or',
-            '  只供休閒 — they already decided it was worth keeping, and saying',
-            '  otherwise tells them nothing they can use. A book someone loved, a',
-            '  drawing style, a thing their kid might like: these are worth keeping',
+            '- The second line is the concrete takeaway — the actual technique,',
+            '  number, or finding. If it is a prompt or a recipe, quote the usable part.',
+            '- The third line says what they can DO with it, or what makes it good.',
+            '  It is NOT a rating. Never call something unimportant, of little help,',
+            '  or merely for leisure — they already decided it was worth keeping, and',
+            '  saying otherwise tells them nothing they can use. A book someone loved,',
+            '  a drawing style, a thing their kid might like: these are worth keeping',
             '  for their own sake, so write about them on their own terms.',
-            '- Reply in Traditional Chinese unless the shared items are clearly another language.',
+            '- Reply in ' + t('LANGUAGE_NAME') + ' unless the shared items are clearly another language.',
             '- Output only the blocks. No preamble, no heading.',
             '',
             'When a page cannot be fetched, work from the text captured with the',
-            'share and write the summary anyway, ending 核心結論 with',
-            '（來源未能開啟，以上為分享內容摘要）. Do not suggest they check the link',
+            'share and write the summary anyway, ending the takeaway line with',
+            '"' + t('DIGEST_UNFETCHED') + '". Do not suggest they check the link',
             'or ask the sharer — they are the sharer.',
             '',
             'If any single item is substantial enough to deserve a full write-up',
             '(a how-to, a comparison, a feasibility assessment) rather than three',
             'lines, add a fourth line to that block:',
-            '- **值得展開**: <one-line reason a full report would help>',
+            '- **' + t('DIGEST_EXPAND') + '**: <one-line reason a full report would help>',
             'Use this sparingly — most items do not warrant it.',
             known ? '\nAbout this reader (context, not a filter — most of what they\n'
                 + 'save has nothing to do with these):\n' + known : '',

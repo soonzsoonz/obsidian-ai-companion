@@ -55,3 +55,20 @@ export function t(key: keyof typeof STRINGS_EN): string {
   const locale = locales[lang] || locales.en;
   return locale[key] || STRINGS_EN[key];
 }
+
+/**
+ * Every locale's value for a key.
+ *
+ * Section headings are written in the reader's language, but a vault may hold
+ * notes created under a different one — or shared by someone else. Matching
+ * therefore accepts any locale's heading, so switching Obsidian's language
+ * never orphans existing notes.
+ */
+export function allTranslations(key: keyof typeof STRINGS_EN): string[] {
+    const seen = new Set<string>();
+    for (const locale of Object.values(locales)) {
+        const value = locale[key];
+        if (value) seen.add(value);
+    }
+    return [...seen];
+}

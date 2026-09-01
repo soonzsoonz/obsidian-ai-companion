@@ -10,17 +10,17 @@ more targeted over time.
 
 ## Features
 
-**Journal feedback** — Reads what you wrote and responds where it can actually help:
-practical notes on health matters you mentioned (yours or your family's), honest thoughts on
-work and family difficulties, and follow-ups worth acting on. It is told explicitly to skip
-affirmations and therapy-speak.
+**Journal feedback** — Reads what you wrote and answers in the voice the subject calls for:
+a confidant for a falling-out, a teacher for something about your child, an engineer for a
+bug. Which voice applies to what is an editable table in settings, and so is each voice's
+own instruction.
 
 **News digest** — Share a post from Threads, X, or Facebook to your vault from your phone,
 and the plugin does the rest: it lists the link in `今日社群轉貼`, then summarises it into a
-fixed triple — 來源標題 / 核心結論 / 為什麼重要. With research enabled it fetches each page
-and summarises what it actually says, rather than guessing from the title. 為什麼重要 is
-written against what the plugin knows about you, so a post is allowed to come back marked as
-only marginally relevant.
+fixed triple — source, takeaway, why it matters. With research enabled it fetches each page
+and summarises what it actually says, rather than guessing from the title. People save things
+to use at work, to try in their own making, for someone in the family, or simply because they
+were good — so the third line says what you can do with it, and never rates it.
 
 **Fact table** — The AI accumulates durable facts about you (people, projects, goals,
 recurring problems) in an ordinary, editable note. Every other feature reads it before
@@ -31,8 +31,8 @@ stays readable after months rather than growing into a changelog.
 
 1. During the day, share links from your phone into the landing folder.
 2. Write your journal — just the `## 日誌` section; the rest is filled in for you.
-3. Run **Generate Digest**. Your shares appear under `## 今日社群轉貼`, the summaries under
-   `## AI整理社群新知`, and the share notes move to the archive.
+3. Run **Generate Digest**. Your shares appear under the shares heading, the summaries
+   under the digest heading, and the share notes move to the archive.
 4. Run **Generate Journal Feedback** when you want a response to what you wrote.
 
 Or set a schedule and let steps 3 and 4 happen on their own.
@@ -42,18 +42,23 @@ Or set a schedule and let steps 3 and 4 happen on their own.
 You own the first and third sections; the AI writes the second and fourth.
 
 ```markdown
-## 日誌
+## Journal
 - what you did today
 
-## AI回饋
+## AI Feedback
 - (AI writes here, timestamped)
 
-## 今日社群轉貼
+## Shared Today
 - (AI lists your shared links here)
 
-## AI整理社群新知
+## AI Digest
 - (AI writes here, timestamped)
 ```
+
+Headings follow Obsidian's language setting, so a Chinese interface writes
+`## 日誌`, `## AI回饋`, and so on. Notes written under one language keep working
+under another: matching recognises every locale's headings, and an existing
+section keeps whatever heading it already has rather than being rewritten.
 
 Sections are found by heading, so their order in your file does not matter. Re-running a
 command appends a new timestamped block rather than replacing what came before, so several
@@ -89,13 +94,17 @@ Requires Obsidian 1.5.0+ on desktop.
 The plugin pipes your prompt to a local AI CLI on stdin and reads its stdout, so the command
 must run non-interactively. For Claude Code:
 
-| Setting | Value |
-| --- | --- |
-| CLI path | `claude` (or its full path) |
-| Extra arguments | `-p` |
+Pick your CLI from the dropdown and its non-interactive flags are applied for you. Only set
+a path if the executable is not on your `PATH`.
 
-The `-p` matters: without it the CLI waits for an interactive session and returns nothing.
-To let the AI fetch the pages you share, add `--allowedTools WebFetch,WebSearch`.
+| CLI | Status |
+| --- | --- |
+| Claude Code | Verified; prompt sent on stdin |
+| Antigravity (`agy`) | Verified; prompt passed as an argument |
+| Codex (ChatGPT) | Offered but untested — please report what you find |
+
+If a command reports no output, the CLI most likely wanted an interactive session; check the
+flags under Extra arguments.
 
 ### Building from source
 
@@ -122,7 +131,10 @@ never act on a file you did not mean to change.
 
 ## Settings
 
-- **AI** — CLI path, extra arguments, model, timeout.
+- **AI** — pick your CLI (Claude Code, Antigravity, Codex) and the flags it needs are filled
+  in; or choose Custom. Plus path, extra arguments, model, timeout.
+- **Voices** — the situation → voice table and each voice's instruction. Every built-in entry
+  resets individually; add your own situations and voices.
 - **Journal** — folder, date format, template path (supports `{{date}}` and `{{time}}`).
   A custom template must keep the four headings; they are how the AI finds where to write.
 - **News** — landing and archive folders, research toggle, archive retention in days
