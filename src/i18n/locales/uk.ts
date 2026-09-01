@@ -112,5 +112,6 @@ export const STRINGS_UK: typeof STRINGS_EN = {
   DIGEST_LINK: 'посилання',
   SETTINGS_ROLES_RESET_ALL: 'Кнопка ↺ повертає початковий набір. Кожен рядок теж має ↺.',
   SETTINGS_ROLES_EMOJI: 'Емодзі',
+  NOTICE_MIGRATED: 'Теку ai-journey переміщено до ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Факти успішно накопичено.',
 };

@@ -112,5 +112,6 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   DIGEST_LINK: 'liên kết',
   SETTINGS_ROLES_RESET_ALL: 'Dùng ↺ để khôi phục bộ mặc định. Mỗi dòng cũng có ↺ riêng.',
   SETTINGS_ROLES_EMOJI: 'Biểu tượng cảm xúc',
+  NOTICE_MIGRATED: 'Đã chuyển thư mục ai-journey sang ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

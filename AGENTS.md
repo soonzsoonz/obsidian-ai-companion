@@ -1,8 +1,8 @@
-# obsidian-ai-journey — build spec
+# obsidian-ai-companion — build spec
 
 An Obsidian plugin: an AI companion for a daily founder's journal. Practical and
 life-oriented, NOT a wellness-guru product. Author: soonzsoonz.
-Repo: git@github.com:soonzsoonz/obsidian-ai-journey.git
+Repo: git@github.com:soonzsoonz/obsidian-ai-companion.git
 
 ## Three features (all shallow but working in v1)
 

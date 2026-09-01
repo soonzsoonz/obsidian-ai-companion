@@ -112,5 +112,6 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   DIGEST_LINK: 'ссылка',
   SETTINGS_ROLES_RESET_ALL: 'Кнопка ↺ возвращает исходный набор. У каждой строки тоже есть ↺.',
   SETTINGS_ROLES_EMOJI: 'Эмодзи',
+  NOTICE_MIGRATED: 'Папка ai-journey перемещена в ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Факты успешно накоплены.',
 };

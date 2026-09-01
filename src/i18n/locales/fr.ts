@@ -112,5 +112,6 @@ export const STRINGS_FR: typeof STRINGS_EN = {
   DIGEST_LINK: 'lien',
   SETTINGS_ROLES_RESET_ALL: 'Utilisez ↺ pour rétablir le jeu par défaut. Chaque ligne a aussi son ↺.',
   SETTINGS_ROLES_EMOJI: 'Émoji',
+  NOTICE_MIGRATED: 'Votre dossier ai-journey a été déplacé vers ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Faits accumulés avec succès.',
 };

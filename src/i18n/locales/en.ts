@@ -110,5 +110,6 @@ export const STRINGS_EN = {
   DIGEST_LINK: 'link',
   SETTINGS_ROLES_RESET_ALL: 'Use the ↺ button to restore the built-in set. Each row has its own ↺ too.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
+  NOTICE_MIGRATED: 'Moved your ai-journey folder to ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

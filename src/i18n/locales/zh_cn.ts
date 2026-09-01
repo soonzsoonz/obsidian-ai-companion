@@ -112,5 +112,6 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   DIGEST_LINK: '原始链接',
   SETTINGS_ROLES_RESET_ALL: '按 ↺ 可恢复整组默认值；每一行也有自己的 ↺。',
   SETTINGS_ROLES_EMOJI: '表情符号',
+  NOTICE_MIGRATED: '已将 ai-journey 文件夹迁移为 ai-companion。',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };

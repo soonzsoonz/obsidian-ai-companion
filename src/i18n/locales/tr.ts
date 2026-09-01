@@ -112,5 +112,6 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   DIGEST_LINK: 'bağlantı',
   SETTINGS_ROLES_RESET_ALL: 'Yerleşik seti geri yüklemek için ↺ kullanın. Her satırın kendi ↺ düğmesi de var.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
+  NOTICE_MIGRATED: 'ai-journey klasörünüz ai-companion olarak taşındı.',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

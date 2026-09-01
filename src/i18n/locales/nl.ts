@@ -112,5 +112,6 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   DIGEST_LINK: 'link',
   SETTINGS_ROLES_RESET_ALL: 'Gebruik ↺ om de standaardset te herstellen. Elke rij heeft ook een ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
+  NOTICE_MIGRATED: 'Je map ai-journey is verplaatst naar ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

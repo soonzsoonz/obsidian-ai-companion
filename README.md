@@ -1,4 +1,4 @@
-# AI Journey
+# AI Companion
 
 An Obsidian plugin that turns a daily journal into a working relationship with an AI —
 practical and life-sized, not a wellness coach.
@@ -67,7 +67,7 @@ runs a day accumulate. Anything outside these four headings is never touched.
 ## Folder layout
 
 ```
-ai-journey/
+ai-companion/
   journal/              daily notes; each day may get a folder of its own for reports
   news/
     landing/            ← share to this folder from your phone
@@ -85,9 +85,9 @@ landing folder exists before you go looking for it in a mobile share sheet.
 Requires Obsidian 1.5.0+ on desktop.
 
 1. Download `main.js`, `manifest.json`, and `styles.css` from the latest release.
-2. Put them in `<vault>/.obsidian/plugins/ai-journey/`.
-3. Enable **AI Journey** in Settings → Community plugins.
-4. Set your AI CLI path in Settings → AI Journey.
+2. Put them in `<vault>/.obsidian/plugins/ai-companion/`.
+3. Enable **AI Companion** in Settings → Community plugins.
+4. Set your AI CLI path in Settings → AI Companion.
 
 ### Setting up the CLI
 

@@ -112,5 +112,6 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   DIGEST_LINK: '元リンク',
   SETTINGS_ROLES_RESET_ALL: '↺ で組み込みのセットに戻せます。各行にも ↺ があります。',
   SETTINGS_ROLES_EMOJI: '絵文字',
+  NOTICE_MIGRATED: 'ai-journey フォルダを ai-companion に移動しました。',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };

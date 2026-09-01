@@ -112,5 +112,6 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   DIGEST_LINK: 'ลิงก์',
   SETTINGS_ROLES_RESET_ALL: 'ใช้ ↺ เพื่อคืนค่าชุดเริ่มต้น แต่ละแถวก็มี ↺ ของตัวเอง',
   SETTINGS_ROLES_EMOJI: 'อีโมจิ',
+  NOTICE_MIGRATED: 'ย้ายโฟลเดอร์ ai-journey ไปยัง ai-companion แล้ว',
   NOTICE_FACTS_ACCUMULATED: 'รวบรวมข้อเท็จจริงสำเร็จ',
 };

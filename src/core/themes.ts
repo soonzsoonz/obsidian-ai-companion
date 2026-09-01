@@ -18,28 +18,28 @@ export interface StyleTheme {
 }
 
 const CARDS = `
-.ai-journey-section {
+.ai-companion-section {
     background: var(--background-secondary);
     border: 1px solid var(--background-modifier-border);
     border-radius: 8px;
     padding: 0.85rem 1.1rem;
     margin-bottom: 0.9rem;
 }
-.ai-journey-section-heading {
+.ai-companion-section-heading {
     margin-top: 0;
     font-size: var(--font-ui-medium);
     letter-spacing: 0.02em;
     color: var(--text-accent);
 }
-.ai-journey-ai .ai-journey-section-heading::before {
+.ai-companion-ai .ai-companion-section-heading::before {
     content: "✦ ";
     opacity: 0.7;
 }
-.ai-journey-stamp {
+.ai-companion-stamp {
     font-size: var(--font-ui-smaller);
     color: var(--text-faint);
 }
-.ai-journey-section hr {
+.ai-companion-section hr {
     border: none;
     border-top: 1px dashed var(--background-modifier-border);
     margin: 0.9rem 0;
@@ -47,39 +47,39 @@ const CARDS = `
 `;
 
 const QUIET = `
-.ai-journey-ai {
+.ai-companion-ai {
     border-left: 3px solid var(--background-modifier-border);
     padding-left: 0.9rem;
     margin-bottom: 0.9rem;
 }
-.ai-journey-ai .ai-journey-section-heading {
+.ai-companion-ai .ai-companion-section-heading {
     font-size: var(--font-ui-small);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
     font-weight: 600;
 }
-.ai-journey-stamp {
+.ai-companion-stamp {
     font-size: var(--font-ui-smaller);
     color: var(--text-faint);
 }
 `;
 
 const MAGAZINE = `
-.ai-journey-section-heading {
+.ai-companion-section-heading {
     font-family: var(--font-text);
     font-size: 1.25em;
     border-bottom: 2px solid var(--text-accent);
     padding-bottom: 0.25rem;
     margin-bottom: 0.7rem;
 }
-.ai-journey-ai {
+.ai-companion-ai {
     margin-bottom: 1.2rem;
 }
-.ai-journey-ai strong {
+.ai-companion-ai strong {
     color: var(--text-accent);
 }
-.ai-journey-stamp {
+.ai-companion-stamp {
     display: inline-block;
     font-size: var(--font-ui-smaller);
     color: var(--text-on-accent);
@@ -87,7 +87,7 @@ const MAGAZINE = `
     border-radius: 999px;
     padding: 0.05rem 0.5rem;
 }
-.ai-journey-ai hr {
+.ai-companion-ai hr {
     border: none;
     border-top: 1px solid var(--background-modifier-border);
     margin: 1rem 0;

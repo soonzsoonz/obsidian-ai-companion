@@ -86,7 +86,9 @@ export default class AIJourneyPlugin extends Plugin {
 
         this.app.workspace.onLayoutReady(() => {
             this.applyTheme();
-            void this.ensureFolders().then(() => this.applySchedule());
+            void this.migrateFromOldName()
+                .then(() => this.ensureFolders())
+                .then(() => this.applySchedule());
         });
     }
 
@@ -178,7 +180,7 @@ export default class AIJourneyPlugin extends Plugin {
     }
 
     onunload() {
-        document.getElementById('ai-journey-theme')?.remove();
+        document.getElementById('ai-companion-theme')?.remove();
         if (this.hourlyTimer !== null) {
             window.clearInterval(this.hourlyTimer);
             this.hourlyTimer = null;
@@ -225,6 +227,43 @@ export default class AIJourneyPlugin extends Plugin {
     }
 
     /**
+     * Moves a vault created under the old name across, once.
+     *
+     * The plugin was called ai-journey before, and its folders were named for
+     * it. Renaming the plugin must not strand someone's journal: any folder
+     * still on the old path is moved, and any setting still pointing at one is
+     * repointed. Folders the reader renamed themselves are left alone, since
+     * they no longer match the old default either.
+     */
+    private async migrateFromOldName(): Promise<void> {
+        const OLD = 'ai-journey';
+        const NEW = 'ai-companion';
+        const s = this.settings;
+
+        const repoint = (value: string) =>
+            value === OLD || value.startsWith(OLD + '/')
+                ? NEW + value.slice(OLD.length)
+                : value;
+
+        // Move the top-level folder first; the per-setting paths then follow.
+        const old = this.app.vault.getFolderByPath(OLD);
+        if (old && !this.app.vault.getFolderByPath(NEW)) {
+            try {
+                await this.app.fileManager.renameFile(old, NEW);
+                new Notice(t('NOTICE_MIGRATED'));
+            } catch {
+                return; // Leave settings pointing at the folder that still exists.
+            }
+        }
+
+        s.journal.folder = repoint(s.journal.folder);
+        s.news.landingFolder = repoint(s.news.landingFolder);
+        s.news.archiveFolder = repoint(s.news.archiveFolder);
+        s.facts.folder = repoint(s.facts.folder);
+        await this.saveData(s);
+    }
+
+    /**
      * Creates the folders the plugin writes into.
      *
      * Done at startup rather than on first write so the news landing folder
@@ -251,7 +290,7 @@ export default class AIJourneyPlugin extends Plugin {
      * page from accumulating stale rules as the reader tries styles out.
      */
     applyTheme(): void {
-        const id = 'ai-journey-theme';
+        const id = 'ai-companion-theme';
         document.getElementById(id)?.remove();
         const css = themeById(this.settings.appearance.theme).css;
         if (!css) return;

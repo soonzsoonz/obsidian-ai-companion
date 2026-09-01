@@ -1,9 +1,9 @@
 {
-    "id": "ai-journey",
-    "name": "AI Journey",
+    "id": "ai-companion",
+    "name": "AI Companion",
     "version": "1.0.0",
     "minAppVersion": "1.5.0",
-    "description": "An AI companion for a daily founder's journal.",
+    "description": "An AI companion for your daily journal: it answers in the voice the subject calls for, digests the links you share from your phone, and remembers what it learns about you.",
     "author": "soonzsoonz",
     "authorUrl": "",
     "isDesktopOnly": true

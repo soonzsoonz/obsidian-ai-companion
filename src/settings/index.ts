@@ -82,13 +82,13 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
         timeout: 30000
     },
     journal: {
-        folder: 'ai-journey/journal',
+        folder: 'ai-companion/journal',
         dateFormat: 'YYYY-MM-DD',
         templatePath: ''
     },
     news: {
-        landingFolder: 'ai-journey/news/landing',
-        archiveFolder: 'ai-journey/news/archived',
+        landingFolder: 'ai-companion/news/landing',
+        archiveFolder: 'ai-companion/news/archived',
         research: true,
         // Deletion of archived shares is opt-in: 0 means keep forever.
         archiveRetentionDays: 0,
@@ -103,7 +103,7 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
         runOnStart: false
     },
     facts: {
-        folder: 'ai-journey/memory',
+        folder: 'ai-companion/memory',
         enable: false
     },
     roles: {
@@ -144,10 +144,10 @@ export class AIJourneySettingsTab extends PluginSettingTab {
             { id: 'appearance', label: t('TAB_APPEARANCE') }
         ];
 
-        const bar = containerEl.createDiv({ cls: 'ai-journey-tabs' });
+        const bar = containerEl.createDiv({ cls: 'ai-companion-tabs' });
         for (const tab of tabs) {
             const btn = bar.createEl('button', { text: tab.label });
-            btn.addClass('ai-journey-tab');
+            btn.addClass('ai-companion-tab');
             if (this.tab === tab.id) btn.addClass('is-active');
             btn.onclick = () => { this.tab = tab.id; this.display(); };
         }
@@ -525,7 +525,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                             role.emoji = value.trim();
                             await this.plugin.saveSettings();
                         });
-                    text.inputEl.addClass('ai-journey-emoji-input');
+                    text.inputEl.addClass('ai-companion-emoji-input');
                 })
                 .addText(text => text
                     .setValue(role.name)
@@ -540,7 +540,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                             await this.plugin.saveSettings();
                         });
                     area.inputEl.rows = 3;
-                    area.inputEl.addClass('ai-journey-role-prompt');
+                    area.inputEl.addClass('ai-companion-role-prompt');
                 });
 
             if (stock) {

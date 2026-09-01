@@ -1,6 +1,6 @@
 /* Settings tab bar. Uses Obsidian's own variables so it follows the active
    theme rather than imposing a look of its own. */
-.ai-journey-tabs {
+.ai-companion-tabs {
     display: flex;
     gap: 0.25rem;
     border-bottom: 1px solid var(--background-modifier-border);
@@ -8,7 +8,7 @@
     flex-wrap: wrap;
 }
 
-.ai-journey-tab {
+.ai-companion-tab {
     background: transparent;
     border: none;
     border-bottom: 2px solid transparent;
@@ -20,24 +20,24 @@
     font-size: var(--font-ui-small);
 }
 
-.ai-journey-tab:hover {
+.ai-companion-tab:hover {
     background: var(--background-modifier-hover);
     color: var(--text-normal);
 }
 
-.ai-journey-tab.is-active {
+.ai-companion-tab.is-active {
     color: var(--text-accent);
     border-bottom-color: var(--text-accent);
 }
 
-.ai-journey-role-prompt {
+.ai-companion-role-prompt {
     width: 100%;
     min-width: 20rem;
     resize: vertical;
 }
 
 /* Emoji field in the voices list: just wide enough for one or two glyphs. */
-.ai-journey-emoji-input {
+.ai-companion-emoji-input {
     width: 3.5rem;
     text-align: center;
 }

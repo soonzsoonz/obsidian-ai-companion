@@ -23,8 +23,8 @@ export function decorateSections(el: HTMLElement, _ctx: MarkdownPostProcessorCon
         );
         if (!key) continue;
 
-        heading.addClass('ai-journey-section-heading');
-        heading.addClass('ai-journey-section-' + key);
+        heading.addClass('ai-companion-section-heading');
+        heading.addClass('ai-companion-section-' + key);
 
         // Everything up to the next h2 belongs to this section.
         const owned: Element[] = [];
@@ -36,15 +36,15 @@ export function decorateSections(el: HTMLElement, _ctx: MarkdownPostProcessorCon
 
         const wrapper = heading.parentElement;
         if (wrapper) {
-            wrapper.addClass('ai-journey-section');
-            if (AI_SECTIONS.includes(key)) wrapper.addClass('ai-journey-ai');
+            wrapper.addClass('ai-companion-section');
+            if (AI_SECTIONS.includes(key)) wrapper.addClass('ai-companion-ai');
         }
         for (const child of owned) {
-            child.addClass('ai-journey-section-body');
+            child.addClass('ai-companion-section-body');
             // The italic timestamp the plugin writes above each AI block.
             if (child.tagName === 'P' && child.children.length === 1
                 && child.firstElementChild?.tagName === 'EM') {
-                child.addClass('ai-journey-stamp');
+                child.addClass('ai-companion-stamp');
             }
         }
     }

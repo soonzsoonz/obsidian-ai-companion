@@ -112,5 +112,6 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   DIGEST_LINK: 'tautan',
   SETTINGS_ROLES_RESET_ALL: 'Gunakan ↺ untuk memulihkan set bawaan. Tiap baris juga punya ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
+  NOTICE_MIGRATED: 'Folder ai-journey dipindahkan ke ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Fakta berhasil dikumpulkan.',
 };

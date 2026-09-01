@@ -112,5 +112,6 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   DIGEST_LINK: '원본 링크',
   SETTINGS_ROLES_RESET_ALL: '↺ 로 기본 세트를 복원합니다. 각 행에도 ↺ 가 있습니다.',
   SETTINGS_ROLES_EMOJI: '이모지',
+  NOTICE_MIGRATED: 'ai-journey 폴더를 ai-companion 으로 옮겼습니다.',
   NOTICE_FACTS_ACCUMULATED: '사실이 성공적으로 축적되었습니다.',
 };

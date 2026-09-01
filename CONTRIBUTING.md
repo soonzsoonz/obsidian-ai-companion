@@ -10,7 +10,7 @@ npm run build
 ```
 
 To test against a real vault, copy `main.js`, `manifest.json`, and `styles.css` into
-`<vault>/.obsidian/plugins/ai-journey/` and reload Obsidian.
+`<vault>/.obsidian/plugins/ai-companion/` and reload Obsidian.
 
 Before opening a PR:
 

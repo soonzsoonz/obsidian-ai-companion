@@ -3,7 +3,7 @@
 ## Reporting a vulnerability
 
 Please report vulnerabilities privately through
-[GitHub security advisories](https://github.com/soonzsoonz/obsidian-ai-journey/security/advisories/new)
+[GitHub security advisories](https://github.com/soonzsoonz/obsidian-ai-companion/security/advisories/new)
 rather than in a public issue.
 
 ## What this plugin does with your data

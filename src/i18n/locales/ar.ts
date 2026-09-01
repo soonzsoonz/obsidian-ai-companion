@@ -112,5 +112,6 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   DIGEST_LINK: 'الرابط',
   SETTINGS_ROLES_RESET_ALL: 'استخدم ↺ لاستعادة المجموعة الافتراضية. لكل صف زر ↺ خاص به.',
   SETTINGS_ROLES_EMOJI: 'رمز تعبيري',
+  NOTICE_MIGRATED: 'تم نقل مجلد ai-journey إلى ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

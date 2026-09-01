@@ -112,5 +112,6 @@ export const STRINGS_PT: typeof STRINGS_EN = {
   DIGEST_LINK: 'ligação',
   SETTINGS_ROLES_RESET_ALL: 'Use ↺ para repor o conjunto original. Cada linha tem o seu ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
+  NOTICE_MIGRATED: 'A sua pasta ai-journey foi movida para ai-companion.',
   NOTICE_FACTS_ACCUMULATED: 'Fatos acumulados com sucesso.',
 };

@@ -112,5 +112,6 @@ export const STRINGS_DE: typeof STRINGS_EN = {
   DIGEST_LINK: 'Link',
   SETTINGS_ROLES_RESET_ALL: 'Mit ↺ den Standardsatz wiederherstellen. Jede Zeile hat ebenfalls ein ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
+  NOTICE_MIGRATED: 'Ihr Ordner ai-journey wurde nach ai-companion verschoben.',
   NOTICE_FACTS_ACCUMULATED: 'Fakten erfolgreich gesammelt.',
 };

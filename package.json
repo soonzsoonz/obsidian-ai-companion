@@ -1,5 +1,5 @@
 {
-    "name": "obsidian-ai-journey",
+    "name": "obsidian-ai-companion",
     "version": "1.0.0",
     "description": "An Obsidian plugin: an AI companion for a daily founder's journal.",
     "main": "main.js",
