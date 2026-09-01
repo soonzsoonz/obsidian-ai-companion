@@ -32,6 +32,10 @@ missing or misspelled key is a compile error rather than a silent fallback to En
 To add a string: add it to `en.ts` first, then to every other locale. To fix a translation,
 edit that locale alone.
 
+Most locales, and the translated READMEs under `docs/`, were machine-translated and
+reviewed only for structure — not by native speakers. Corrections are especially
+welcome, and a fix to your own language needs no discussion first.
+
 Two things to watch:
 
 - The section headings `日誌`, `AI回饋`, `今日社群轉貼`, and `AI整理社群新知` are literal
