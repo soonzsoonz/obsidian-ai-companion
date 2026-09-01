@@ -1,6 +1,7 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
 import type AIJourneyPlugin from '../main';
 import { CLI_PRESETS } from '../providers/presets';
+import { STYLE_THEMES } from '../core/themes';
 import { DEFAULT_ROLES, DEFAULT_RULES, type RoleDefinition, type RoleRule } from '../core/roles';
 import { t } from '../i18n';
 
@@ -50,6 +51,13 @@ export interface FactsSettings {
     enable: boolean;
 }
 
+export interface AppearanceSettings {
+    /** Style theme id, or 'none' to leave notes entirely alone. */
+    theme: string;
+    /** Only style notes inside the journal folder. */
+    journalOnly: boolean;
+}
+
 export interface RolesSettings {
     rules: RoleRule[];
     roles: RoleDefinition[];
@@ -62,6 +70,7 @@ export interface AIJourneySettings {
     digest: DigestSettings;
     facts: FactsSettings;
     roles: RolesSettings;
+    appearance: AppearanceSettings;
 }
 
 export const DEFAULT_SETTINGS: AIJourneySettings = {
@@ -100,6 +109,12 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
     roles: {
         rules: DEFAULT_RULES,
         roles: DEFAULT_ROLES
+    },
+    appearance: {
+        // Off by default: many vaults are already styled by a theme or
+        // snippet, and repainting someone's notes uninvited is a nuisance.
+        theme: 'none',
+        journalOnly: true
     }
 };
 
@@ -125,7 +140,8 @@ export class AIJourneySettingsTab extends PluginSettingTab {
         const tabs: { id: string; label: string }[] = [
             { id: 'general', label: t('TAB_GENERAL') },
             { id: 'ai', label: t('TAB_AI') },
-            { id: 'roles', label: t('TAB_ROLES') }
+            { id: 'roles', label: t('TAB_ROLES') },
+            { id: 'appearance', label: t('TAB_APPEARANCE') }
         ];
 
         const bar = containerEl.createDiv({ cls: 'ai-journey-tabs' });
@@ -139,7 +155,8 @@ export class AIJourneySettingsTab extends PluginSettingTab {
         const body = containerEl.createDiv();
         if (this.tab === 'general') this.renderGeneral(body);
         else if (this.tab === 'ai') this.renderAI(body);
-        else this.renderRoles(body);
+        else if (this.tab === 'roles') this.renderRoles(body);
+        else this.renderAppearance(body);
     }
 
     private renderGeneral(containerEl: HTMLElement): void {
@@ -522,5 +539,40 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                 await this.plugin.saveSettings();
                 this.display();
             }));
+    }
+
+    /**
+     * Appearance: opt-in styling for the plugin's own sections.
+     *
+     * Deliberately last and deliberately off by default — the reader's theme
+     * should win unless they ask otherwise.
+     */
+    private renderAppearance(containerEl: HTMLElement): void {
+        new Setting(containerEl)
+            .setName(t('SETTINGS_STYLE_NAME'))
+            .setDesc(t('SETTINGS_STYLE_DESC'))
+            .addDropdown(dropdown => {
+                for (const theme of STYLE_THEMES) {
+                    dropdown.addOption(theme.id, t(theme.labelKey));
+                }
+                dropdown.setValue(this.plugin.settings.appearance.theme)
+                    .onChange(async (value) => {
+                        this.plugin.settings.appearance.theme = value;
+                        await this.plugin.saveSettings();
+                        this.display();
+                    });
+            });
+
+        if (this.plugin.settings.appearance.theme !== 'none') {
+            new Setting(containerEl)
+                .setName(t('SETTINGS_STYLE_JOURNAL_ONLY_NAME'))
+                .setDesc(t('SETTINGS_STYLE_JOURNAL_ONLY_DESC'))
+                .addToggle(toggle => toggle
+                    .setValue(this.plugin.settings.appearance.journalOnly)
+                    .onChange(async (value) => {
+                        this.plugin.settings.appearance.journalOnly = value;
+                        await this.plugin.saveSettings();
+                    }));
+        }
     }
 }

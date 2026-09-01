@@ -6,6 +6,8 @@ import { DigestFeature } from './features/digest';
 import { FactsFeature } from './features/facts';
 import { NewsInbox } from './features/news';
 import { isJournalNote } from './core/notes';
+import { decorateSections } from './core/decorate';
+import { themeById } from './core/themes';
 import { ProviderCore } from './core';
 import { CliProvider } from './providers/cli';
 import { t } from './i18n';
@@ -71,11 +73,19 @@ export default class AIJourneyPlugin extends Plugin {
             callback: () => { void this.journalFeature?.openToday(); }
         });
 
+        this.registerMarkdownPostProcessor((el, ctx) => {
+            if (this.settings.appearance.theme === 'none') return;
+            if (this.settings.appearance.journalOnly
+                && !isJournalNote(ctx.sourcePath, this.settings.journal.folder)) return;
+            decorateSections(el, ctx);
+        });
+
         this.addRibbonIcon('bot-message-square', t('RIBBON_TOOLTIP'), evt => {
             this.showActionMenu(evt);
         });
 
         this.app.workspace.onLayoutReady(() => {
+            this.applyTheme();
             void this.ensureFolders().then(() => this.applySchedule());
         });
     }
@@ -168,6 +178,7 @@ export default class AIJourneyPlugin extends Plugin {
     }
 
     onunload() {
+        document.getElementById('ai-journey-theme')?.remove();
         if (this.hourlyTimer !== null) {
             window.clearInterval(this.hourlyTimer);
             this.hourlyTimer = null;
@@ -184,7 +195,8 @@ export default class AIJourneyPlugin extends Plugin {
             news: { ...DEFAULT_SETTINGS.news, ...saved?.news },
             digest: { ...DEFAULT_SETTINGS.digest, ...saved?.digest },
             facts: { ...DEFAULT_SETTINGS.facts, ...saved?.facts },
-            roles: { ...DEFAULT_SETTINGS.roles, ...saved?.roles }
+            roles: { ...DEFAULT_SETTINGS.roles, ...saved?.roles },
+            appearance: { ...DEFAULT_SETTINGS.appearance, ...saved?.appearance }
         };
 
         // A folder saved as "" predates the default layout — it is what an
@@ -225,8 +237,24 @@ export default class AIJourneyPlugin extends Plugin {
         }
     }
 
+    /**
+     * Injects the chosen style's CSS. Replacing one style element keeps the
+     * page from accumulating stale rules as the reader tries styles out.
+     */
+    applyTheme(): void {
+        const id = 'ai-journey-theme';
+        document.getElementById(id)?.remove();
+        const css = themeById(this.settings.appearance.theme).css;
+        if (!css) return;
+        const el = document.createElement('style');
+        el.id = id;
+        el.textContent = css;
+        document.head.appendChild(el);
+    }
+
     async saveSettings() {
         await this.saveData(this.settings);
+        this.applyTheme();
         // Swap in place: the features hold this same ProviderCore instance.
         this.providerCore?.setProvider(new CliProvider(this.settings.ai, this.settings.news.research));
         this.applySchedule();
