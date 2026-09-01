@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 /**
  * Which voice the AI answers in, and when.
  *
@@ -25,98 +27,84 @@ export interface RoleRule {
     roles: string[];
 }
 
-export const DEFAULT_ROLES: RoleDefinition[] = [
-    {
-        id: 'confidant',
-        emoji: '🫂',
-        name: '心靈導師',
-        prompt: 'Listen first. Acknowledge what is hard without dressing it up, and '
-            + 'offer perspective only where it genuinely helps. No affirmations, no '
-            + 'therapy-speak, no telling them how to feel.'
-    },
-    {
-        id: 'friend',
-        emoji: '☕',
-        name: '貼心好友',
-        prompt: 'Reply as a close friend would: warm, direct, occasionally funny. '
-            + 'You may simply be glad for them, or say that something sounds rough, '
-            + 'without turning it into advice.'
-    },
-    {
-        id: 'teacher',
-        emoji: '🎒',
-        name: '學校老師',
-        prompt: 'Speak from experience with children of this age: what is normal, '
-            + 'what is worth watching, what usually helps at school. Concrete and '
-            + 'calm; never alarming.'
-    },
-    {
-        id: 'parent-coach',
-        emoji: '👨‍👩‍👧',
-        name: '父母導師',
-        prompt: 'Advise on the parenting side — routines, expectations, how to talk '
-            + 'to a child about this. Assume a tired parent who wants one thing to '
-            + 'try, not a philosophy.'
-    },
-    {
-        id: 'life-hacker',
-        emoji: '💡',
-        name: '生活智慧王',
-        prompt: 'Practical household and daily-life know-how: the trick, the tool, '
-            + 'the order to do things in. Short and immediately usable.'
-    },
-    {
-        id: 'finance',
-        emoji: '💰',
-        name: '財金顧問',
-        prompt: 'Reason about the numbers plainly — costs, runway, pricing, what a '
-            + 'figure implies. State assumptions. Say when something needs a real '
-            + 'accountant or licensed adviser rather than guessing.'
-    },
-    {
-        id: 'engineer',
-        emoji: '🔧',
-        name: '技術顧問',
-        prompt: 'Engage as a senior engineer: what the real problem is, what the '
-            + 'trade-offs are, what to try first. Push back when an approach looks '
-            + 'wrong, and say what you would do instead.'
-    },
-    {
-        id: 'scout',
-        emoji: '📡',
-        name: '新知報馬仔',
-        prompt: 'Report what is genuinely new or useful here and why anyone would '
-            + 'care. Curiosity is reason enough — do not measure everything by '
-            + 'whether it advances their work.'
-    },
-    {
-        id: 'creative',
-        emoji: '🎨',
-        name: '創作夥伴',
-        prompt: 'Respond as a fellow maker: what is interesting about the craft, '
-            + 'what technique is worth stealing, what you would try. Talk about the '
-            + 'work itself, not its business value.'
-    },
-    {
-        id: 'librarian',
-        emoji: '📚',
-        name: '知識管家',
-        prompt: 'Record it well for later: what this is, what it is good for, and '
-            + 'the one detail worth remembering. Something saved for its own sake '
-            + 'deserves a good note, not a verdict on its importance.'
-    }
-];
+/**
+ * The built-in voices, before localisation.
+ *
+ * Names, situations and prompts are i18n keys resolved when the defaults are
+ * first handed out, so installing in Japanese gives Japanese rules rather than
+ * a page of Chinese. Once saved they become ordinary editable text — a
+ * language change never overwrites wording the reader has made their own.
+ */
+const ROLE_SEEDS = [
+    { id: 'confidant', emoji: '🫂' },
+    { id: 'friend', emoji: '☕' },
+    { id: 'teacher', emoji: '🎒' },
+    { id: 'parent-coach', emoji: '👨‍👩‍👧' },
+    { id: 'life-hacker', emoji: '💡' },
+    { id: 'finance', emoji: '💰' },
+    { id: 'engineer', emoji: '🔧' },
+    { id: 'scout', emoji: '📡' },
+    { id: 'creative', emoji: '🎨' },
+    { id: 'librarian', emoji: '📚' }
+] as const;
 
-export const DEFAULT_RULES: RoleRule[] = [
-    { id: 'r-people',    situation: '人際關係、爭執、情緒',     roles: ['confidant', 'friend'] },
-    { id: 'r-children',  situation: '兒女、學校、教養',         roles: ['teacher', 'parent-coach'] },
-    { id: 'r-life',      situation: '生活瑣事、家務、節慶習俗', roles: ['life-hacker', 'scout'] },
-    { id: 'r-money',     situation: '財務、定價、營收、成本',   roles: ['finance'] },
-    { id: 'r-tech',      situation: '軟體、架構、開發、除錯',   roles: ['engineer'] },
-    { id: 'r-creative',  situation: '設計、繪圖、寫作、prompt', roles: ['creative', 'scout'] },
-    { id: 'r-interest',  situation: '純粹覺得有趣、想記錄下來', roles: ['librarian', 'scout'] },
-    { id: 'r-family-use', situation: '家人可能用得上',          roles: ['life-hacker', 'friend'] }
-];
+const RULE_SEEDS = [
+    { id: 'r-people', roles: ['confidant', 'friend'] },
+    { id: 'r-children', roles: ['teacher', 'parent-coach'] },
+    { id: 'r-life', roles: ['life-hacker', 'scout'] },
+    { id: 'r-money', roles: ['finance'] },
+    { id: 'r-tech', roles: ['engineer'] },
+    { id: 'r-creative', roles: ['creative', 'scout'] },
+    { id: 'r-interest', roles: ['librarian', 'scout'] },
+    { id: 'r-family-use', roles: ['life-hacker', 'friend'] }
+] as const;
+
+/** Maps a seed id to its i18n keys. Kept explicit so a typo is a build error. */
+const ROLE_KEYS = {
+    'confidant': ['ROLE_CONFIDANT_NAME', 'ROLE_CONFIDANT_PROMPT'],
+    'friend': ['ROLE_FRIEND_NAME', 'ROLE_FRIEND_PROMPT'],
+    'teacher': ['ROLE_TEACHER_NAME', 'ROLE_TEACHER_PROMPT'],
+    'parent-coach': ['ROLE_PARENT_NAME', 'ROLE_PARENT_PROMPT'],
+    'life-hacker': ['ROLE_LIFE_NAME', 'ROLE_LIFE_PROMPT'],
+    'finance': ['ROLE_FINANCE_NAME', 'ROLE_FINANCE_PROMPT'],
+    'engineer': ['ROLE_ENGINEER_NAME', 'ROLE_ENGINEER_PROMPT'],
+    'scout': ['ROLE_SCOUT_NAME', 'ROLE_SCOUT_PROMPT'],
+    'creative': ['ROLE_CREATIVE_NAME', 'ROLE_CREATIVE_PROMPT'],
+    'librarian': ['ROLE_LIBRARIAN_NAME', 'ROLE_LIBRARIAN_PROMPT']
+} as const;
+
+const RULE_KEYS = {
+    'r-people': 'RULE_PEOPLE',
+    'r-children': 'RULE_CHILDREN',
+    'r-life': 'RULE_LIFE',
+    'r-money': 'RULE_MONEY',
+    'r-tech': 'RULE_TECH',
+    'r-creative': 'RULE_CREATIVE',
+    'r-interest': 'RULE_INTEREST',
+    'r-family-use': 'RULE_FAMILY_USE'
+} as const;
+
+/** The built-in voices in the reader's language. */
+export function defaultRoles(): RoleDefinition[] {
+    return ROLE_SEEDS.map(seed => {
+        const [nameKey, promptKey] = ROLE_KEYS[seed.id];
+        return {
+            id: seed.id,
+            emoji: seed.emoji,
+            name: t(nameKey),
+            prompt: t(promptKey)
+        };
+    });
+}
+
+/** The built-in situation rules in the reader's language. */
+export function defaultRules(): RoleRule[] {
+    return RULE_SEEDS.map(seed => ({
+        id: seed.id,
+        situation: t(RULE_KEYS[seed.id]),
+        roles: [...seed.roles]
+    }));
+}
 
 /**
  * Renders the rules and role prompts into the instruction block both features
@@ -148,19 +136,16 @@ export function renderRoleGuidance(rules: RoleRule[], roles: RoleDefinition[]): 
         if (role) lines.push(`- ${role.emoji} ${role.name}: ${role.prompt}`);
     }
 
+    const first = byId.get([...used][0] ?? '');
     lines.push(
         '',
         'Open each answer with the emoji and name of the voice you are using,',
         'so the reader can see at a glance who is speaking — for example:',
         '',
-        (byId.get([...used][0] ?? '')?.emoji ?? '') + ' **'
-            + (byId.get([...used][0] ?? '')?.name ?? '') + '** — <the answer>',
+        (first?.emoji ?? '') + ' **' + (first?.name ?? '') + '** — <the answer>',
         '',
         'When a passage genuinely needs a different voice, start a new line with',
-        'that voice instead. Never use more than one voice for the same point.'
-    );
-
-    lines.push(
+        'that voice instead. Never use more than one voice for the same point.',
         '',
         'If nothing fits, answer as a thoughtful friend would. Never force an',
         'entry into a work frame it does not belong in.'

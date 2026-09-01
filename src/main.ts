@@ -6,6 +6,7 @@ import { DigestFeature } from './features/digest';
 import { FactsFeature } from './features/facts';
 import { NewsInbox } from './features/news';
 import { isJournalNote, parseNoteDate } from './core/notes';
+import { defaultRoles, defaultRules } from './core/roles';
 import { decorateSections } from './core/decorate';
 import { themeById } from './core/themes';
 import { ProviderCore } from './core';
@@ -223,7 +224,12 @@ export default class AICompanionPlugin extends Plugin {
             news: { ...DEFAULT_SETTINGS.news, ...saved?.news },
             digest: { ...DEFAULT_SETTINGS.digest, ...saved?.digest },
             facts: { ...DEFAULT_SETTINGS.facts, ...saved?.facts },
-            roles: { ...DEFAULT_SETTINGS.roles, ...saved?.roles },
+            roles: {
+                // Seed from the reader's language when nothing was saved; an
+                // existing set is their own wording and is left untouched.
+                rules: saved?.roles?.rules?.length ? saved.roles.rules : defaultRules(),
+                roles: saved?.roles?.roles?.length ? saved.roles.roles : defaultRoles()
+            },
             appearance: { ...DEFAULT_SETTINGS.appearance, ...saved?.appearance }
         };
 
@@ -241,8 +247,7 @@ export default class AICompanionPlugin extends Plugin {
         // because the saved array replaces the defaults wholesale.
         for (const role of this.settings.roles.roles) {
             if (!role.emoji) {
-                role.emoji = DEFAULT_SETTINGS.roles.roles
-                    .find(d => d.id === role.id)?.emoji ?? '💬';
+                role.emoji = defaultRoles().find(d => d.id === role.id)?.emoji ?? '💬';
             }
         }
 

@@ -2,7 +2,7 @@ import { App, PluginSettingTab, Setting } from 'obsidian';
 import type AICompanionPlugin from '../main';
 import { CLI_PRESETS, detectCommand, presetById } from '../providers/presets';
 import { STYLE_THEMES } from '../core/themes';
-import { DEFAULT_ROLES, DEFAULT_RULES, type RoleDefinition, type RoleRule } from '../core/roles';
+import { defaultRoles, defaultRules, type RoleDefinition, type RoleRule } from '../core/roles';
 import { t } from '../i18n';
 
 export interface AISettings {
@@ -110,8 +110,10 @@ export const DEFAULT_SETTINGS: AICompanionSettings = {
         enable: false
     },
     roles: {
-        rules: DEFAULT_RULES,
-        roles: DEFAULT_ROLES
+        // Filled in by loadSettings(): t() cannot run at module-evaluation
+        // time, before Obsidian has reported its language.
+        rules: [],
+        roles: []
     },
     appearance: {
         // Off by default: many vaults are already styled by a theme or
@@ -466,7 +468,7 @@ export class AICompanionSettingsTab extends PluginSettingTab {
                 .setIcon('rotate-ccw')
                 .setTooltip(t('SETTINGS_RESET'))
                 .onClick(async () => {
-                    cfg.rules = DEFAULT_RULES.map(r => ({ ...r, roles: [...r.roles] }));
+                    cfg.rules = defaultRules();
                     await this.plugin.saveSettings();
                     this.display();
                 }));
@@ -505,7 +507,7 @@ export class AICompanionSettingsTab extends PluginSettingTab {
 
             // Built-in rules can be restored one at a time; rules the reader
             // added have no default to return to, so they only get a delete.
-            const stockRule = DEFAULT_RULES.find(d => d.id === rule.id);
+            const stockRule = defaultRules().find(d => d.id === rule.id);
             if (stockRule) {
                 setting.addExtraButton(b => b
                     .setIcon('rotate-ccw')
@@ -536,13 +538,13 @@ export class AICompanionSettingsTab extends PluginSettingTab {
                 .setIcon('rotate-ccw')
                 .setTooltip(t('SETTINGS_RESET'))
                 .onClick(async () => {
-                    cfg.roles = DEFAULT_ROLES.map(r => ({ ...r }));
+                    cfg.roles = defaultRoles();
                     await this.plugin.saveSettings();
                     this.display();
                 }));
 
         for (const role of cfg.roles) {
-            const stock = DEFAULT_ROLES.find(d => d.id === role.id);
+            const stock = defaultRoles().find(d => d.id === role.id);
             // Older saved roles predate the emoji field.
             if (role.emoji === undefined) role.emoji = stock?.emoji ?? '💬';
             const setting = new Setting(containerEl)
