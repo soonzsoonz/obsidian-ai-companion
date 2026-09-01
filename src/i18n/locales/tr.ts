@@ -109,5 +109,6 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   STYLE_MAGAZINE: 'Magazine',
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
+  DIGEST_LINK: 'bağlantı',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

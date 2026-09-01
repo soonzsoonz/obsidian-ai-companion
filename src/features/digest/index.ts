@@ -11,17 +11,32 @@ import { buildReportPrompt, findExpandable, linkReport, safeFileName } from './r
 import { t } from '../../i18n';
 
 /**
- * The per-item shape, in the reader's language.
+ * How each item is written up.
  *
- * The three fields keep the structure of the author's existing Notion digests
- * (source / takeaway / why it matters) so old and new archives stay
- * comparable, but the labels themselves follow the interface language.
+ * Only the source line is fixed — it carries the link, and the report feature
+ * parses it. What follows depends on the item, because a single three-field
+ * template made everything sound like a report: asking for the 核心結論 of a
+ * doodle prompt, or 為什麼重要 of a book someone simply liked, forces a
+ * verdict where none was wanted. The shape should follow what the thing
+ * actually has to offer.
  */
 function itemFormat(): string {
     return [
-        '- **' + t('DIGEST_SOURCE') + '**: <title> ([link](<url>))',
-        '- **' + t('DIGEST_TAKEAWAY') + '**: <the concrete takeaway>',
-        '- **' + t('DIGEST_WHY') + '**: <what they can do with it>'
+        'Every item starts with this line, and the link is never dropped:',
+        '- **' + t('DIGEST_SOURCE') + '**: <title> ([' + t('DIGEST_LINK') + '](<url>))',
+        '',
+        'How much follows, and in what shape, depends on what the item holds:',
+        '',
+        '- It contains something usable — a prompt, a setting, code, a recipe,',
+        '  a number: quote it VERBATIM in a > blockquote, then one line on how',
+        '  to adjust it. The point is to use it without reopening the source.',
+        '- It carries an idea or technique worth understanding: two lines —',
+        '  **' + t('DIGEST_TAKEAWAY') + '** (the concrete finding, not a description of the',
+        '  article) and **' + t('DIGEST_WHY') + '** (what they could do with it).',
+        '- It is a work, a book list, a film, something to enjoy: two or three',
+        '  sentences the way you would tell a friend about it. No analysis, no',
+        '  bullet points, no verdict.',
+        '- It is just news or an announcement: one line. Do not pad it.'
     ].join('\n');
 }
 
@@ -39,7 +54,7 @@ export class DigestFeature {
     }
 
     /**
-     * Digests today's shared links into the 來源標題/核心結論/為什麼重要 triple.
+     * Digests today's shared links, writing each up in whatever shape suits it.
      *
      * Sources are the note's own 今日社群轉貼 section plus anything sitting
      * unprocessed in the news landing folder (where mobile shares arrive).
@@ -201,25 +216,24 @@ export class DigestFeature {
             '',
             roleGuidance,
             '',
-            'For EACH link, output exactly this three-line block:',
             itemFormat(),
             '',
-            'Separate blocks with a line containing only: ---',
+            'Separate items with a line containing only: ---',
             '',
             'Rules:',
-            '- The second line is the concrete takeaway — the actual technique,',
-            '  number, or finding. If it is a prompt or a recipe, quote the usable part.',
-            '- The third line says what they can DO with it, or what makes it good.',
-            '  It is NOT a rating. Never call something unimportant, of little help,',
+            '- Never rate an item. Do not call anything unimportant, of little help,',
             '  or merely for leisure — they already decided it was worth keeping, and',
             '  saying otherwise tells them nothing they can use. A book someone loved,',
             '  a drawing style, a thing their kid might like: these are worth keeping',
             '  for their own sake, so write about them on their own terms.',
+            '- Match the length to the substance. A short item written short is',
+            '  right; padding it to fill a template is not.',
+            '- Never write the wording of these instructions into the output.',
             '- Reply in ' + t('LANGUAGE_NAME') + ' unless the shared items are clearly another language.',
             '- Output only the blocks. No preamble, no heading.',
             '',
             'When a page cannot be fetched, work from the text captured with the',
-            'share and write the summary anyway, ending the takeaway line with',
+            'share and write it up anyway, ending with',
             '"' + t('DIGEST_UNFETCHED') + '". Do not suggest they check the link',
             'or ask the sharer — they are the sharer.',
             '',

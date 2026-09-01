@@ -109,5 +109,6 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   STYLE_MAGAZINE: 'Magazine',
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
+  DIGEST_LINK: '원본 링크',
   NOTICE_FACTS_ACCUMULATED: '사실이 성공적으로 축적되었습니다.',
 };

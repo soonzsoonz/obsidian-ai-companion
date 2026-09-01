@@ -109,5 +109,6 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   STYLE_MAGAZINE: '杂志',
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: '只应用日志笔记',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: '只为日志文件夹内的笔记应用样式。',
+  DIGEST_LINK: '原始链接',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };
