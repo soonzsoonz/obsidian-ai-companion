@@ -110,5 +110,7 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'ลิงก์',
+  SETTINGS_ROLES_RESET_ALL: 'ใช้ ↺ เพื่อคืนค่าชุดเริ่มต้น แต่ละแถวก็มี ↺ ของตัวเอง',
+  SETTINGS_ROLES_EMOJI: 'อีโมจิ',
   NOTICE_FACTS_ACCUMULATED: 'รวบรวมข้อเท็จจริงสำเร็จ',
 };

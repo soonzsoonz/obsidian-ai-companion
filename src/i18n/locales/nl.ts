@@ -110,5 +110,7 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'link',
+  SETTINGS_ROLES_RESET_ALL: 'Gebruik ↺ om de standaardset te herstellen. Elke rij heeft ook een ↺.',
+  SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

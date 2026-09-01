@@ -110,5 +110,7 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'bağlantı',
+  SETTINGS_ROLES_RESET_ALL: 'Yerleşik seti geri yüklemek için ↺ kullanın. Her satırın kendi ↺ düğmesi de var.',
+  SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

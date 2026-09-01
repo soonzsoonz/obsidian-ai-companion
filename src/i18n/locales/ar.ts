@@ -110,5 +110,7 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'الرابط',
+  SETTINGS_ROLES_RESET_ALL: 'استخدم ↺ لاستعادة المجموعة الافتراضية. لكل صف زر ↺ خاص به.',
+  SETTINGS_ROLES_EMOJI: 'رمز تعبيري',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

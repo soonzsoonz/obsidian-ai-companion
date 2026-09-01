@@ -431,6 +431,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName(t('SETTINGS_ROLES_RULES_HEADING'))
+            .setDesc(t('SETTINGS_ROLES_RESET_ALL'))
             .setHeading()
             .addExtraButton(b => b
                 .setIcon('rotate-ccw')
@@ -485,6 +486,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName(t('SETTINGS_ROLES_VOICES_HEADING'))
+            .setDesc(t('SETTINGS_ROLES_RESET_ALL'))
             .setHeading()
             .addExtraButton(b => b
                 .setIcon('rotate-ccw')
@@ -497,8 +499,25 @@ export class AIJourneySettingsTab extends PluginSettingTab {
 
         for (const role of cfg.roles) {
             const stock = DEFAULT_ROLES.find(d => d.id === role.id);
+            // Older saved roles predate the emoji field.
+            if (role.emoji === undefined) role.emoji = stock?.emoji ?? '💬';
             const setting = new Setting(containerEl)
-                .setName(role.name)
+                .addText(text => {
+                    // Emoji and name sit inline: the voice's identity is one
+                    // thing, and both show up as the answer's prefix.
+                    text.setValue(role.emoji)
+                        .onChange(async (value) => {
+                            role.emoji = value.trim();
+                            await this.plugin.saveSettings();
+                        });
+                    text.inputEl.addClass('ai-journey-emoji-input');
+                })
+                .addText(text => text
+                    .setValue(role.name)
+                    .onChange(async (value) => {
+                        role.name = value;
+                        await this.plugin.saveSettings();
+                    }))
                 .addTextArea(area => {
                     area.setValue(role.prompt)
                         .onChange(async (value) => {
@@ -514,6 +533,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                     .setIcon('rotate-ccw')
                     .setTooltip(t('SETTINGS_RESET'))
                     .onClick(async () => {
+                        role.emoji = stock.emoji;
                         role.name = stock.name;
                         role.prompt = stock.prompt;
                         await this.plugin.saveSettings();
@@ -535,7 +555,7 @@ export class AIJourneySettingsTab extends PluginSettingTab {
             .setButtonText(t('SETTINGS_ROLES_ADD_VOICE'))
             .onClick(async () => {
                 const id = 'role-' + Date.now();
-                cfg.roles.push({ id, name: t('SETTINGS_ROLES_NEW_VOICE'), prompt: '' });
+                cfg.roles.push({ id, emoji: '💬', name: t('SETTINGS_ROLES_NEW_VOICE'), prompt: '' });
                 await this.plugin.saveSettings();
                 this.display();
             }));

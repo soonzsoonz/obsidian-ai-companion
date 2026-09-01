@@ -110,5 +110,7 @@ export const STRINGS_UK: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'посилання',
+  SETTINGS_ROLES_RESET_ALL: 'Кнопка ↺ повертає початковий набір. Кожен рядок теж має ↺.',
+  SETTINGS_ROLES_EMOJI: 'Емодзі',
   NOTICE_FACTS_ACCUMULATED: 'Факти успішно накопичено.',
 };

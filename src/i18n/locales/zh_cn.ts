@@ -110,5 +110,7 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: '只应用日志笔记',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: '只为日志文件夹内的笔记应用样式。',
   DIGEST_LINK: '原始链接',
+  SETTINGS_ROLES_RESET_ALL: '按 ↺ 可恢复整组默认值；每一行也有自己的 ↺。',
+  SETTINGS_ROLES_EMOJI: '表情符号',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };

@@ -108,5 +108,7 @@ export const STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'link',
+  SETTINGS_ROLES_RESET_ALL: 'Use the ↺ button to restore the built-in set. Each row has its own ↺ too.',
+  SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

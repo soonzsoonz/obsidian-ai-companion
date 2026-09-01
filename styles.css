@@ -35,3 +35,9 @@
     min-width: 20rem;
     resize: vertical;
 }
+
+/* Emoji field in the voices list: just wide enough for one or two glyphs. */
+.ai-journey-emoji-input {
+    width: 3.5rem;
+    text-align: center;
+}

@@ -11,6 +11,8 @@ export interface RoleDefinition {
     id: string;
     /** Display name, e.g. 心靈導師. */
     name: string;
+    /** Shown before the answer so the voice is visible at a glance. */
+    emoji: string;
     /** The instruction handed to the AI when this role is chosen. */
     prompt: string;
 }
@@ -26,6 +28,7 @@ export interface RoleRule {
 export const DEFAULT_ROLES: RoleDefinition[] = [
     {
         id: 'confidant',
+        emoji: '🫂',
         name: '心靈導師',
         prompt: 'Listen first. Acknowledge what is hard without dressing it up, and '
             + 'offer perspective only where it genuinely helps. No affirmations, no '
@@ -33,6 +36,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'friend',
+        emoji: '☕',
         name: '貼心好友',
         prompt: 'Reply as a close friend would: warm, direct, occasionally funny. '
             + 'You may simply be glad for them, or say that something sounds rough, '
@@ -40,6 +44,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'teacher',
+        emoji: '🎒',
         name: '學校老師',
         prompt: 'Speak from experience with children of this age: what is normal, '
             + 'what is worth watching, what usually helps at school. Concrete and '
@@ -47,6 +52,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'parent-coach',
+        emoji: '👨‍👩‍👧',
         name: '父母導師',
         prompt: 'Advise on the parenting side — routines, expectations, how to talk '
             + 'to a child about this. Assume a tired parent who wants one thing to '
@@ -54,12 +60,14 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'life-hacker',
+        emoji: '💡',
         name: '生活智慧王',
         prompt: 'Practical household and daily-life know-how: the trick, the tool, '
             + 'the order to do things in. Short and immediately usable.'
     },
     {
         id: 'finance',
+        emoji: '💰',
         name: '財金顧問',
         prompt: 'Reason about the numbers plainly — costs, runway, pricing, what a '
             + 'figure implies. State assumptions. Say when something needs a real '
@@ -67,6 +75,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'engineer',
+        emoji: '🔧',
         name: '技術顧問',
         prompt: 'Engage as a senior engineer: what the real problem is, what the '
             + 'trade-offs are, what to try first. Push back when an approach looks '
@@ -74,6 +83,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'scout',
+        emoji: '📡',
         name: '新知報馬仔',
         prompt: 'Report what is genuinely new or useful here and why anyone would '
             + 'care. Curiosity is reason enough — do not measure everything by '
@@ -81,6 +91,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'creative',
+        emoji: '🎨',
         name: '創作夥伴',
         prompt: 'Respond as a fellow maker: what is interesting about the craft, '
             + 'what technique is worth stealing, what you would try. Talk about the '
@@ -88,6 +99,7 @@ export const DEFAULT_ROLES: RoleDefinition[] = [
     },
     {
         id: 'librarian',
+        emoji: '📚',
         name: '知識管家',
         prompt: 'Record it well for later: what this is, what it is good for, and '
             + 'the one detail worth remembering. Something saved for its own sake '
@@ -133,8 +145,20 @@ export function renderRoleGuidance(rules: RoleRule[], roles: RoleDefinition[]): 
     lines.push('', 'The voices:');
     for (const id of used) {
         const role = byId.get(id);
-        if (role) lines.push(`- ${role.name}: ${role.prompt}`);
+        if (role) lines.push(`- ${role.emoji} ${role.name}: ${role.prompt}`);
     }
+
+    lines.push(
+        '',
+        'Open each answer with the emoji and name of the voice you are using,',
+        'so the reader can see at a glance who is speaking — for example:',
+        '',
+        (byId.get([...used][0] ?? '')?.emoji ?? '') + ' **'
+            + (byId.get([...used][0] ?? '')?.name ?? '') + '** — <the answer>',
+        '',
+        'When a passage genuinely needs a different voice, start a new line with',
+        'that voice instead. Never use more than one voice for the same point.'
+    );
 
     lines.push(
         '',

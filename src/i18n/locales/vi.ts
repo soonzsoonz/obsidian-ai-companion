@@ -110,5 +110,7 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'liên kết',
+  SETTINGS_ROLES_RESET_ALL: 'Dùng ↺ để khôi phục bộ mặc định. Mỗi dòng cũng có ↺ riêng.',
+  SETTINGS_ROLES_EMOJI: 'Biểu tượng cảm xúc',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

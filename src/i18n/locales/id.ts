@@ -110,5 +110,7 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   SETTINGS_STYLE_JOURNAL_ONLY_NAME: 'Journal notes only',
   SETTINGS_STYLE_JOURNAL_ONLY_DESC: 'Style only notes inside the journal folder.',
   DIGEST_LINK: 'tautan',
+  SETTINGS_ROLES_RESET_ALL: 'Gunakan ↺ untuk memulihkan set bawaan. Tiap baris juga punya ↺.',
+  SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_FACTS_ACCUMULATED: 'Fakta berhasil dikumpulkan.',
 };
