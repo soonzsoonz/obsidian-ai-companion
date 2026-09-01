@@ -111,5 +111,7 @@ export const STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Use the ↺ button to restore the built-in set. Each row has its own ↺ too.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_MIGRATED: 'Moved your ai-journey folder to ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Found automatically — leave the field empty to use it:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Not found automatically. Leave empty to try "{cmd}" on your PATH, or enter the full path to the executable.',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

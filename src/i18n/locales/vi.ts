@@ -113,5 +113,7 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Dùng ↺ để khôi phục bộ mặc định. Mỗi dòng cũng có ↺ riêng.',
   SETTINGS_ROLES_EMOJI: 'Biểu tượng cảm xúc',
   NOTICE_MIGRATED: 'Đã chuyển thư mục ai-journey sang ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Đã tự động tìm thấy — để trống ô này:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Không tự tìm thấy. Để trống sẽ thử "{cmd}" trong PATH, hoặc nhập đường dẫn đầy đủ tới tệp thực thi.',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

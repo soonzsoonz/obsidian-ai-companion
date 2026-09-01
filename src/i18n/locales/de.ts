@@ -113,5 +113,7 @@ export const STRINGS_DE: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Mit ↺ den Standardsatz wiederherstellen. Jede Zeile hat ebenfalls ein ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_MIGRATED: 'Ihr Ordner ai-journey wurde nach ai-companion verschoben.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Automatisch gefunden — Feld leer lassen:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Nicht automatisch gefunden. Leer lassen, um "{cmd}" im PATH zu versuchen, oder den vollständigen Pfad zur ausführbaren Datei eingeben.',
   NOTICE_FACTS_ACCUMULATED: 'Fakten erfolgreich gesammelt.',
 };

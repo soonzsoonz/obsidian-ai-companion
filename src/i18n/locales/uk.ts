@@ -113,5 +113,7 @@ export const STRINGS_UK: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Кнопка ↺ повертає початковий набір. Кожен рядок теж має ↺.',
   SETTINGS_ROLES_EMOJI: 'Емодзі',
   NOTICE_MIGRATED: 'Теку ai-journey переміщено до ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Знайдено автоматично — залиште поле порожнім:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Не знайдено автоматично. Залиште порожнім, щоб спробувати «{cmd}» з PATH, або вкажіть повний шлях до виконуваного файлу.',
   NOTICE_FACTS_ACCUMULATED: 'Факти успішно накопичено.',
 };

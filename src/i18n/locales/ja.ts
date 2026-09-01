@@ -113,5 +113,7 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: '↺ で組み込みのセットに戻せます。各行にも ↺ があります。',
   SETTINGS_ROLES_EMOJI: '絵文字',
   NOTICE_MIGRATED: 'ai-journey フォルダを ai-companion に移動しました。',
+  SETTINGS_AI_CLI_PATH_FOUND: '自動検出されました。この欄は空のままで構いません：',
+  SETTINGS_AI_CLI_PATH_MISSING: '自動検出できませんでした。空欄のままだと PATH 上の「{cmd}」を試します。うまくいかない場合は実行ファイルのフルパスを入力してください。',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };

@@ -113,5 +113,7 @@ export const STRINGS_KO: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: '↺ 로 기본 세트를 복원합니다. 각 행에도 ↺ 가 있습니다.',
   SETTINGS_ROLES_EMOJI: '이모지',
   NOTICE_MIGRATED: 'ai-journey 폴더를 ai-companion 으로 옮겼습니다.',
+  SETTINGS_AI_CLI_PATH_FOUND: '자동으로 찾았습니다. 이 칸은 비워 두세요:',
+  SETTINGS_AI_CLI_PATH_MISSING: '자동으로 찾지 못했습니다. 비워 두면 PATH 의 "{cmd}" 를 시도합니다. 안 되면 실행 파일의 전체 경로를 입력하세요.',
   NOTICE_FACTS_ACCUMULATED: '사실이 성공적으로 축적되었습니다.',
 };

@@ -374,9 +374,15 @@ export class AICompanionSettingsTab extends PluginSettingTab {
                     });
             });
 
+        // Say plainly whether the CLI was found, so an empty field is visibly
+        // the right answer when it was, and obviously not when it was not.
+        const preset = presetById(this.plugin.settings.ai.provider);
+        const found = detectCommand(preset);
         new Setting(containerEl)
             .setName(t('SETTINGS_AI_CLI_PATH_NAME'))
-            .setDesc(t('SETTINGS_AI_CLI_PATH_DESC'))
+            .setDesc(found
+                ? t('SETTINGS_AI_CLI_PATH_FOUND') + ' ' + found
+                : t('SETTINGS_AI_CLI_PATH_MISSING').replace('{cmd}', preset.command || 'claude'))
             .addText(text => text
                 .setPlaceholder(presetPlaceholder(this.plugin.settings.ai.provider))
                 .setValue(this.plugin.settings.ai.cliPath)

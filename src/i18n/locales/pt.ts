@@ -113,5 +113,7 @@ export const STRINGS_PT: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Use ↺ para repor o conjunto original. Cada linha tem o seu ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_MIGRATED: 'A sua pasta ai-journey foi movida para ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Encontrado automaticamente — deixe o campo vazio:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Não encontrado automaticamente. Deixe vazio para tentar "{cmd}" no PATH, ou introduza o caminho completo do executável.',
   NOTICE_FACTS_ACCUMULATED: 'Fatos acumulados com sucesso.',
 };

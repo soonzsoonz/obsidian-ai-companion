@@ -113,5 +113,7 @@ export const STRINGS_TH: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'ใช้ ↺ เพื่อคืนค่าชุดเริ่มต้น แต่ละแถวก็มี ↺ ของตัวเอง',
   SETTINGS_ROLES_EMOJI: 'อีโมจิ',
   NOTICE_MIGRATED: 'ย้ายโฟลเดอร์ ai-journey ไปยัง ai-companion แล้ว',
+  SETTINGS_AI_CLI_PATH_FOUND: 'ตรวจพบอัตโนมัติ — ปล่อยช่องนี้ว่างไว้ได้:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'ไม่พบอัตโนมัติ ปล่อยว่างเพื่อลองใช้ "{cmd}" ใน PATH หรือกรอกพาธเต็มของไฟล์ที่รันได้',
   NOTICE_FACTS_ACCUMULATED: 'รวบรวมข้อเท็จจริงสำเร็จ',
 };

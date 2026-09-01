@@ -113,5 +113,7 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'برای بازگرداندن مجموعه پیش‌فرض از ↺ استفاده کنید. هر ردیف هم ↺ خود را دارد.',
   SETTINGS_ROLES_EMOJI: 'ایموجی',
   NOTICE_MIGRATED: 'پوشه ai-journey به ai-companion منتقل شد.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'به‌طور خودکار پیدا شد — این فیلد را خالی بگذارید:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'به‌طور خودکار پیدا نشد. خالی بگذارید تا «{cmd}» در PATH امتحان شود، یا مسیر کامل فایل اجرایی را وارد کنید.',
   NOTICE_FACTS_ACCUMULATED: 'حقایق با موفقیت جمع\u200cآوری شدند.',
 };

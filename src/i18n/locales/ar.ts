@@ -113,5 +113,7 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'استخدم ↺ لاستعادة المجموعة الافتراضية. لكل صف زر ↺ خاص به.',
   SETTINGS_ROLES_EMOJI: 'رمز تعبيري',
   NOTICE_MIGRATED: 'تم نقل مجلد ai-journey إلى ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'تم العثور عليه تلقائيًا — اترك الحقل فارغًا:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'لم يُعثر عليه تلقائيًا. اتركه فارغًا لتجربة "{cmd}" في PATH، أو أدخل المسار الكامل للملف التنفيذي.',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

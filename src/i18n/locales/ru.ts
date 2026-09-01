@@ -113,5 +113,7 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Кнопка ↺ возвращает исходный набор. У каждой строки тоже есть ↺.',
   SETTINGS_ROLES_EMOJI: 'Эмодзи',
   NOTICE_MIGRATED: 'Папка ai-journey перемещена в ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Найдено автоматически — оставьте поле пустым:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Не найдено автоматически. Оставьте пустым, чтобы использовать «{cmd}» из PATH, либо укажите полный путь к исполняемому файлу.',
   NOTICE_FACTS_ACCUMULATED: 'Факты успешно накоплены.',
 };

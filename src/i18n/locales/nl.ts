@@ -113,5 +113,7 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Gebruik ↺ om de standaardset te herstellen. Elke rij heeft ook een ↺.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_MIGRATED: 'Je map ai-journey is verplaatst naar ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Automatisch gevonden — laat het veld leeg:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Niet automatisch gevonden. Laat leeg om "{cmd}" op je PATH te proberen, of vul het volledige pad naar het programma in.',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

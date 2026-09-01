@@ -113,5 +113,7 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Yerleşik seti geri yüklemek için ↺ kullanın. Her satırın kendi ↺ düğmesi de var.',
   SETTINGS_ROLES_EMOJI: 'Emoji',
   NOTICE_MIGRATED: 'ai-journey klasörünüz ai-companion olarak taşındı.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Otomatik bulundu — alanı boş bırakın:',
+  SETTINGS_AI_CLI_PATH_MISSING: 'Otomatik bulunamadı. PATH üzerindeki "{cmd}" denensin diye boş bırakın ya da çalıştırılabilir dosyanın tam yolunu girin.',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

@@ -113,5 +113,7 @@ export const STRINGS_FR: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: 'Utilisez ↺ pour rétablir le jeu par défaut. Chaque ligne a aussi son ↺.',
   SETTINGS_ROLES_EMOJI: 'Émoji',
   NOTICE_MIGRATED: 'Votre dossier ai-journey a été déplacé vers ai-companion.',
+  SETTINGS_AI_CLI_PATH_FOUND: 'Trouvé automatiquement — laissez le champ vide :',
+  SETTINGS_AI_CLI_PATH_MISSING: "Non trouvé automatiquement. Laissez vide pour essayer « {cmd} » dans le PATH, ou saisissez le chemin complet de l'exécutable.",
   NOTICE_FACTS_ACCUMULATED: 'Faits accumulés avec succès.',
 };

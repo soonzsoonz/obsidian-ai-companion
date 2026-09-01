@@ -113,5 +113,7 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   SETTINGS_ROLES_RESET_ALL: '按 ↺ 可恢复整组默认值；每一行也有自己的 ↺。',
   SETTINGS_ROLES_EMOJI: '表情符号',
   NOTICE_MIGRATED: '已将 ai-journey 文件夹迁移为 ai-companion。',
+  SETTINGS_AI_CLI_PATH_FOUND: '已自动检测到，此栏留空即可：',
+  SETTINGS_AI_CLI_PATH_MISSING: '未自动检测到。留空会尝试用 PATH 中的“{cmd}”，若不行请填入可执行文件的完整路径。',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };
