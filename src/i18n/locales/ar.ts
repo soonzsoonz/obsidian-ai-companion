@@ -115,5 +115,7 @@ export const STRINGS_AR: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'تم نقل مجلد ai-journey إلى ai-companion.',
   SETTINGS_AI_CLI_PATH_FOUND: 'تم العثور عليه تلقائيًا — اترك الحقل فارغًا:',
   SETTINGS_AI_CLI_PATH_MISSING: 'لم يُعثر عليه تلقائيًا. اتركه فارغًا لتجربة "{cmd}" في PATH، أو أدخل المسار الكامل للملف التنفيذي.',
+  SETTINGS_AI_EFFORT_NAME: 'مستوى الاستدلال',
+  SETTINGS_AI_EFFORT_DESC: 'مدى عمق تفكير النموذج. الأقل أسرع وأرخص؛ والأعلى يناسب التقارير والتحليل. تقبل هذه الأداة: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'تم تراكم الحقائق بنجاح.',
 };

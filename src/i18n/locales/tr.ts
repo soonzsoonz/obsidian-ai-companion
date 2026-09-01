@@ -115,5 +115,7 @@ export const STRINGS_TR: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'ai-journey klasörünüz ai-companion olarak taşındı.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Otomatik bulundu — alanı boş bırakın:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Otomatik bulunamadı. PATH üzerindeki "{cmd}" denensin diye boş bırakın ya da çalıştırılabilir dosyanın tam yolunu girin.',
+  SETTINGS_AI_EFFORT_NAME: 'Akıl yürütme düzeyi',
+  SETTINGS_AI_EFFORT_DESC: 'Modelin ne kadar derin düşüneceği. Düşük daha hızlı ve ucuz; yüksek rapor ve analiz için uygun. Bu CLI şunları kabul eder: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Gerçekler başarıyla biriktirildi.',
 };

@@ -115,5 +115,7 @@ export const STRINGS_DE: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'Ihr Ordner ai-journey wurde nach ai-companion verschoben.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Automatisch gefunden — Feld leer lassen:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Nicht automatisch gefunden. Leer lassen, um "{cmd}" im PATH zu versuchen, oder den vollständigen Pfad zur ausführbaren Datei eingeben.',
+  SETTINGS_AI_EFFORT_NAME: 'Denkaufwand',
+  SETTINGS_AI_EFFORT_DESC: 'Wie gründlich das Modell denkt. Niedriger ist schneller und günstiger; höher eignet sich für Berichte und Analysen. Diese CLI akzeptiert: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Fakten erfolgreich gesammelt.',
 };

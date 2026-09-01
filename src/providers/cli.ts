@@ -34,12 +34,29 @@ export class CliProvider implements AIProvider {
         const timeout = config?.timeout ?? this.settings.timeout ?? 500000;
         const model = config?.model ?? this.settings.model;
 
-        // Preset flags first, then research flags, then whatever the reader
-        // added by hand — so a hand-written flag can override a preset one.
-        const args = [...preset.baseArgs];
+        // Flags are assembled BEFORE the prompt-carrying flag, because a CLI
+        // that takes its prompt as an argument treats the next token as that
+        // prompt: `agy -p --effort low "..."` makes "--effort" the prompt and
+        // silently drops the real one. Everything therefore goes in front,
+        // and baseArgs (which holds -p) goes last.
+        const args: string[] = [];
         if (this.research) args.push(...preset.researchArgs);
         if (model) args.push(preset.modelFlag, model);
+
+        // Effort is only passed when this CLI has such a flag and the chosen
+        // level is one it accepts — a flag a CLI does not know is an error,
+        // not a no-op.
+        const effort = this.settings.effort;
+        if (preset.effortFlag && effort && preset.effortLevels.includes(effort)) {
+            if (preset.effortFlag.endsWith('=')) {
+                args.push(preset.effortFlag + effort);
+            } else {
+                args.push(preset.effortFlag, effort);
+            }
+        }
         args.push(...parseArgs(config?.extraArgs ?? this.settings.extraArgs));
+
+        args.push(...preset.baseArgs);
         if (preset.delivery === 'argument') args.push(prompt);
 
         return new Promise<AIResponse>(resolve => {

@@ -10,6 +10,8 @@ export interface AISettings {
     cliPath: string;
     extraArgs: string;
     model: string;
+    /** Reasoning effort, when the chosen CLI supports one. */
+    effort: string;
     timeout: number;
 }
 
@@ -79,6 +81,7 @@ export const DEFAULT_SETTINGS: AICompanionSettings = {
         cliPath: '',
         extraArgs: '',
         model: '',
+        effort: 'medium',
         timeout: 500000
     },
     journal: {
@@ -410,6 +413,24 @@ export class AICompanionSettingsTab extends PluginSettingTab {
                     this.plugin.settings.ai.model = value;
                     await this.plugin.saveSettings();
                 }));
+
+        if (preset.effortLevels.length > 0) {
+            new Setting(containerEl)
+                .setName(t('SETTINGS_AI_EFFORT_NAME'))
+                .setDesc(t('SETTINGS_AI_EFFORT_DESC')
+                    .replace('{levels}', preset.effortLevels.join(' / ')))
+                .addDropdown(dropdown => {
+                    for (const level of preset.effortLevels) dropdown.addOption(level, level);
+                    // A level the previous CLI accepted may not exist here.
+                    const current = preset.effortLevels.includes(this.plugin.settings.ai.effort)
+                        ? this.plugin.settings.ai.effort
+                        : 'medium';
+                    dropdown.setValue(current).onChange(async (value) => {
+                        this.plugin.settings.ai.effort = value;
+                        await this.plugin.saveSettings();
+                    });
+                });
+        }
 
         new Setting(containerEl)
             .setName(t('SETTINGS_AI_TIMEOUT_NAME'))

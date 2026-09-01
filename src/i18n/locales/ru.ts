@@ -115,5 +115,7 @@ export const STRINGS_RU: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'Папка ai-journey перемещена в ai-companion.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Найдено автоматически — оставьте поле пустым:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Не найдено автоматически. Оставьте пустым, чтобы использовать «{cmd}» из PATH, либо укажите полный путь к исполняемому файлу.',
+  SETTINGS_AI_EFFORT_NAME: 'Глубина рассуждений',
+  SETTINGS_AI_EFFORT_DESC: 'Насколько усердно думает модель. Ниже — быстрее и дешевле; выше — для отчётов и анализа. Этот CLI принимает: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Факты успешно накоплены.',
 };

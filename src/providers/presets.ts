@@ -30,6 +30,10 @@ export interface CliPreset {
     delivery: PromptDelivery;
     /** How the model is named, when one is set. */
     modelFlag: string;
+    /** How reasoning effort is named, or '' if the CLI has no such flag. */
+    effortFlag: string;
+    /** Effort levels this CLI accepts, in order. Empty means no effort control. */
+    effortLevels: string[];
     /**
      * Whether this preset has been verified against the real CLI. Presets that
      * have not are still offered, but the settings tab says so rather than
@@ -54,6 +58,8 @@ export const CLI_PRESETS: CliPreset[] = [
         researchArgs: ['--allowedTools', 'WebFetch,WebSearch'],
         delivery: 'stdin',
         modelFlag: '--model',
+        effortFlag: '--effort',
+        effortLevels: ['low', 'medium', 'high', 'xhigh', 'max'],
         verified: true
     },
     {
@@ -71,6 +77,8 @@ export const CLI_PRESETS: CliPreset[] = [
         researchArgs: [],
         delivery: 'argument',
         modelFlag: '--model',
+        effortFlag: '--effort',
+        effortLevels: ['low', 'medium', 'high'],
         verified: true
     },
     {
@@ -86,6 +94,10 @@ export const CLI_PRESETS: CliPreset[] = [
         researchArgs: [],
         delivery: 'argument',
         modelFlag: '--model',
+        // Documented as model_reasoning_effort; not verified against the real
+        // CLI, which is not installed here.
+        effortFlag: '-c model_reasoning_effort=',
+        effortLevels: ['minimal', 'low', 'medium', 'high'],
         verified: false
     },
     {
@@ -96,6 +108,9 @@ export const CLI_PRESETS: CliPreset[] = [
         researchArgs: [],
         delivery: 'stdin',
         modelFlag: '--model',
+        // Unknown CLI: pass nothing rather than guessing a flag it may reject.
+        effortFlag: '',
+        effortLevels: [],
         verified: true
     }
 ];

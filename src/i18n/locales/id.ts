@@ -115,5 +115,7 @@ export const STRINGS_ID: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'Folder ai-journey dipindahkan ke ai-companion.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Ditemukan otomatis — biarkan kolom ini kosong:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Tidak ditemukan otomatis. Biarkan kosong untuk mencoba "{cmd}" di PATH, atau masukkan path lengkap ke executable.',
+  SETTINGS_AI_EFFORT_NAME: 'Tingkat penalaran',
+  SETTINGS_AI_EFFORT_DESC: 'Seberapa dalam model berpikir. Lebih rendah lebih cepat dan murah; lebih tinggi cocok untuk laporan dan analisis. CLI ini menerima: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Fakta berhasil dikumpulkan.',
 };

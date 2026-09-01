@@ -115,5 +115,7 @@ export const STRINGS_VI: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'Đã chuyển thư mục ai-journey sang ai-companion.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Đã tự động tìm thấy — để trống ô này:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Không tự tìm thấy. Để trống sẽ thử "{cmd}" trong PATH, hoặc nhập đường dẫn đầy đủ tới tệp thực thi.',
+  SETTINGS_AI_EFFORT_NAME: 'Mức độ suy luận',
+  SETTINGS_AI_EFFORT_DESC: 'Mô hình suy nghĩ sâu đến đâu. Thấp thì nhanh và rẻ hơn; cao hợp với báo cáo và phân tích. CLI này chấp nhận: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Tích lũy sự kiện thành công.',
 };

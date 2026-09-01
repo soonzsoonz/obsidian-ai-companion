@@ -113,5 +113,7 @@ export const STRINGS_EN = {
   NOTICE_MIGRATED: 'Moved your ai-journey folder to ai-companion.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Found automatically — leave the field empty to use it:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Not found automatically. Leave empty to try "{cmd}" on your PATH, or enter the full path to the executable.',
+  SETTINGS_AI_EFFORT_NAME: 'Reasoning effort',
+  SETTINGS_AI_EFFORT_DESC: 'How hard the model thinks. Lower is faster and cheaper; higher suits reports and analysis. This CLI accepts: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Facts accumulated successfully.',
 };

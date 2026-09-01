@@ -115,5 +115,7 @@ export const STRINGS_FA: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'پوشه ai-journey به ai-companion منتقل شد.',
   SETTINGS_AI_CLI_PATH_FOUND: 'به‌طور خودکار پیدا شد — این فیلد را خالی بگذارید:',
   SETTINGS_AI_CLI_PATH_MISSING: 'به‌طور خودکار پیدا نشد. خالی بگذارید تا «{cmd}» در PATH امتحان شود، یا مسیر کامل فایل اجرایی را وارد کنید.',
+  SETTINGS_AI_EFFORT_NAME: 'میزان استدلال',
+  SETTINGS_AI_EFFORT_DESC: 'مدل چقدر عمیق فکر کند. پایین‌تر سریع‌تر و ارزان‌تر است؛ بالاتر برای گزارش و تحلیل مناسب است. این CLI می‌پذیرد: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'حقایق با موفقیت جمع\u200cآوری شدند.',
 };

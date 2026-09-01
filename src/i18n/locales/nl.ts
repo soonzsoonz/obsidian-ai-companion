@@ -115,5 +115,7 @@ export const STRINGS_NL: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'Je map ai-journey is verplaatst naar ai-companion.',
   SETTINGS_AI_CLI_PATH_FOUND: 'Automatisch gevonden — laat het veld leeg:',
   SETTINGS_AI_CLI_PATH_MISSING: 'Niet automatisch gevonden. Laat leeg om "{cmd}" op je PATH te proberen, of vul het volledige pad naar het programma in.',
+  SETTINGS_AI_EFFORT_NAME: 'Redeneerinspanning',
+  SETTINGS_AI_EFFORT_DESC: 'Hoe diep het model nadenkt. Lager is sneller en goedkoper; hoger past bij rapporten en analyse. Deze CLI accepteert: {levels}',
   NOTICE_FACTS_ACCUMULATED: 'Feiten succesvol verzameld.',
 };

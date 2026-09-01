@@ -115,5 +115,7 @@ export const STRINGS_ZH_TW: typeof STRINGS_EN = {
   NOTICE_MIGRATED: '已將 ai-journey 資料夾搬移為 ai-companion。',
   SETTINGS_AI_CLI_PATH_FOUND: '已自動偵測到，此欄留空即可：',
   SETTINGS_AI_CLI_PATH_MISSING: '未自動偵測到。留空會嘗試用 PATH 中的「{cmd}」，若不行請填入執行檔的完整路徑。',
+  SETTINGS_AI_EFFORT_NAME: '推理強度',
+  SETTINGS_AI_EFFORT_DESC: '模型思考的深度。低較快也較省；高適合報告與分析。此 CLI 可填：{levels}',
   NOTICE_FACTS_ACCUMULATED: '事實累積成功。',
 };

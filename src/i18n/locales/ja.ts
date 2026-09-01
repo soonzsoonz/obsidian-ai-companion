@@ -115,5 +115,7 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   NOTICE_MIGRATED: 'ai-journey フォルダを ai-companion に移動しました。',
   SETTINGS_AI_CLI_PATH_FOUND: '自動検出されました。この欄は空のままで構いません：',
   SETTINGS_AI_CLI_PATH_MISSING: '自動検出できませんでした。空欄のままだと PATH 上の「{cmd}」を試します。うまくいかない場合は実行ファイルのフルパスを入力してください。',
+  SETTINGS_AI_EFFORT_NAME: '推論の深さ',
+  SETTINGS_AI_EFFORT_DESC: 'モデルがどれだけ考えるか。低いほど速く安価、高いほどレポートや分析向き。この CLI が受け付ける値：{levels}',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };
