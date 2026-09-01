@@ -122,7 +122,7 @@ export class DigestFeature {
         }
 
         const existing = readSection(await this.app.vault.read(file), 'digest');
-        const block = '*' + stamp + '*\n\n' + res.data.trim();
+        const block = '*' + stamp + '*\n\n' + digestText;
         const merged = existing ? existing + '\n\n---\n\n' + block : block;
 
         await this.app.vault.modify(
@@ -133,8 +133,7 @@ export class DigestFeature {
         // Both sections are written, so these shares have served their purpose
         // and can be archived immediately.
         if (shares.length > 0) {
-            await this.inbox.markDone(shares, formatDate(date, 'YYYY-MM-DD'));
-            await this.inbox.archiveNow(shares);
+            await this.inbox.archiveNow(shares, formatDate(date, 'YYYY-MM-DD'));
         }
         new Notice(t('NOTICE_DIGEST_GENERATED'));
 

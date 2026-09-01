@@ -209,6 +209,15 @@ export default class AIJourneyPlugin extends Plugin {
         // A dot-folder is invisible to Obsidian's whole API surface, not just
         // the file explorer: it is never indexed, so the fact table could be
         // neither read back nor opened by hand. Move anyone off it.
+        // Roles saved before emoji existed would otherwise stay blank forever,
+        // because the saved array replaces the defaults wholesale.
+        for (const role of this.settings.roles.roles) {
+            if (!role.emoji) {
+                role.emoji = DEFAULT_SETTINGS.roles.roles
+                    .find(d => d.id === role.id)?.emoji ?? '💬';
+            }
+        }
+
         const f = this.settings.facts;
         if (!f.folder.trim() || f.folder === 'facts' || f.folder.includes('/.')) {
             f.folder = DEFAULT_SETTINGS.facts.folder;

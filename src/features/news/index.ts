@@ -89,20 +89,32 @@ export class NewsInbox {
      * leaving it in the landing folder would only make it look unprocessed.
      * Shares from a run that failed are never passed here, so they stay put.
      */
-    async archiveNow(shares: Share[]): Promise<number> {
+    async archiveNow(shares: Share[], date: string): Promise<number> {
         const archive = normalizePath(this.settings().archiveFolder);
         let moved = 0;
 
-        for (const s of shares) {
-            if (!this.app.vault.getFolderByPath(archive)) {
-                await this.app.vault.createFolder(archive).catch(() => { /* exists */ });
+        if (!this.app.vault.getFolderByPath(archive)) {
+            await this.app.vault.createFolder(archive).catch(() => { /* exists */ });
+        }
+
+        for (const share of shares) {
+            // Stamp and move in one pass. Doing them separately left the note
+            // marked processed but still sitting in the landing folder when
+            // the move failed, which reads as "nothing happened" and then as
+            // "no shares found" on the next run.
+            const file = this.app.vault.getFileByPath(share.file.path) ?? share.file;
+            try {
+                await this.app.vault.modify(file, markProcessed(await this.app.vault.read(file), date));
+
+                let target = normalizePath(archive + '/' + file.name);
+                if (this.app.vault.getFileByPath(target)) {
+                    target = normalizePath(archive + '/' + file.basename + ' ' + Date.now() + '.md');
+                }
+                await this.app.fileManager.renameFile(file, target);
+                moved++;
+            } catch {
+                // Leave it in place; the next run will pick it up again.
             }
-            let target = normalizePath(archive + '/' + s.file.name);
-            if (this.app.vault.getFileByPath(target)) {
-                target = normalizePath(archive + '/' + s.file.basename + ' ' + Date.now() + '.md');
-            }
-            await this.app.fileManager.renameFile(s.file, target);
-            moved++;
         }
         return moved;
     }

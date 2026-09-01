@@ -5,9 +5,10 @@
  * snippet, and a plugin that repaints their notes uninvited is a nuisance —
  * so this is something to switch on, not something to switch off.
  *
- * Every style is scoped to `.ai-journey-styled` on the markdown container, and
- * built from Obsidian's own CSS variables, so a chosen style still follows the
- * reader's theme and their light/dark setting rather than fighting it.
+ * Rules are scoped to the classes the post-processor adds to the plugin's own
+ * sections, so nothing else in the note is touched, and every value comes from
+ * Obsidian's own CSS variables, so a chosen style still follows the reader's
+ * theme and their light/dark setting rather than fighting it.
  */
 export interface StyleTheme {
     id: string;
@@ -17,28 +18,28 @@ export interface StyleTheme {
 }
 
 const CARDS = `
-.ai-journey-styled .ai-journey-section {
+.ai-journey-section {
     background: var(--background-secondary);
     border: 1px solid var(--background-modifier-border);
     border-radius: 8px;
     padding: 0.85rem 1.1rem;
     margin-bottom: 0.9rem;
 }
-.ai-journey-styled .ai-journey-section-heading {
+.ai-journey-section-heading {
     margin-top: 0;
     font-size: var(--font-ui-medium);
     letter-spacing: 0.02em;
     color: var(--text-accent);
 }
-.ai-journey-styled .ai-journey-ai .ai-journey-section-heading::before {
+.ai-journey-ai .ai-journey-section-heading::before {
     content: "✦ ";
     opacity: 0.7;
 }
-.ai-journey-styled .ai-journey-stamp {
+.ai-journey-stamp {
     font-size: var(--font-ui-smaller);
     color: var(--text-faint);
 }
-.ai-journey-styled .ai-journey-section hr {
+.ai-journey-section hr {
     border: none;
     border-top: 1px dashed var(--background-modifier-border);
     margin: 0.9rem 0;
@@ -46,39 +47,39 @@ const CARDS = `
 `;
 
 const QUIET = `
-.ai-journey-styled .ai-journey-ai {
+.ai-journey-ai {
     border-left: 3px solid var(--background-modifier-border);
     padding-left: 0.9rem;
     margin-bottom: 0.9rem;
 }
-.ai-journey-styled .ai-journey-ai .ai-journey-section-heading {
+.ai-journey-ai .ai-journey-section-heading {
     font-size: var(--font-ui-small);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
     font-weight: 600;
 }
-.ai-journey-styled .ai-journey-stamp {
+.ai-journey-stamp {
     font-size: var(--font-ui-smaller);
     color: var(--text-faint);
 }
 `;
 
 const MAGAZINE = `
-.ai-journey-styled .ai-journey-section-heading {
+.ai-journey-section-heading {
     font-family: var(--font-text);
     font-size: 1.25em;
     border-bottom: 2px solid var(--text-accent);
     padding-bottom: 0.25rem;
     margin-bottom: 0.7rem;
 }
-.ai-journey-styled .ai-journey-ai {
+.ai-journey-ai {
     margin-bottom: 1.2rem;
 }
-.ai-journey-styled .ai-journey-ai strong {
+.ai-journey-ai strong {
     color: var(--text-accent);
 }
-.ai-journey-styled .ai-journey-stamp {
+.ai-journey-stamp {
     display: inline-block;
     font-size: var(--font-ui-smaller);
     color: var(--text-on-accent);
@@ -86,7 +87,7 @@ const MAGAZINE = `
     border-radius: 999px;
     padding: 0.05rem 0.5rem;
 }
-.ai-journey-styled .ai-journey-ai hr {
+.ai-journey-ai hr {
     border: none;
     border-top: 1px solid var(--background-modifier-border);
     margin: 1rem 0;

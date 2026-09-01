@@ -473,6 +473,21 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                         await this.plugin.saveSettings();
                         this.display();
                     }));
+
+            // Built-in rules can be restored one at a time; rules the reader
+            // added have no default to return to, so they only get a delete.
+            const stockRule = DEFAULT_RULES.find(d => d.id === rule.id);
+            if (stockRule) {
+                setting.addExtraButton(b => b
+                    .setIcon('rotate-ccw')
+                    .setTooltip(t('SETTINGS_RESET'))
+                    .onClick(async () => {
+                        rule.situation = stockRule.situation;
+                        rule.roles = [...stockRule.roles];
+                        await this.plugin.saveSettings();
+                        this.display();
+                    }));
+            }
             setting.infoEl.remove();
         }
 
