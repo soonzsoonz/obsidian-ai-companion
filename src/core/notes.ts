@@ -79,6 +79,29 @@ export function clockTime(date: Date): string {
     return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
 
+/**
+ * Reads the date back out of a note's filename.
+ *
+ * Re-running from a note's own menu has to act on that note's day, not
+ * today's — otherwise reopening an older entry and asking for feedback
+ * would quietly write into a different file.
+ */
+export function parseNoteDate(name: string, format: string): Date | null {
+    const order: ('Y' | 'M' | 'D')[] = [];
+    const pattern = format
+        .replace(/YYYY/g, () => { order.push('Y'); return '(\\d{4})'; })
+        .replace(/MM/g, () => { order.push('M'); return '(\\d{2})'; })
+        .replace(/DD/g, () => { order.push('D'); return '(\\d{2})'; });
+
+    const m = new RegExp('^' + pattern + '$').exec(name.trim());
+    if (!m || order.length !== 3) return null;
+
+    const parts: Record<string, number> = {};
+    order.forEach((key, i) => { parts[key] = Number(m[i + 1]); });
+    const date = new Date(parts.Y, parts.M - 1, parts.D);
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
 export function journalPath(folder: string, date: Date, format: string): string {
     const name = `${formatDate(date, format)}.md`;
     return normalizePath(folder ? `${folder}/${name}` : name);

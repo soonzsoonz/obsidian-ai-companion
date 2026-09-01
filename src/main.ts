@@ -1,11 +1,11 @@
-import { Menu, Notice, Plugin, normalizePath } from 'obsidian';
+import { Menu, Notice, Plugin, TFile, normalizePath } from 'obsidian';
 import { AICompanionSettingsTab, DEFAULT_SETTINGS } from './settings';
 import type { AICompanionSettings } from './settings';
 import { JournalFeature } from './features/journal';
 import { DigestFeature } from './features/digest';
 import { FactsFeature } from './features/facts';
 import { NewsInbox } from './features/news';
-import { isJournalNote } from './core/notes';
+import { isJournalNote, parseNoteDate } from './core/notes';
 import { decorateSections } from './core/decorate';
 import { themeById } from './core/themes';
 import { ProviderCore } from './core';
@@ -13,6 +13,11 @@ import { CliProvider } from './providers/cli';
 import { t } from './i18n';
 
 const HOUR_MS = 60 * 60 * 1000;
+
+/** The day a journal note is for, from its filename; today if unparseable. */
+function dateOfNote(file: TFile, settings: AICompanionSettings): Date {
+    return parseNoteDate(file.basename, settings.journal.dateFormat) ?? new Date();
+}
 
 export default class AICompanionPlugin extends Plugin {
     settings: AICompanionSettings = DEFAULT_SETTINGS;
@@ -72,6 +77,27 @@ export default class AICompanionPlugin extends Plugin {
             name: t('COMMAND_CREATE_JOURNAL'),
             callback: () => { void this.journalFeature?.openToday(); }
         });
+
+        // The note's own ⋮ menu, so a day can be re-run from the day itself
+        // rather than by remembering which note the command would target.
+        this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
+            if (!(file instanceof TFile) || file.extension !== 'md') return;
+            if (!isJournalNote(file.path, this.settings.journal.folder)) return;
+
+            menu.addSeparator();
+            menu.addItem(item => item
+                .setTitle(t('COMMAND_GENERATE_JOURNAL_FEEDBACK'))
+                .setIcon('message-circle')
+                .onClick(() => { void this.journalFeature?.generateFeedback(dateOfNote(file, this.settings)); }));
+            menu.addItem(item => item
+                .setTitle(t('COMMAND_GENERATE_DIGEST'))
+                .setIcon('newspaper')
+                .onClick(() => { void this.digestFeature?.generate(dateOfNote(file, this.settings)); }));
+            menu.addItem(item => item
+                .setTitle(t('COMMAND_ACCUMULATE_FACTS'))
+                .setIcon('brain')
+                .onClick(() => { void this.factsFeature?.accumulate(dateOfNote(file, this.settings)); }));
+        }));
 
         this.registerMarkdownPostProcessor((el, ctx) => {
             if (this.settings.appearance.theme === 'none') return;

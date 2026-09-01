@@ -1,7 +1,7 @@
 import { spawn } from 'child_process';
 import type { AIProvider, ProviderConfig, AIResponse } from '../core/types';
 import type { AISettings } from '../settings';
-import { presetById } from './presets';
+import { detectCommand, presetById } from './presets';
 
 /**
  * Splits a user-supplied argument string into argv, honouring quoted segments.
@@ -22,7 +22,11 @@ export class CliProvider implements AIProvider {
 
     async generate(prompt: string, config?: ProviderConfig): Promise<AIResponse> {
         const preset = presetById(this.settings.provider);
-        const command = (this.settings.cliPath.trim() || preset.command).trim();
+        // A configured path wins; otherwise probe the usual install locations,
+        // and only then fall back to the bare name and hope PATH has it.
+        const command = (this.settings.cliPath.trim()
+            || detectCommand(preset)
+            || preset.command).trim();
         if (!command) {
             return { success: false, error: 'No AI CLI path configured.' };
         }

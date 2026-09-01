@@ -1,6 +1,6 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
 import type AICompanionPlugin from '../main';
-import { CLI_PRESETS } from '../providers/presets';
+import { CLI_PRESETS, detectCommand, presetById } from '../providers/presets';
 import { STYLE_THEMES } from '../core/themes';
 import { DEFAULT_ROLES, DEFAULT_RULES, type RoleDefinition, type RoleRule } from '../core/roles';
 import { t } from '../i18n';
@@ -119,7 +119,9 @@ export const DEFAULT_SETTINGS: AICompanionSettings = {
 };
 
 function presetPlaceholder(id: string): string {
-    return CLI_PRESETS.find(p => p.id === id)?.command || 'claude';
+    const preset = presetById(id);
+    // Show the detected path, so leaving the field empty is visibly safe.
+    return detectCommand(preset) || preset.command || 'claude';
 }
 
 export class AICompanionSettingsTab extends PluginSettingTab {
