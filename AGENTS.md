@@ -28,16 +28,17 @@ Repo: git@github.com:soonzsoonz/obsidian-ai-companion.git
 - (AI generated)
 ```
 
-Digest items MUST use this existing triple format:
-`**來源標題**: <title> ([原始連結](<url>))` / `**核心結論**: ...` / `**為什麼重要**: ...`
-separated by `---`. See `data-for-study/daily_new_knowledge/網路新知彙整/*.md`.
+Only the source line of a digest item is fixed; what follows depends on what the
+item holds (see `src/features/digest/index.ts`, `itemFormat`). One template made
+everything read as a report. Section headings and the field labels follow the
+interface language — never hardcode Chinese in output.
 
 ## Fact table
 
-`facts/*.md` — AI accumulates what it learns about the writer (people, projects,
+`ai-companion/memory/facts.md` — AI accumulates what it learns about the writer (people, projects,
 goals, ongoing problems) so later advice is targeted. Every fact carries
 provenance: the journal date it came from. Append-only source log in
-`facts/_log.md`; never silently rewrite history. Journal sample shows recurring
+`memory/_log.md`; never silently rewrite history. Journal sample shows recurring
 threads (問題清單/優化清單 repeat across months) — dedupe these into one fact.
 
 ## Architecture (copy claudian's split)
@@ -46,12 +47,12 @@ threads (問題清單/優化清單 repeat across months) — dedupe these into o
 - `src/providers/` — one adapter per AI CLI, spawned via child_process.
   Implement a `cli` provider (configurable command/args, e.g. claude or gemini).
   Leave a clearly-marked seam for a future `api` provider — do NOT implement it.
-- `src/features/` — journal/, digest/, facts/ (one folder each).
+- `src/features/` — journal/, digest/, news/, facts/ (one folder each).
 - `src/settings/` — settings tab + defaults.
 - `src/i18n/` — see below.
 - `src/main.ts` — plugin entry.
 
-`manifest.json`: id `ai-journey`, name `AI Journey`, isDesktopOnly **true**
+`manifest.json`: id `ai-companion`, name `AI Companion`, isDesktopOnly **true**
 (CLI spawning needs Node), minAppVersion "1.5.0", author soonzsoonz.
 
 ## i18n (required from day one — copy notebook-navigator's pattern EXACTLY)
@@ -93,3 +94,21 @@ sent to that CLI's provider, and it writes directly into the vault.
   `src/providers/`.
 - `npm run build` and `npx tsc --noEmit` MUST both pass cleanly.
 - Do not touch `data-for-study/` — it is read-only reference sample data.
+
+## Learned the hard way
+
+- **Never use a dot-folder for plugin data.** Obsidian does not index it, so the
+  vault API cannot read it back either — the feature goes silently inert.
+- **A new field on a default object never reaches existing users.** The saved
+  value replaces the default wholesale, so migrate explicitly on load. This bit
+  the folder defaults, then the role emoji.
+- **`getLanguage()` must come from `obsidian`.** localStorage holds nothing while
+  the interface is English, so reading it directly reports English for everyone.
+- **Scope CSS to classes something actually adds.** A wrapper class that is never
+  applied means no rule can ever match.
+- **Styles only apply in Reading view**; markdown post-processors do not run in
+  Live Preview.
+- **agy takes its prompt as an argument; claude takes it on stdin.** Exit 0 with
+  empty output almost always means a missing non-interactive flag.
+- **Verify AI output shape by running it**, not by reasoning about the prompt.
+  Every prompt change here was wrong on the first try.

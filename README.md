@@ -11,9 +11,10 @@ more targeted over time.
 ## Features
 
 **Journal feedback** — Reads what you wrote and answers in the voice the subject calls for:
-a confidant for a falling-out, a teacher for something about your child, an engineer for a
-bug. Which voice applies to what is an editable table in settings, and so is each voice's
-own instruction.
+🫂 a confidant for a falling-out, 🎒 a teacher for something about your child, 🔧 an engineer
+for a bug. Each answer opens with that voice's emoji and name, so a day holding all three
+reads as three replies rather than one wall of text. Which voice applies to what is an
+editable table in settings, and so is each voice's emoji, name, and instruction.
 
 **News digest** — Share a post from Threads, X, or Facebook to your vault from your phone,
 and the plugin does the rest: it lists the link in `今日社群轉貼`, then summarises it into a
@@ -21,6 +22,11 @@ fixed triple — source, takeaway, why it matters. With research enabled it fetc
 and summarises what it actually says, rather than guessing from the title. People save things
 to use at work, to try in their own making, for someone in the family, or simply because they
 were good — so the third line says what you can do with it, and never rates it.
+
+**Full reports** — When an item deserves more than a couple of lines, the AI marks it and
+writes it a note of its own in that day's folder — what it is, how to do it, what to watch
+for — quoting the method verbatim so it is usable without reopening the source. The digest
+entry links to it. Capped per run, and switchable off.
 
 **Fact table** — The AI accumulates durable facts about you (people, projects, goals,
 recurring problems) in an ordinary, editable note. Every other feature reads it before
@@ -120,8 +126,8 @@ All of these are in the command palette, and in the menu behind the ribbon icon.
 | Command | What it does |
 | --- | --- |
 | New Journal Note | Creates today's note from the template and opens it |
-| Generate Journal Feedback | Writes advice into `## AI回饋` |
-| Generate Digest | Lists your shares and summarises them into `## AI整理社群新知` |
+| Generate Journal Feedback | Answers the day's entry, in the voice each part calls for |
+| Generate Digest | Lists your shares and writes each one up |
 | Accumulate Facts | Updates the fact table from the day's entry |
 | Open Fact Table | Opens `facts.md` for reading or correcting |
 | Archive Processed Shares | Sweeps up any leftover processed shares |
@@ -142,6 +148,9 @@ never act on a file you did not mean to change.
 - **Schedule** — manual (default), on open, or every N hours, with separate toggles for
   whether a scheduled pass runs the digest, the feedback, or both.
 - **Facts** — folder, and an enable toggle (off by default).
+- **Appearance** — an optional style for the plugin's own sections (cards, quiet, magazine),
+  off by default and confined to journal notes. Styles apply in Reading view; every value
+  comes from Obsidian's CSS variables, so your theme still wins.
 
 ### Scheduling
 
