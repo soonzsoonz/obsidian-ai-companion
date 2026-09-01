@@ -1,5 +1,7 @@
 # AI Companion
 
+【English | [繁體中文](docs/README.zh-TW.md) | [简体中文](docs/README.zh-CN.md)】
+
 An Obsidian plugin that turns a daily journal into a working relationship with an AI —
 practical and life-sized, not a wellness coach.
 
@@ -17,7 +19,7 @@ reads as three replies rather than one wall of text. Which voice applies to what
 editable table in settings, and so is each voice's emoji, name, and instruction.
 
 **News digest** — Share a post from Threads, X, or Facebook to your vault from your phone,
-and the plugin does the rest: it lists the link in `今日社群轉貼`, then summarises it into a
+and the plugin does the rest: it lists the link under the shares heading, then writes it up
 fixed triple — source, takeaway, why it matters. With research enabled it fetches each page
 and summarises what it actually says, rather than guessing from the title. People save things
 to use at work, to try in their own making, for someone in the family, or simply because they
@@ -36,7 +38,7 @@ stays readable after months rather than growing into a changelog.
 ## How a day works
 
 1. During the day, share links from your phone into the landing folder.
-2. Write your journal — just the `## 日誌` section; the rest is filled in for you.
+2. Write your journal — just the Journal section; the rest is filled in for you.
 3. Run **Generate Digest**. Your shares appear under the shares heading, the summaries
    under the digest heading, and the share notes move to the archive.
 4. Run **Generate Journal Feedback** when you want a response to what you wrote.

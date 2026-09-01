@@ -20,6 +20,7 @@ import { STRINGS_IT } from './locales/it';
 import { STRINGS_PL } from './locales/pl';
 import { STRINGS_AR } from './locales/ar';
 import { STRINGS_FA } from './locales/fa';
+import { STRINGS_HI } from './locales/hi';
 
 const locales: { [key: string]: typeof STRINGS_EN } = {
   en: STRINGS_EN,
@@ -46,6 +47,7 @@ const locales: { [key: string]: typeof STRINGS_EN } = {
   pl: STRINGS_PL,
   ar: STRINGS_AR,
   fa: STRINGS_FA,
+  hi: STRINGS_HI,
 };
 
 /**
