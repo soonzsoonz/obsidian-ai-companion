@@ -92,5 +92,13 @@ export const STRINGS_ZH_TW: typeof STRINGS_EN = {
   DIGEST_EXPAND: '值得展開',
   DIGEST_UNFETCHED: '（來源未能開啟，以上為分享內容摘要）',
   LANGUAGE_NAME: '繁體中文',
+  NOTICE_REPORTS_WRITTEN: '已產生報告',
+  REPORT_WHAT: '這是什麼',
+  REPORT_HOW: '怎麼做',
+  REPORT_NOTES: '注意事項與取捨',
+  SETTINGS_NEWS_REPORTS_NAME: '產生完整報告',
+  SETTINGS_NEWS_REPORTS_DESC: '當某一項值得展開時，在當天資料夾另外產生一篇完整筆記。',
+  SETTINGS_NEWS_MAXREPORTS_NAME: '每次產生上限',
+  SETTINGS_NEWS_MAXREPORTS_DESC: '每次彙整最多產生幾篇報告。',
   NOTICE_FACTS_ACCUMULATED: '事實累積成功。',
 };

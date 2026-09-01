@@ -92,5 +92,13 @@ export const STRINGS_JA: typeof STRINGS_EN = {
   DIGEST_EXPAND: '掘り下げる価値あり',
   DIGEST_UNFETCHED: '（ソースを開けませんでした。共有内容からの要約です）',
   LANGUAGE_NAME: '日本語',
+  NOTICE_REPORTS_WRITTEN: 'Reports written',
+  REPORT_WHAT: 'What it is',
+  REPORT_HOW: 'How to do it',
+  REPORT_NOTES: 'Notes and trade-offs',
+  SETTINGS_NEWS_REPORTS_NAME: 'Write full reports',
+  SETTINGS_NEWS_REPORTS_DESC: 'When an item deserves more than three lines, write it a note of its own in the day folder.',
+  SETTINGS_NEWS_MAXREPORTS_NAME: 'Reports per run',
+  SETTINGS_NEWS_MAXREPORTS_DESC: 'At most this many reports per digest run.',
   NOTICE_FACTS_ACCUMULATED: 'ファクトが正常に蓄積されました。',
 };

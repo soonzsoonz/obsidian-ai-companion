@@ -27,6 +27,10 @@ export interface NewsSettings {
     research: boolean;
     /** Delete archived shares older than this. 0 disables deletion. */
     archiveRetentionDays: number;
+    /** Write a full note for items the AI marks as worth expanding. */
+    expandReports: boolean;
+    /** Cap per run, so one busy day cannot spawn a dozen AI calls. */
+    maxReportsPerRun: number;
 }
 
 export interface DigestSettings {
@@ -78,7 +82,9 @@ export const DEFAULT_SETTINGS: AIJourneySettings = {
         archiveFolder: 'ai-journey/news/archived',
         research: true,
         // Deletion of archived shares is opt-in: 0 means keep forever.
-        archiveRetentionDays: 0
+        archiveRetentionDays: 0,
+        expandReports: true,
+        maxReportsPerRun: 3
     },
     digest: {
         scheduleMode: 'manual',
@@ -202,6 +208,31 @@ export class AIJourneySettingsTab extends PluginSettingTab {
                     this.plugin.settings.news.research = value;
                     await this.plugin.saveSettings();
                 }));
+
+        new Setting(containerEl)
+            .setName(t('SETTINGS_NEWS_REPORTS_NAME'))
+            .setDesc(t('SETTINGS_NEWS_REPORTS_DESC'))
+            .addToggle(toggle => toggle
+                .setValue(this.plugin.settings.news.expandReports)
+                .onChange(async (value) => {
+                    this.plugin.settings.news.expandReports = value;
+                    await this.plugin.saveSettings();
+                    this.display();
+                }));
+
+        if (this.plugin.settings.news.expandReports) {
+            new Setting(containerEl)
+                .setName(t('SETTINGS_NEWS_MAXREPORTS_NAME'))
+                .setDesc(t('SETTINGS_NEWS_MAXREPORTS_DESC'))
+                .addSlider(slider => slider
+                    .setLimits(1, 10, 1)
+                    .setDynamicTooltip()
+                    .setValue(this.plugin.settings.news.maxReportsPerRun)
+                    .onChange(async (value) => {
+                        this.plugin.settings.news.maxReportsPerRun = value;
+                        await this.plugin.saveSettings();
+                    }));
+        }
 
         new Setting(containerEl)
             .setName(t('SETTINGS_NEWS_RETENTION_NAME'))

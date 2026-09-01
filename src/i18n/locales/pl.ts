@@ -92,5 +92,13 @@ export const STRINGS_PL: typeof STRINGS_EN = {
   DIGEST_EXPAND: 'Warto rozwinąć',
   DIGEST_UNFETCHED: '(nie udało się otworzyć źródła; podsumowanie udostępnionego tekstu)',
   LANGUAGE_NAME: 'polski',
+  NOTICE_REPORTS_WRITTEN: 'Reports written',
+  REPORT_WHAT: 'What it is',
+  REPORT_HOW: 'How to do it',
+  REPORT_NOTES: 'Notes and trade-offs',
+  SETTINGS_NEWS_REPORTS_NAME: 'Write full reports',
+  SETTINGS_NEWS_REPORTS_DESC: 'When an item deserves more than three lines, write it a note of its own in the day folder.',
+  SETTINGS_NEWS_MAXREPORTS_NAME: 'Reports per run',
+  SETTINGS_NEWS_MAXREPORTS_DESC: 'At most this many reports per digest run.',
   NOTICE_FACTS_ACCUMULATED: 'Fakty zgromadzone pomyślnie.',
 };

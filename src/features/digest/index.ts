@@ -1,11 +1,13 @@
-import { Notice, type App, type Plugin } from 'obsidian';
+import { Notice, normalizePath, type App, type Plugin, type TFile } from 'obsidian';
 import type { ProviderCore } from '../../core';
 import {
-    clockTime, ensureNote, extractLinks, formatDate, journalPath, readSection, writeSection
+    clockTime, ensureNote, extractLinks, formatDate, journalChildFolder, journalPath,
+    readSection, writeSection
 } from '../../core/notes';
 import type { AIJourneySettings } from '../../settings';
 import { NewsInbox, type Share } from '../news';
 import { renderRoleGuidance } from '../../core/roles';
+import { buildReportPrompt, findExpandable, linkReport, safeFileName } from './reports';
 import { t } from '../../i18n';
 
 /**
@@ -117,6 +119,57 @@ export class DigestFeature {
             await this.inbox.archiveNow(shares);
         }
         new Notice(t('NOTICE_DIGEST_GENERATED'));
+
+        if (cfg.news.expandReports) {
+            await this.writeReports(file, res.data.trim(), date, known);
+        }
+    }
+
+    /**
+     * Writes a full note for each item the AI flagged as worth expanding, and
+     * links it from the digest entry.
+     *
+     * Runs after the digest is already saved, so a failure here costs the
+     * reader a report but never the briefing they were waiting for.
+     */
+    private async writeReports(
+        journal: TFile, digestBlock: string, date: Date, known: string
+    ): Promise<void> {
+        const cfg = this.settings();
+        const items = findExpandable(digestBlock);
+        if (items.length === 0) return;
+
+        const folder = journalChildFolder(cfg.journal.folder, date, cfg.journal.dateFormat);
+        const guidance = renderRoleGuidance(cfg.roles.rules, cfg.roles.roles);
+        let written = 0;
+
+        for (const item of items.slice(0, cfg.news.maxReportsPerRun)) {
+            const res = await this.providerCore.generate(
+                buildReportPrompt(item, known, cfg.news.research, guidance)
+            );
+            if (!res.success || !res.data) continue;
+
+            const name = safeFileName(item.title);
+            const note = await ensureNote(
+                this.app, normalizePath(folder + '/' + name + '.md'), ''
+            );
+            const heading = '# ' + item.title + '\n\n'
+                + (item.url ? '[' + t('DIGEST_SOURCE') + '](' + item.url + ')\n\n' : '');
+            await this.app.vault.modify(note, heading + res.data.trim() + '\n');
+
+            // Link it from the digest line that asked for it.
+            const current = readSection(await this.app.vault.read(journal), 'digest');
+            const linked = linkReport(current, item, note.basename);
+            if (linked !== current) {
+                await this.app.vault.modify(
+                    journal,
+                    writeSection(await this.app.vault.read(journal), 'digest', linked)
+                );
+            }
+            written++;
+        }
+
+        if (written > 0) new Notice(t('NOTICE_REPORTS_WRITTEN') + ': ' + written);
     }
 
     private buildDigestPrompt(

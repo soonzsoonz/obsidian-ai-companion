@@ -92,5 +92,13 @@ export const STRINGS_ZH_CN: typeof STRINGS_EN = {
   DIGEST_EXPAND: '值得展开',
   DIGEST_UNFETCHED: '（来源未能开启，以上为分享内容摘要）',
   LANGUAGE_NAME: '简体中文',
+  NOTICE_REPORTS_WRITTEN: '已生成报告',
+  REPORT_WHAT: '这是什么',
+  REPORT_HOW: '怎么做',
+  REPORT_NOTES: '注意事项与取舍',
+  SETTINGS_NEWS_REPORTS_NAME: '生成完整报告',
+  SETTINGS_NEWS_REPORTS_DESC: '当某一项值得展开时，在当天文件夹另外生成一篇完整笔记。',
+  SETTINGS_NEWS_MAXREPORTS_NAME: '每次生成上限',
+  SETTINGS_NEWS_MAXREPORTS_DESC: '每次汇整最多生成几篇报告。',
   NOTICE_FACTS_ACCUMULATED: '事实累积成功。',
 };
